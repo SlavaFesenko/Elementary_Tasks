@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LibraryFor7And8;
 
-namespace Elementary_Tasks_7_8
+namespace ElementaryTasks8
 {
     class SquareSequence : Sequence
     {
@@ -19,14 +20,14 @@ namespace Elementary_Tasks_7_8
                 sequence = new SquareSequence(1, rightBorder);
             }
 
-            return sequence;
+            return sequence; 
         }
 
         public override IEnumerable<int> GetSequence()
         {
             int naturalNumber = 1;
 
-            while (naturalNumber * naturalNumber < RightBorder)// for
+            while (naturalNumber * naturalNumber < RightBorder)
             {
                 yield return naturalNumber;
                 naturalNumber++;

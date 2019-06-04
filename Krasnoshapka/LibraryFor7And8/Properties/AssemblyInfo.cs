@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("Elementary-Tasks-7-8")]
+[assembly: AssemblyTitle("LibraryFor7And8")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Elementary-Tasks-7-8")]
+[assembly: AssemblyProduct("LibraryFor7And8")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("1b9f52ce-cbb6-4b59-bd69-5f890efe8f51")]
+[assembly: Guid("9fdb1392-95a3-4a52-b38f-f8a54f8e56dc")]
 
 // Сведения о версии сборки состоят из следующих четырех значений:
 //

@@ -18,7 +18,7 @@ namespace Elementary_Tasks_7_8
                 case SQUARE:
                     //int border = int.Parse(args[0]);
                     Square(args);
-                    break;   
+                    break;
                 case FIBONACCI:
                     //int leftBorder = int.Parse(args[0]);
                     //int rightBorder = int.Parse(args[1]);

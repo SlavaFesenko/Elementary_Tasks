@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Elementary_Tasks_3
 {
-    class Triangle : IFigure
+    public class Triangle : IFigure
     {
         public string TriangleName { get; set; }
         public float FirstSide { get; set; }

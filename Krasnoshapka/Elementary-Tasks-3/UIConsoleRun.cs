@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 
 namespace Elementary_Tasks_3
 {
-    static class UIConsole
+    static class UIConsoleRun
     {
         private const int COMMAND_LINE_ARGS = 0;
         private const int ARGS_FOR_TRIANGLE=4;
 
         public static void BuildUI(string[] args)
         {
-          
-
             if (args.Length == COMMAND_LINE_ARGS)
             {
                 bool Finish = true;
@@ -35,20 +33,14 @@ namespace Elementary_Tasks_3
                         float thirdTriangleSide;
                         bool success = true;
 
-                        triangleName = input[0];
-                        success &= float.TryParse(input[1], out firstTriangleSide);
-                        success &= float.TryParse(input[2], out secondTriangleSide);
-                        success &= float.TryParse(input[3], out thirdTriangleSide);
+                        success = NewMethod(input, out triangleName, out firstTriangleSide, out secondTriangleSide, out thirdTriangleSide, success);
                         if (success)
                         {
                             Triangle triangle = Triangle.TriangleInitialize(triangleName, firstTriangleSide, secondTriangleSide, thirdTriangleSide);
                             trianglesList.Add(triangle);
                             trianglesList.Sort(new TrianglesCompare());
-                            Console.WriteLine("============= Triangles list: ===============");
-                            foreach (Triangle item in trianglesList)
-                            {
-                                Console.WriteLine(item.ToString());
-                            }
+
+                            ShowList(trianglesList);
 
                             Finish = Repeat();
                         }
@@ -73,6 +65,23 @@ namespace Elementary_Tasks_3
             }
         }
 
+        private static bool NewMethod(string[] input, out string triangleName, out float firstTriangleSide, out float secondTriangleSide, out float thirdTriangleSide, bool success)
+        {
+            triangleName = input[0];
+            success &= float.TryParse(input[1], out firstTriangleSide);
+            success &= float.TryParse(input[2], out secondTriangleSide);
+            success &= float.TryParse(input[3], out thirdTriangleSide);
+            return success;
+        }
+
+        private static void ShowList(List<Triangle> trianglesList)
+        {
+            Console.WriteLine("============= Triangles list: ===============");
+            foreach (Triangle item in trianglesList)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
 
         private static void Instruction()
         {

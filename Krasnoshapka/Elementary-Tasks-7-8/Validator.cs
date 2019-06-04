@@ -10,9 +10,9 @@ namespace Elementary_Tasks_7_8
     {
         public static bool ValidFibonacci(int leftBorder, int rightBorder)
         {
-            if (leftBorder>0 && rightBorder>0)
+            if (leftBorder > 0 && rightBorder > 0)
             {
-                if (leftBorder< rightBorder)
+                if (leftBorder < rightBorder)
                 {
                     return true;
                 }
@@ -29,10 +29,10 @@ namespace Elementary_Tasks_7_8
 
         public static bool ValidSquare(int rightBorder)
         {
-            bool result = false; 
+            bool result = false;
             if (rightBorder > 1)
             {
-                result=true;
+                result = true;
             }
             return result;
         }
@@ -53,7 +53,7 @@ namespace Elementary_Tasks_7_8
             }
 
         }
-        
+
         public static void Parsed(string firstValue, string secondValue, ref int firstNumber, ref int secondNumber)
         {
             bool success = Int32.TryParse(firstValue, out firstNumber);
