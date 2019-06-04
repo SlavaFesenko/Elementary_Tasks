@@ -9,7 +9,7 @@ using NLog;
 
 namespace Task8_FibonacciOrder
 {
-    enum TaskNumber { Task8 = 8 }
+    
     enum EventIdForLogger { UseVoid = 10, UseProperty = 20, UseConstructor = 30 }
 
     class OrderFibonacciWithBorders : Order
@@ -26,7 +26,7 @@ namespace Task8_FibonacciOrder
 
         #region Constructors
 
-        public OrderFibonacciWithBorders(IServiceProvider provider,ILogger<OrderFibonacciWithBorders> logger)
+        public OrderFibonacciWithBorders(IServiceProvider provider, ILogger<OrderFibonacciWithBorders> logger)
         {
             _provider = provider;
             _logger = logger;
@@ -50,7 +50,8 @@ namespace Task8_FibonacciOrder
                 {
                     int _nextNumber = 0;
 
-                    _nextNumber = fibonacciOrder.FindFibonacciNumber(delta);
+                    _nextNumber = OrderFibonacciWithBorders.FindFibonacciNumber(delta);
+                    _logger.LogInformation(10, "Method {0} was called for count {1} number ib order", System.Reflection.MethodBase.GetCurrentMethod().Name, delta);
 
                     collection.Add(_nextNumber);
                 }
@@ -61,13 +62,12 @@ namespace Task8_FibonacciOrder
             }
         }
 
-        internal int FindFibonacciNumber(int serialNumber)
+        internal static int FindFibonacciNumber(int serialNumber)
         {
             int result = 0;
             double helper = (Math.Pow(_fi, serialNumber) / _sqrt) + 0.5;
 
             result = (int)Math.Floor(helper);
-            _logger.LogInformation(10, "Method {0} was called", System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             return result;
         }

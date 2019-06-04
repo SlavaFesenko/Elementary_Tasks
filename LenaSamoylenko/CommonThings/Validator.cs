@@ -11,6 +11,17 @@ namespace CommonThings
     {
         #region Task7
 
+        public static bool CheckArgs(string[] args)
+        {
+            bool couldContinue = false;
+
+            if (args.Length == (int)CommonThings.CountOfArgs.SeventhTask)
+            {
+                couldContinue = true;
+            }
+            return couldContinue;
+        }
+
         public static bool CheckCountAndTypeArgs(string[] args, out int border1, out int border2)
         {
             bool result = false;

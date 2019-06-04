@@ -11,43 +11,43 @@ namespace Task8_FibonacciOrder
         #region Fields
         private static readonly double _sqrt = Math.Sqrt(5);
         private static readonly double _fi = (1 + _sqrt) / 2;
-        private IExeptionForFirstDemo toRecorgnizeExceptionType;
-        private ILogger<Borders> _logger = null;
-        private IServiceProvider _provider = null;
-
-        public readonly double _border1;
-        public readonly double _border2;
+        private ILogger<Range> _logger = null;
 
         #endregion
 
         #region Constructors
 
-
-        public Borders(ILogger<Borders> logger, IServiceProvider provider, double border1, double border2)
+        public Borders(ILogger<Range> logger)
         {
-            toRecorgnizeExceptionType = new ExceptionsForAllAplication((int)TaskNumber.Task8);
-
-            _border1 = border1;
-            _border2 = border2;
             _logger = logger;
-            _provider = provider;
-
-            FindLowAndUpBorder(border1, border2);
         }
 
         #endregion
 
         #region Methods
 
+        public override void FindLowAndUpBorder(int border1, int border2)
+        {
+            base.FindLowAndUpBorder(border1, border2);
+        }
+
         public override int GetLowerBorderWithConditionals(double lowerRange)
         {
             int numberOf = 0;
-            
-            numberOf = GetNumberInOrder(lowerRange);
-            if (GetBorder(numberOf) < Math.Floor(lowerRange))
+            try
             {
-                numberOf++;
+                numberOf = GetNumberInOrder(lowerRange);
+                if (GetBorder(numberOf) < Math.Floor(lowerRange))
+                {
+                    numberOf++;
+                }
             }
+            catch (Exception exception)
+            {
+                Exception expFinal = _exeptions.GetException(exception);
+                _logger.LogError(expFinal, "Error in {0} method", System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+
 
             return numberOf;
         }
@@ -55,14 +55,22 @@ namespace Task8_FibonacciOrder
         public override int GetUpperBoarderConditionals(double upperRange)
         {
             int result = 0;
-
-            result = GetNumberInOrder(upperRange);
-
-            if (GetBorder(result) > Math.Floor(upperRange) && result > LowerBorder + 1)
+            try
             {
-                result--;
+                result = GetNumberInOrder(upperRange);
+
+                if (GetBorder(result) > Math.Floor(upperRange) && result > LowerBorder + 1)
+                {
+                    result--;
+                }
             }
-            
+            catch (Exception exception)
+            {
+                Exception expFinal = _exeptions.GetException(exception);
+                _logger.LogError(expFinal, "Error in {0} method", System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+
+
             return result;
         }
 
@@ -78,8 +86,8 @@ namespace Task8_FibonacciOrder
             }
             catch (Exception exception)
             {
-                var exp = toRecorgnizeExceptionType.GetException(exception);
-                _logger.LogError(exception, "Error in {0} method", System.Reflection.MethodBase.GetCurrentMethod().Name);
+                Exception expFinal = _exeptions.GetException(exception);
+                _logger.LogError(expFinal, "Error in {0} method", System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
 
             return numberOf;
@@ -89,8 +97,7 @@ namespace Task8_FibonacciOrder
         {
             int result = 0;
 
-            var fbNum = _provider.GetRequiredService<OrderFibonacciWithBorders>();
-            result=fbNum.FindFibonacciNumber(value);
+            result = OrderFibonacciWithBorders.FindFibonacciNumber(value);
 
             return result;
         }

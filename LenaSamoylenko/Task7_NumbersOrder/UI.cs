@@ -8,35 +8,44 @@ namespace Task7_NumbersOrder
 {
     public class UI : BaseUI
     {
+
+
         #region Fields
 
-        int border1 = 0;
-        int border2 = 0;
-        IEnumerable<int> collection = null;
-        Range range = null;
-        OrderSQRTWithBorders order = null;
+        private int _border1 = 0;
+        private int _border2 = 0;
         private string _instruction = null;
-
+        private IEnumerable<int> _collection = null;
+        private Range range = null;
+        private OrderSQRTWithBorders _order = null;
+        private int _taskNumber = 0;
+        private IExeptionForFirstDemo exeptions = null;
 
         #endregion
 
         #region Constructors
 
-        public UI(string[] args)
+        private UI()
+        {
+            _taskNumber = (int)BaseUI.TaskNumber.Task7;
+            _instruction = InstructionReader.GiveInstruction();
+            exeptions = new ExceptionsForAllAplication(_taskNumber);
+        }
+
+        public UI(string[] args) : this()
         {
             bool validArgs = false;
             int[] curArgs = new int[(int)CountOfArgs.SeventhTask];
 
-            validArgs = Validator.CheckCountAndTypeArgs(args, out border1, out border2);
-            _instruction = InstructionReader.GiveInstruction();
-
-            bool startProg = CheckArgsForContinue.CheckArgs(args);
+            validArgs = Validator.CheckCountAndTypeArgs(args, out _border1, out _border2);
+            
+            bool startProg = Validator.CheckArgs(args);
 
             while (validArgs == false && startProg == false)
             {
                 Console.WriteLine(_instruction);
                 string row = Console.ReadLine();
-                validArgs = Parser.ParseIntoIntNumbers(row, out border1, out border2);
+                validArgs = Parser.ParseIntoIntNumbers(row, _taskNumber, out _border1, out _border2);
             }
 
         }
@@ -50,9 +59,9 @@ namespace Task7_NumbersOrder
 
             try
             {
-                range = new Borders(border1, border2);
-                order = new OrderSQRTWithBorders();
-                collection = order.FindArrayOrder(range);
+                range = new Borders(_border1, _border2);
+                _order = new OrderSQRTWithBorders();
+                _collection = _order.FindArrayOrder(range);
                 _message = "Congratulations, the calculation was finished";
             }
             catch (Exception exeption)
@@ -68,8 +77,8 @@ namespace Task7_NumbersOrder
         {
             string result = null;
 
-            Console.WriteLine("The choosen diapazon squared from {0} to {1}", border1, border2);
-            result = order.GetOrderFromCollection(collection);
+            Console.WriteLine("The choosen diapazon squared from {0} to {1}", _border1, _border2);
+            result = _order.GetOrderFromCollection(_collection);
 
             return result;
         }
@@ -81,15 +90,6 @@ namespace Task7_NumbersOrder
 
     static class CheckArgsForContinue
     {
-        public static bool CheckArgs(string[] args)
-        {
-            bool couldContinue = false;
 
-            if (args.Length == (int)CommonThings.CountOfArgs.SeventhTask)
-            {
-                couldContinue = true;
-            }
-            return couldContinue;
-        }
     }
 }

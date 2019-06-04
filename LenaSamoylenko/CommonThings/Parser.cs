@@ -8,15 +8,26 @@ namespace CommonThings
 {
     public class Parser
     {
-        public static bool ParseIntoIntNumbers(string row, out int border1, out int border2)
+        #region Fields
+
+        private static SortedDictionary<int, string> _patternForRegex = new SortedDictionary<int, string>
+        {
+            [7] = @"(\b(\d +\W ?)) | (\B(\d *)\b)| (\b(\d *)\B)| ((\B)(\d +)(\B))",
+            [8] = @"(\b(\d+\s?))"
+        };
+
+        #endregion
+
+         
+        public static bool ParseIntoIntNumbers(string row, int taskNumber, out int border1, out int border2)
         {
             bool result = false;
             border1 = 0;
             border2 = 0;
-     
+
             try
             {
-                string pattern = @"(\b(\d+\W?))|(\B(\d*)\b)|(\b(\d*)\B)|((\B)(\d+)(\B))";
+                string pattern = _patternForRegex[taskNumber];
 
                 Regex regex = new Regex(pattern);
                 MatchCollection collectionOfIntNumbers = regex.Matches(row);
@@ -30,8 +41,8 @@ namespace CommonThings
                 }
 
 
-                result=Validator.CheckCountAndTypeArgs(collection, out border1, out border2);
-                
+                result = Validator.CheckCountAndTypeArgs(collection, out border1, out border2);
+
 
             }
 
