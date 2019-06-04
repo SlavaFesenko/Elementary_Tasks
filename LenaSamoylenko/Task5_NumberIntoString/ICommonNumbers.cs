@@ -103,7 +103,7 @@ namespace Task5_NumberIntoString
                     getTens.IsConcatBiggerAndSmallerExponents(forCountTens, out builder);
 
                     getHundreds = new GetHundreds(builder);
-                    builder = CommonPartForTensAndUnits(getHundreds, forCountHundreds);
+                    builder = Common.CommonPartForTensAndUnits(getHundreds, forCountHundreds, this);
                 }
 
             }
@@ -113,7 +113,7 @@ namespace Task5_NumberIntoString
                 throw;
             }
 
-            return forOut
+            return forOut;
         }
 
         #endregion

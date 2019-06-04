@@ -9,9 +9,6 @@ namespace Task8_FibonacciOrder
             string _message = null;
             string _data = null;
 
-            //greating
-
-
             //creating new UI 
             UI currentUI = new UI(args);
 
@@ -22,6 +19,8 @@ namespace Task8_FibonacciOrder
             //get results and print it
             _data = currentUI.PrintIntoConsole();
             currentUI.PrintMessage(_data);
+
+            currentUI.Exit();
 
             Console.ReadKey();
         }

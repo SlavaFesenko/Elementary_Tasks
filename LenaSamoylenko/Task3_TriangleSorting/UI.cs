@@ -1,25 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using CommonThings;
+using Microsoft.Extensions.DependencyInjection;
+using NLog;
 
 namespace Task3_TriangleSorting
 {
     class UI : BaseUI
     {
+        #region Fields
+
         private string row;
+        private string _instruction = null;
+        private int _taskNumber = 0;
         private TriangleList _triangles = new TriangleList();
+
+        private Logger _logger = null;
+        private IServiceProvider _provider = null;
+        private IExeptionForFirstDemo _exeptions = null;
+
+        #endregion
+
+
+        #region Constructors
+
+        public UI()
+        {
+            _logger = LogManager.GetCurrentClassLogger();
+            _taskNumber = (int)TaskNumber.Task8;
+            _instruction = InstructionReader.GiveInstruction();
+            _exeptions = new ExceptionsForAllAplication(_taskNumber);
+
+            Console.WriteLine("{0} Hello in Task{1} {0}", new string('*', 10), _taskNumber);
+        }
+
+        #endregion
+
+        #region Properties
 
         public char DecisionToContinueProgramm { get => Logic.DecisionToContinue(); }
         public string Row { get => row; set => row = value; }
 
+        #endregion
 
-        public UI()
-        {
-            Console.WriteLine("Hello in task 3\n");
-        }
-
-
+        #region Methods
 
         public void Print()
         {
@@ -28,50 +52,23 @@ namespace Task3_TriangleSorting
 
         public override string CalculateOK()
         {
-            Wrapper.GetCycle();
+            string message = null;
+            using (_provider as IDisposable)
+            {
+                _provider = CommonThings.Logger<Wrapper>.HelperForLogging();
+                var _wrapper = _provider.GetRequiredService<Wrapper>();
+                message=_wrapper.GetCycle(_exeptions);
+            }
+            
+            return message;
         }
 
         public override string PrintIntoConsole()
         {
             throw new NotImplementedException();
         }
-    }
 
-    public class Wrapper
-    {
-        private static Dictionary<int, string> _answer = new Dictionary<int, string>
-        {
-            [1] = "Y",
-            [2] = "YES"
-        };
+        #endregion
 
-        public static void GetCycle()
-        {
-            bool isContinue = true;
-
-            while (isContinue == true)
-            {
-                Console.WriteLine();
-                string getAnswer = (Console.ReadLine()).ToUpper();
-                isContinue = (getAnswer == _answer[1] || getAnswer == _answer[2]) ? AddTriangleToCollection() : false;
-            }
-        }
-
-        public static bool AddTriangleToCollection()
-        {
-            bool result = false;
-            Triangle triangle = null;
-
-            Console.WriteLine("Put your data in format <name>, <size1>, <size2>, <size3>");
-            string row = Console.ReadLine();
-
-            triangle = Logic.GenerateNewTriangle(row, out result);
-            if (result == true)
-            {
-                _triangles.Add(triangle);
-            }
-
-            return result;
-        }
     }
 }

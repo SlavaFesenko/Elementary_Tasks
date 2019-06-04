@@ -1,6 +1,6 @@
 ﻿namespace CommonThings
 {
-    interface IUA
+    interface IUI
     {
         string CalculateOK();
         string PrintIntoConsole();

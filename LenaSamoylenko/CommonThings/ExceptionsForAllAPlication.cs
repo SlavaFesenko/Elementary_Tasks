@@ -22,22 +22,6 @@ namespace CommonThings
 
         #endregion
 
-        #region Enums
-
-        public enum Tasks
-        {
-            Task1_ChessBoard = 1,
-            Task2_EnvelopesAnalizer = 2,
-            Task3_TriangleSorting = 3,
-            Task4_ParserForFiles = 4,
-            Task5_NumberIntoString = 5,
-            Task6_ = 6,
-            Task7_NumbersOrder = 7,
-            Task8_FibonacciOrder = 8
-        }
-
-        #endregion
-
         #region Properties
 
         public Exception getLastException { get { return this.exception; } }
