@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -16,6 +18,7 @@ namespace Task4_ParserForFiles
         private int _rowInText;
         private int _partSize;
         private int _currentPart;
+        private SortedDictionary<int, int> changedParts = null;
         #endregion
 
         #region Constructors
@@ -57,6 +60,7 @@ namespace Task4_ParserForFiles
             RowSize = oldRow.Length;
             _partSize = RowSize * 2;
             NewRow = newRow;
+            changedParts = new SortedDictionary<int, int>();
 
             int accuracy = (RowSize > 1000) ? (16) : ((RowSize > 100) ? 8 : 4);
 
@@ -68,11 +72,11 @@ namespace Task4_ParserForFiles
 
             Console.WriteLine(DateTime.Now);
             //FileStream outStream = new FileStream(filePath, FileMode.OpenOrCreate);
-            
+
 
             var result = Parallel.For(0, CountOfThread, (int textPartNumber) =>
               {
-                  ChangeTextInText(textPartNumber, rowPart1, rowPart2, accuracy, filePath);
+                  GetPointWhereChangeText(textPartNumber, rowPart1, rowPart2, accuracy, filePath);
 
                   //Console.WriteLine(Thread.GetCurrentProcessorId());
               });
@@ -88,19 +92,39 @@ namespace Task4_ParserForFiles
             return outText;
         }
 
-        private void WriteToFile(StringBuilder builder, StreamWriter stream, int range)
-        {
-            string text = builder.ToString();
-            WriteToFile(text, stream, range);
+        //private void WriteToFile(StringBuilder builder, StreamWriter stream, int range)
+        //{
+        //    string text = builder.ToString();
+        //    WriteToFile(text, stream, range);
 
-        }
-        private void WriteToFile(string text, StreamWriter stream, int range)
+        //}
+        //private void WriteToFile(string text, StreamWriter stream, int range)
+        //{
+        //    char[] textChar = text.ToCharArray();
+        //    stream.Write(textChar, range, textChar.Length);
+        //}
+
+        private void ReplacePart()
         {
-            char[] textChar =text.ToCharArray();
-            stream.Write(textChar, range, textChar.Length);
+            using ( )
+            {
+
+            }
+            StringWriter stringWriter = new StringWriter();
+            StringReader stringReader=new StringReader()
+                
         }
 
-        public void ChangeTextInText(int textPartNumber, string rowPart1, string rowPart2, int accuracy, string filePath)
+        public char[] ChangingSucces(string oldRow, string newRow, string text)
+        {
+            char[] textOut = Array.Empty<char>();
+
+            textOut = text.Replace(oldRow, newRow).ToCharArray();
+
+            return textOut;
+        }
+
+        public void GetPointWhereChangeText(int textPartNumber, string rowPart1, string rowPart2, int accuracy, string filePath)
         {
             bool _isInText;
             bool _isInTextInEnd = false;
@@ -122,7 +146,7 @@ namespace Task4_ParserForFiles
                     {
                         //if we have start and end in the text part 
                         _isInText = _textPart.Contains(Row);
-                        ChangeRow(_isInText, Row, NewRow, ref _builder);
+                        AddToChangedList(_isInText, _range, _partSize);
                     }
                     else if (_isInText == true)
                     {
@@ -131,23 +155,23 @@ namespace Task4_ParserForFiles
 
                         _builder.Append(Text.Substring(_range, _partSize - accuracy));
                         _textPart = _builder.ToString();
-                        _currentPart = textPartNumber;
+                        //_currentPart = textPartNumber;
 
                         _isInText = _textPart.Contains(Row);
-                        ChangeRow(_isInText, Row, NewRow, ref _builder);
+                        AddToChangedList(_isInText, _range, _textPart.Length);
 
                         //Console.WriteLine(_textPart + "\n\n");
                     }
                     else if (_isInTextInEnd == true)
                     {
-                        if (_currentPart != textPartNumber - 1)
+                        if (!changedParts.ContainsKey(textPartNumber - 1))
                         {
                             _range = (textPartNumber - 1) * _partSize + accuracy;
                             _builder.Insert(0, Text.Substring((textPartNumber - 1) * _partSize + accuracy, _partSize - accuracy), 1);
                             _textPart = _builder.ToString();
 
                             _isInText = _textPart.Contains(Row);
-                            ChangeRow(_isInText, Row, NewRow, ref _builder);
+                            AddToChangedList(_isInText, _range, _textPart.Length);
                             //Console.WriteLine(_textPart + "\n\n");
                         }
                     }
@@ -161,28 +185,23 @@ namespace Task4_ParserForFiles
                     {
                         _rowInText++;
                     }
-
-                    using (StreamWriter sw = new StreamWriter(filePath, true, System.Text.Encoding.Default))
-                        WriteToFile(_builder, sw, _range);
-                     
                 }
                 catch (Exception exception)
                 {
                     //add to log
                 }
-
-            }
-            lock (new object())
-            {
-
             }
         }
 
-        private void ChangeRow(bool isInText, string oldRow, string newRow, ref StringBuilder textPartBuilder)
+        //using (StreamWriter sw = new StreamWriter(filePath, true, System.Text.Encoding.Default))
+        //              WriteToFile(_builder, sw, _range);
+
+
+        private void AddToChangedList(bool isInText, int startFromSymbolNumber, int lenght)
         {
             if (isInText == true)
             {
-                textPartBuilder = textPartBuilder.Replace(oldRow, newRow);
+                changedParts.Add(startFromSymbolNumber, lenght);
             }
         }
 
