@@ -13,14 +13,15 @@ namespace Task8_FibonacciOrder
     {
         #region Fields
 
-        private double _border1 = 0;
-        private double _border2 = 0;
+        private int _border1 = 0;
+        private int _border2 = 0;
         private IEnumerable<int> _collection = null;
         private Range _range = null;
         OrderFibonacciWithBorders _order = null;
         private Logger _logger = null;
-        private IServiceProvider _servicesProvider = null;
-        private IServiceProvider _providerBorder = null; 
+        //private IServiceProvider _servicesProvider = null;
+        private IServiceProvider _provider = null;
+        private string _instruction = null;
 
         #endregion
 
@@ -28,15 +29,32 @@ namespace Task8_FibonacciOrder
 
         private UI()
         {
-            _logger = LogManager.GetCurrentClassLogger();
-            _servicesProvider = CommonThings.Logger<UI>.HelperForLogging();
-            _providerBorder = CommonThings.Logger<Borders>.HelperForLogging();
+            Console.WriteLine("{0} Hello in Task8 {0}", new string('*', 10));
 
+            _logger = LogManager.GetCurrentClassLogger();
+            //_servicesProvider = CommonThings.Logger<UI>.HelperForLogging();
+           
         }
 
-        public UI(string[] args, out string message) : this()
+        public UI(string[] args) : this()
         {
-            message = Validator.CheckCountAndTypeArgs(args, out message, out _border1, out _border2);
+            //bool result = Validator.CheckCountAndTypeArgs(args, out message, out _border1, out _border2);
+
+            bool validArgs = false;
+            int[] curArgs = new int[(int)CountOfArgs.EightTask];
+
+            validArgs = Validator.CheckCountAndTypeArgs(args, out _border1, out _border2);
+            _instruction = InstructionReader.GiveInstruction();
+
+            bool startProg = Validator.CheckArgs(args);
+
+            while (validArgs == false && startProg == false)
+            {
+                Console.WriteLine(_instruction);
+                string row = Console.ReadLine();
+                validArgs = Parser.ParseIntoIntNumbers(row, out _border1, out _border2);
+            }
+
         }
 
         #endregion
@@ -45,17 +63,32 @@ namespace Task8_FibonacciOrder
 
         public override string CalculateOK()
         {
-            string _message;
+            string _message = null;
             //_logger.LogDebug()
 
             try
             {
-                //add part with dispose
-                _range = _providerBorder.GetRequiredService<Borders>();//new Borders();
-                var _orderRunnet = _servicesProvider.GetRequiredService<OrderFibonacciWithBorders>();
+                using (_provider as IDisposable)
+                {
+                    _provider = CommonThings.Logger<Borders>.HelperForLogging();
+                    _range = _provider.GetRequiredService<Borders>();//new Borders();
+                    _range.SetValue(_border1, _border2);
+                }
+
+                using (_provider as IDisposable)
+                {
+                    _provider = CommonThings.Logger<OrderFibonacciWithBorders>.HelperForLogging();
+                    _order = _provider.GetRequiredService<OrderFibonacciWithBorders>();
+                    _collection = _order.FindArrayOrder(_range);
+                }
+
                 //_order = new OrderFibonacciWithBorders(_servicesProvider, _logger);
-                _collection = _order.FindArrayOrder(_range);
+
                 _message = "Congratulations, the calculation was finished";
+            }
+            catch (System.InvalidOperationException exception)
+            {
+                _logger.Error(exception, "Stopped program because of exception");
             }
             catch (Exception exception)
             {

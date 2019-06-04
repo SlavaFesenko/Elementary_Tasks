@@ -11,11 +11,11 @@ namespace Task8_FibonacciOrder
             string _data = null;
 
             //greating
-            Console.WriteLine("Hello in Task8");
+          
 
             //creating new UI 
-            UI currentUI = new UI(args, out _message1);
-            Console.WriteLine(_message1);
+            UI currentUI = new UI(args);
+            
             currentUI.CheckForExit(_message1);
 
             //get calculation`s result and print message

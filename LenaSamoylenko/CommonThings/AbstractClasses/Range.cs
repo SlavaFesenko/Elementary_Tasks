@@ -1,4 +1,7 @@
 ﻿
+using Microsoft.Extensions.Logging;
+using System;
+
 namespace CommonThings.AbstractClasses
 {
     public abstract class Range
@@ -7,6 +10,7 @@ namespace CommonThings.AbstractClasses
 
         private int lowerBorder;
         private int upperBorder;
+        private ILogger<Range> _logger = null;
 
         #endregion
 
@@ -22,7 +26,7 @@ namespace CommonThings.AbstractClasses
         public abstract int GetLowerBorderWithConditionals(double lowerInSecondPow);
         public abstract int GetUpperBoarderConditionals(double upperInSecondPow);
 
-        public virtual void FindLowAndUpBorder(double border1, double border2)
+        public virtual void FindLowAndUpBorder(int border1, int border2)
         {
             if (border1 > border2)
             {
@@ -37,6 +41,19 @@ namespace CommonThings.AbstractClasses
             else
             {
                 LowerBorder = UpperBorder = GetLowerBorderWithConditionals(border1);
+            }
+        }
+
+        public virtual void SetValue(int border1, int border2)
+        {
+            try
+            {
+                FindLowAndUpBorder(border1, border2);
+            }
+            catch (Exception exception)
+            {
+
+                throw;
             }
         }
         #endregion

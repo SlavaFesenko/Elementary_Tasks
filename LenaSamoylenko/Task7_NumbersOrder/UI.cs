@@ -30,7 +30,7 @@ namespace Task7_NumbersOrder
             validArgs = Validator.CheckCountAndTypeArgs(args, out border1, out border2);
             _instruction = InstructionReader.GiveInstruction();
 
-            bool startProg = CheckArgsForContinue.CheckArgs(args);
+            bool startProg = Validator.CheckArgs(args);
 
             while (validArgs == false && startProg == false)
             {
@@ -81,15 +81,6 @@ namespace Task7_NumbersOrder
 
     static class CheckArgsForContinue
     {
-        public static bool CheckArgs(string[] args)
-        {
-            bool couldContinue = false;
-
-            if (args.Length == (int)CommonThings.CountOfArgs.SeventhTask)
-            {
-                couldContinue = true;
-            }
-            return couldContinue;
-        }
+        
     }
 }

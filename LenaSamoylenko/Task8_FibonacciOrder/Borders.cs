@@ -12,37 +12,35 @@ namespace Task8_FibonacciOrder
         private static readonly double _sqrt = Math.Sqrt(5);
         private static readonly double _fi = (1 + _sqrt) / 2;
         private IExeptionForFirstDemo toRecorgnizeExceptionType;
-        private ILogger<Borders> _logger = null;
         private IServiceProvider _provider = null;
+        private ILogger<Range> _logger = null;
 
-        public readonly double _border1;
-        public readonly double _border2;
+        public int _border1;
+        public int _border2;
 
         #endregion
 
         #region Constructors
 
-
-        public Borders(ILogger<Borders> logger, IServiceProvider provider, double border1, double border2)
+        public Borders(ILogger<Range> logger)
         {
             toRecorgnizeExceptionType = new ExceptionsForAllAplication((int)TaskNumber.Task8);
-
-            _border1 = border1;
-            _border2 = border2;
             _logger = logger;
-            _provider = provider;
-
-            FindLowAndUpBorder(border1, border2);
         }
 
         #endregion
 
         #region Methods
 
+        public override void FindLowAndUpBorder(int border1, int border2)
+        {
+            base.FindLowAndUpBorder(border1, border2);
+        }
+
         public override int GetLowerBorderWithConditionals(double lowerRange)
         {
             int numberOf = 0;
-            
+
             numberOf = GetNumberInOrder(lowerRange);
             if (GetBorder(numberOf) < Math.Floor(lowerRange))
             {
@@ -62,7 +60,7 @@ namespace Task8_FibonacciOrder
             {
                 result--;
             }
-            
+
             return result;
         }
 
@@ -89,8 +87,7 @@ namespace Task8_FibonacciOrder
         {
             int result = 0;
 
-            var fbNum = _provider.GetRequiredService<OrderFibonacciWithBorders>();
-            result=fbNum.FindFibonacciNumber(value);
+            result = OrderFibonacciWithBorders.FindFibonacciNumber(value);
 
             return result;
         }
