@@ -6,11 +6,11 @@ namespace Task4FileParser
 {
     public class Parser
     {
-        public string Path { get; set; }
+        private string _path;
 
         public Parser(string path)
         {
-            Path = path;
+            _path = path;
         }
 
         #region Methods
@@ -23,11 +23,12 @@ namespace Task4FileParser
         {
             int countEntry = 0;
 
-            using (StreamReader reader = new StreamReader(Path, Encoding.Default))
+            using (StreamReader reader = new StreamReader(_path, Encoding.Default))
             {
                 // more effective than string
                 StringBuilder line = new StringBuilder();
 
+                //методи стринга в место getcount enrtyсерч
                 while ((line.Append(reader.ReadLine())) != null)
                 {
                     if (line.Length == 0)
@@ -58,7 +59,7 @@ namespace Task4FileParser
             
             using (StreamWriter writer = new StreamWriter(tempFileName))
             {
-                using (StreamReader reader = new StreamReader(Path, Encoding.Default))
+                using (StreamReader reader = new StreamReader(_path, Encoding.Default))
                 {
                     // more effective than string
                     StringBuilder line = new StringBuilder();
@@ -93,7 +94,7 @@ namespace Task4FileParser
             try
             {
                 if (countEntry > 0)
-                    File.Replace(tempFileName, Path, null);
+                    File.Replace(tempFileName, _path, null);//rename and deletede path
                 if (countEntry == 0)
                     return;
             }
@@ -109,7 +110,6 @@ namespace Task4FileParser
             int countEntry = 0;
             do
             {
-                //TODO: ASK need StringComparisonType ? 
                 startIndex = line.IndexOf(searchingString, startIndex);
                 if (startIndex > -1)
                 {
@@ -121,5 +121,6 @@ namespace Task4FileParser
             return countEntry;
         }
     }
+
     #endregion
 }

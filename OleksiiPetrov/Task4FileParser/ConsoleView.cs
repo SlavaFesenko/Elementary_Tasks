@@ -5,9 +5,11 @@ namespace Task4FileParser
 {
     public class ConsoleView : IView
     {
+        //TODO: Method ShowSeparator(count)
         private const string LINE_SEPARATOR = "---------------------------------------------------------------------------";
 
         #region Methods
+
         public void ShowErrorMessage(string text)
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -49,6 +51,7 @@ namespace Task4FileParser
 
             return arguments;
         }
+
         #endregion
     }
 }

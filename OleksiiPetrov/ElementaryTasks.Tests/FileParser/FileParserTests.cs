@@ -9,7 +9,7 @@ namespace ElementaryTasks.tests.FileParser
     public class FileParserTests
     {
         [TestMethod]
-        public void GetCountEntries()
+        public void ParserGetCountEntries_ONENUMBERfindInPath_Return0()
         {
             // Arrange
             string path = "test2.txt";
@@ -35,7 +35,7 @@ namespace ElementaryTasks.tests.FileParser
         {
             //Arrange
             string path = "test.txt";
-            if (File.Exists(path))
+            if (File.Exists(path))// TODO: ToSetup            //diapdown
                 File.Delete(path);
             using (File.Create(path)) { }
             File.WriteAllText(path, "One, Two, Three\r\n Two, Three\r\n");
@@ -51,6 +51,7 @@ namespace ElementaryTasks.tests.FileParser
             Assert.AreEqual(expected, actual);
         }
         //cr file -> one -> replace two -> Check replace. +checkException + checkReturn0->returnExValue0
+        //TODO: +ожидаем любой ексепшн
 
     }
 }

@@ -12,10 +12,9 @@ namespace Task4FileParser
                 case (int)WorkMode.Find:
                     if (File.Exists(args[0]))
                     {
-                        mode = WorkMode.Find;
+                        mode = WorkMode.Find; //detect mode
                         return true;
                     }
-                    //TODO: ASK: мы проверяем аргументы, ArgEx or FileNotFoundEx
                     else throw new ArgumentException($"File is not exist at the target directory");
 
                 case (int)WorkMode.Replace:

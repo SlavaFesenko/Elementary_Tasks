@@ -30,14 +30,16 @@ namespace Task4FileParser
         }
         public virtual void Run(string[] args)
         {
-            _args = (string[])args.Clone();
+            _args = (string[])args.Clone();//посмотреть про поверхносное копирование с пом. сериализации
+            //class input model args\ + props
             try
             { 
                 if (Validator.IsValid(_args, out WorkMode mode))
                 {
+                    //+detect mode
                     if (mode == WorkMode.Find)
                     {
-                        _parser = new Parser(_args[0]);
+                        _parser = new Parser(_args[0]);//model OPtions models InputModel
                         _view.ShowResult($"File {_args[0]}: Count entries \"{_args[1]}\" = {_parser.GetCountEntries(_args[1])}");
 
                         logger.Info($"Application run and show result with valid arguments: {args[0]}, {args[1]}");

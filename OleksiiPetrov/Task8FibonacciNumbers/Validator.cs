@@ -14,7 +14,7 @@ namespace Task8FibonacciNumbers
 
                 //args.Lenght only = 2, because range take only 2 argumnts
                 case 2:
-                    args[0] = args[0].Trim(new char[] { ',' });
+                    args[0] = args[0].Trim(new char[] { ',' });//TODO: к типу данних аргс0
                     if (int.TryParse(args[0], out int startPosition) && int.TryParse(args[1], out int endPosition))
                     {
                         if (startPosition < endPosition)
