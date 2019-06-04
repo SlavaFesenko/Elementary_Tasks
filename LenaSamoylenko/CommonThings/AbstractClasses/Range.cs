@@ -11,6 +11,7 @@ namespace CommonThings.AbstractClasses
         private int lowerBorder;
         private int upperBorder;
         private ILogger<Range> _logger = null;
+        protected IExeptionForFirstDemo _exeptions = null;
 
         #endregion
 
@@ -44,17 +45,10 @@ namespace CommonThings.AbstractClasses
             }
         }
 
-        public virtual void SetValue(int border1, int border2)
+        public virtual void SetValue(int border1, int border2, IExeptionForFirstDemo exceptions)
         {
-            try
-            {
-                FindLowAndUpBorder(border1, border2);
-            }
-            catch (Exception exception)
-            {
-
-                throw;
-            }
+            _exeptions = exceptions;
+            FindLowAndUpBorder(border1, border2);
         }
         #endregion
     }

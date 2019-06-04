@@ -67,6 +67,7 @@ namespace CommonThings
 
         #endregion
 
+        #region PrivateMethods
 
         private Exception Task1Exception(Exception exception)
         {
@@ -81,6 +82,9 @@ namespace CommonThings
 
             return task1Exception;
         }
+
+        #endregion
+
 
     }
 }

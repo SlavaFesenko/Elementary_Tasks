@@ -11,12 +11,7 @@ namespace Task8_FibonacciOrder
         #region Fields
         private static readonly double _sqrt = Math.Sqrt(5);
         private static readonly double _fi = (1 + _sqrt) / 2;
-        private IExeptionForFirstDemo toRecorgnizeExceptionType;
-        private IServiceProvider _provider = null;
         private ILogger<Range> _logger = null;
-
-        public int _border1;
-        public int _border2;
 
         #endregion
 
@@ -24,7 +19,6 @@ namespace Task8_FibonacciOrder
 
         public Borders(ILogger<Range> logger)
         {
-            toRecorgnizeExceptionType = new ExceptionsForAllAplication((int)TaskNumber.Task8);
             _logger = logger;
         }
 
@@ -40,12 +34,20 @@ namespace Task8_FibonacciOrder
         public override int GetLowerBorderWithConditionals(double lowerRange)
         {
             int numberOf = 0;
-
-            numberOf = GetNumberInOrder(lowerRange);
-            if (GetBorder(numberOf) < Math.Floor(lowerRange))
+            try
             {
-                numberOf++;
+                numberOf = GetNumberInOrder(lowerRange);
+                if (GetBorder(numberOf) < Math.Floor(lowerRange))
+                {
+                    numberOf++;
+                }
             }
+            catch (Exception exception)
+            {
+                Exception expFinal = _exeptions.GetException(exception);
+                _logger.LogError(expFinal, "Error in {0} method", System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+
 
             return numberOf;
         }
@@ -53,13 +55,21 @@ namespace Task8_FibonacciOrder
         public override int GetUpperBoarderConditionals(double upperRange)
         {
             int result = 0;
-
-            result = GetNumberInOrder(upperRange);
-
-            if (GetBorder(result) > Math.Floor(upperRange) && result > LowerBorder + 1)
+            try
             {
-                result--;
+                result = GetNumberInOrder(upperRange);
+
+                if (GetBorder(result) > Math.Floor(upperRange) && result > LowerBorder + 1)
+                {
+                    result--;
+                }
             }
+            catch (Exception exception)
+            {
+                Exception expFinal = _exeptions.GetException(exception);
+                _logger.LogError(expFinal, "Error in {0} method", System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+
 
             return result;
         }
@@ -76,8 +86,8 @@ namespace Task8_FibonacciOrder
             }
             catch (Exception exception)
             {
-                var exp = toRecorgnizeExceptionType.GetException(exception);
-                _logger.LogError(exception, "Error in {0} method", System.Reflection.MethodBase.GetCurrentMethod().Name);
+                Exception expFinal = _exeptions.GetException(exception);
+                _logger.LogError(expFinal, "Error in {0} method", System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
 
             return numberOf;

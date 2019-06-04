@@ -9,19 +9,23 @@ using NLog;
 
 namespace Task8_FibonacciOrder
 {
+
     class UI : BaseUI
     {
         #region Fields
 
         private int _border1 = 0;
         private int _border2 = 0;
+        private string _instruction = null;
+        private int _taskNumber = 0;
+
         private IEnumerable<int> _collection = null;
         private Range _range = null;
-        OrderFibonacciWithBorders _order = null;
+        private OrderFibonacciWithBorders _order = null;
         private Logger _logger = null;
-        //private IServiceProvider _servicesProvider = null;
         private IServiceProvider _provider = null;
-        private string _instruction = null;
+        private IExeptionForFirstDemo exeptions = null;
+
 
         #endregion
 
@@ -32,8 +36,9 @@ namespace Task8_FibonacciOrder
             Console.WriteLine("{0} Hello in Task8 {0}", new string('*', 10));
 
             _logger = LogManager.GetCurrentClassLogger();
-            //_servicesProvider = CommonThings.Logger<UI>.HelperForLogging();
-           
+            _taskNumber = (int)BaseUI.TaskNumber.Task8;
+            _instruction = InstructionReader.GiveInstruction();
+            exeptions = new ExceptionsForAllAplication(_taskNumber);
         }
 
         public UI(string[] args) : this()
@@ -50,9 +55,10 @@ namespace Task8_FibonacciOrder
 
             while (validArgs == false && startProg == false)
             {
+                Console.WriteLine();
                 Console.WriteLine(_instruction);
                 string row = Console.ReadLine();
-                validArgs = Parser.ParseIntoIntNumbers(row, out _border1, out _border2);
+                validArgs = Parser.ParseIntoIntNumbers(row, _taskNumber, out _border1, out _border2);
             }
 
         }
@@ -72,7 +78,7 @@ namespace Task8_FibonacciOrder
                 {
                     _provider = CommonThings.Logger<Borders>.HelperForLogging();
                     _range = _provider.GetRequiredService<Borders>();//new Borders();
-                    _range.SetValue(_border1, _border2);
+                    _range.SetValue(_border1, _border2, exeptions);
                 }
 
                 using (_provider as IDisposable)
@@ -84,17 +90,15 @@ namespace Task8_FibonacciOrder
 
                 //_order = new OrderFibonacciWithBorders(_servicesProvider, _logger);
 
-                _message = "Congratulations, the calculation was finished";
-            }
-            catch (System.InvalidOperationException exception)
-            {
-                _logger.Error(exception, "Stopped program because of exception");
+                _message = "Congratulations, the calculation was finished\n";
             }
             catch (Exception exception)
             {
                 //add to log file
-                _message = "Some problems";
-                _logger.Error(exception, "Stopped program because of exception");
+                Exception exceptionFinal = exeptions.GetException(exception);
+
+                _message = "Some problems\n";
+                _logger.Error(exceptionFinal, "Stopped program because of exception");
             }
 
             return _message;
@@ -104,7 +108,7 @@ namespace Task8_FibonacciOrder
         {
             string result = null;
 
-            Console.WriteLine("The choosen diapazon from {0} to {1}", _border1, _border2);
+            Console.WriteLine("The choosen diapazon from {0} to {1} is:", _border1, _border2);
             result = _order.GetOrderFromCollection(_collection);
 
             return result;

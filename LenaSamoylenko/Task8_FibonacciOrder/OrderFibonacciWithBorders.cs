@@ -9,7 +9,7 @@ using NLog;
 
 namespace Task8_FibonacciOrder
 {
-    enum TaskNumber { Task8 = 8 }
+    
     enum EventIdForLogger { UseVoid = 10, UseProperty = 20, UseConstructor = 30 }
 
     class OrderFibonacciWithBorders : Order
