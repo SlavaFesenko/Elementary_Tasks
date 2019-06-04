@@ -19,7 +19,7 @@ namespace Task4_ParserForFiles
         private int _partSize;
         private int _currentPart;
         private SortedDictionary<int, int> changedParts = null;
-        #endregion
+         #endregion
 
         #region Constructors
 
@@ -76,7 +76,7 @@ namespace Task4_ParserForFiles
 
             var result = Parallel.For(0, CountOfThread, (int textPartNumber) =>
               {
-                  GetPointWhereChangeText(textPartNumber, rowPart1, rowPart2, accuracy, filePath);
+                  GetPointWhereChangeText(textPartNumber, rowPart1, rowPart2, accuracy);
 
                   //Console.WriteLine(Thread.GetCurrentProcessorId());
               });
@@ -104,15 +104,41 @@ namespace Task4_ParserForFiles
         //    stream.Write(textChar, range, textChar.Length);
         //}
 
-        private void ReplacePart()
+
+
+        private async bool ReplacePart(SortedDictionary<int, int> forChangeParts, string oldRow, string newRow, out string pathNewFile)
         {
-            using ( )
+            bool succesResult = false;
+
+            FileStream stream = new FileStream(TextPath, FileMode.Open);
+            BinaryReader reader = new BinaryReader(stream);
+
+            char[] text = reader.ReadChars(0);
+
+
+
+            //get new file path
+            StringBuilder newFilePath = new StringBuilder(TextPath.Substring(TextPath.LastIndexOf(Path.PathSeparator)));
+            newFilePath.Append(Path.PathSeparator);
+            newFilePath.Append(String.Format(@"{0}.txt", System.Guid.NewGuid()));
+            pathNewFile = newFilePath.ToString();
+
+           
+            using (StreamWriter writer = new StreamWriter(pathNewFile))
             {
+                writer.Write(text, 0, forChangeParts[0]);
+                
+                foreach (var item in forChangeParts)
+                {
+                    char []buffer=text.CopyTo
+                    writer.Write(text, item.Key, item.Value);
+                }
+
 
             }
-            StringWriter stringWriter = new StringWriter();
-            StringReader stringReader=new StringReader()
-                
+
+
+
         }
 
         public char[] ChangingSucces(string oldRow, string newRow, string text)
@@ -124,10 +150,11 @@ namespace Task4_ParserForFiles
             return textOut;
         }
 
-        public void GetPointWhereChangeText(int textPartNumber, string rowPart1, string rowPart2, int accuracy, string filePath)
+        public SortedDictionary<int, int> GetPointWhereChangeText(int textPartNumber, string rowPart1, string rowPart2, int accuracy)
         {
             bool _isInText;
             bool _isInTextInEnd = false;
+            SortedDictionary<int, int> points = new SortedDictionary<int, int>();
 
             lock (this)
             {
@@ -136,6 +163,8 @@ namespace Task4_ParserForFiles
                 try
                 {
                     StringBuilder _builder = new StringBuilder(Text.Substring(_range, _partSize));
+
+                    //StringWriter reader = new StringWriter()
                     string _textPart = _builder.ToString();//takes part of text for work in thread
 
                     //find do we have start and end in the part of text
@@ -145,8 +174,7 @@ namespace Task4_ParserForFiles
                     if (_isInText == true && _isInTextInEnd == true)
                     {
                         //if we have start and end in the text part 
-                        _isInText = _textPart.Contains(Row);
-                        AddToChangedList(_isInText, _range, _partSize);
+                        points.AddToChangedList(_textPart, Row, _range);
                     }
                     else if (_isInText == true)
                     {
@@ -157,10 +185,7 @@ namespace Task4_ParserForFiles
                         _textPart = _builder.ToString();
                         //_currentPart = textPartNumber;
 
-                        _isInText = _textPart.Contains(Row);
-                        AddToChangedList(_isInText, _range, _textPart.Length);
-
-                        //Console.WriteLine(_textPart + "\n\n");
+                        points.AddToChangedList(_textPart, Row, _range);
                     }
                     else if (_isInTextInEnd == true)
                     {
@@ -170,9 +195,7 @@ namespace Task4_ParserForFiles
                             _builder.Insert(0, Text.Substring((textPartNumber - 1) * _partSize + accuracy, _partSize - accuracy), 1);
                             _textPart = _builder.ToString();
 
-                            _isInText = _textPart.Contains(Row);
-                            AddToChangedList(_isInText, _range, _textPart.Length);
-                            //Console.WriteLine(_textPart + "\n\n");
+                            points.AddToChangedList(_textPart, Row, _range);
                         }
                     }
                     else
@@ -190,6 +213,8 @@ namespace Task4_ParserForFiles
                 {
                     //add to log
                 }
+
+                return points;
             }
         }
 
@@ -197,13 +222,7 @@ namespace Task4_ParserForFiles
         //              WriteToFile(_builder, sw, _range);
 
 
-        private void AddToChangedList(bool isInText, int startFromSymbolNumber, int lenght)
-        {
-            if (isInText == true)
-            {
-                changedParts.Add(startFromSymbolNumber, lenght);
-            }
-        }
+
 
         public void GetNewFile(string toFile)
         {
