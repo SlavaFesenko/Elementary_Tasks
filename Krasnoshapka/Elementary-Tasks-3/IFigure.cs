@@ -8,6 +8,7 @@ namespace Elementary_Tasks_3
 {
     interface IFigure
     {
+        float GetPerimeter();
         float GetSquare();
     }
 }

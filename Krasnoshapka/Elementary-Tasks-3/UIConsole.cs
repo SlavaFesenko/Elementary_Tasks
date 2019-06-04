@@ -13,11 +13,13 @@ namespace Elementary_Tasks_3
 
         public static void BuildUI(string[] args)
         {
-            List<Triangle> trianglesList = new List<Triangle>();
+          
 
             if (args.Length == COMMAND_LINE_ARGS)
             {
                 bool Finish = true;
+
+                List<Triangle> trianglesList = new List<Triangle>();
 
                 do
                 {
@@ -52,12 +54,14 @@ namespace Elementary_Tasks_3
                         }
                         else
                         {
-                            throw new FormatException("Please enter numbers as triangle parameters");
+                            Finish = true;
+                            Console.WriteLine("Please enter numbers as triangle parameters");
                         }
                     }
                     else
                     {
-                        throw new ArgumentException(" Not enough parameters for building triangle!");
+                        Finish = true;
+                        Console.WriteLine(" Not enough parameters for building triangle!");
                     }
 
                 } while (Finish);
