@@ -1,0 +1,1 @@
+﻿If you have seen this instruction probably you`ve got some error. Put two positive integer borders into console, please 

@@ -1,0 +1,2 @@
+﻿If you want to find out could one envelope get in second envelope, you should firstly put double size of first envelope and then double size of second. 
+To continue this procces put in "y" or "yes", otherwise the application would be closed.

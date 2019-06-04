@@ -1,0 +1,2 @@
+﻿You`ve already put your data.
+Depending on you choise, you`ve put two or free arguments, the programe will give to you count of row in text or text of new file with replaced rows.
