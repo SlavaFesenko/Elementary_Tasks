@@ -18,13 +18,12 @@ namespace CommonThings
 
         #endregion
 
-         
-        public static bool ParseIntoIntNumbers(string row, int taskNumber, out int border1, out int border2)
+        #region Methods
+
+        public static bool ParseIntoIntNumbers(string row, int taskNumber, ref int[] borders)
         {
             bool result = false;
-            border1 = 0;
-            border2 = 0;
-
+      
             try
             {
                 string pattern = _patternForRegex[taskNumber];
@@ -39,11 +38,8 @@ namespace CommonThings
                     collection[i] = item.ToString();
                     i++;
                 }
-
-
-                result = Validator.CheckCountAndTypeArgs(collection, out border1, out border2);
-
-
+                
+                result = Validator.CheckCountAndTypeArgs(collection, ref borders);
             }
 
             catch (Exception exception)
@@ -54,5 +50,9 @@ namespace CommonThings
 
             return result;
         }
+
+        #endregion
+
+
     }
 }

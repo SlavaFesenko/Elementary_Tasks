@@ -1,9 +1,10 @@
 ﻿using System;
 using CommonThings;
+using CommonThings.AbstractClasses;
 
 namespace Task6_LuckyTickets
 {
-    class UA : IUA, IUAForTask6
+    class UI : BaseUI, IUAForTask6
     {
         ChooseConcreteAlgorithm choose;
         public void PutOK()
@@ -24,6 +25,16 @@ namespace Task6_LuckyTickets
         }
 
         public void SetConsoleSize(int height, int wight)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string CalculateOK()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string PrintIntoConsole()
         {
             throw new NotImplementedException();
         }

@@ -14,8 +14,7 @@ namespace Task8_FibonacciOrder
     {
         #region Fields
 
-        private int _border1 = 0;
-        private int _border2 = 0;
+        private int[] _borders;
         private string _instruction = null;
         private int _taskNumber = 0;
 
@@ -26,19 +25,18 @@ namespace Task8_FibonacciOrder
         private IServiceProvider _provider = null;
         private IExeptionForFirstDemo exeptions = null;
 
-
         #endregion
 
         #region Constructors
 
         private UI()
         {
-            Console.WriteLine("{0} Hello in Task8 {0}", new string('*', 10));
-
             _logger = LogManager.GetCurrentClassLogger();
-            _taskNumber = (int)BaseUI.TaskNumber.Task8;
+            _taskNumber = (int)TaskNumber.Task8;
             _instruction = InstructionReader.GiveInstruction();
             exeptions = new ExceptionsForAllAplication(_taskNumber);
+
+            Console.WriteLine("{0} Hello in Task{1} {0}", new string('*', 10), _taskNumber);
         }
 
         public UI(string[] args) : this()
@@ -46,21 +44,23 @@ namespace Task8_FibonacciOrder
             //bool result = Validator.CheckCountAndTypeArgs(args, out message, out _border1, out _border2);
 
             bool validArgs = false;
-            int[] curArgs = new int[(int)CountOfArgs.EightTask];
+            bool startProg = false;
+            _borders = new int[(int)CountOfArgs.EightTask];
 
-            validArgs = Validator.CheckCountAndTypeArgs(args, out _border1, out _border2);
-            _instruction = InstructionReader.GiveInstruction();
+            startProg = Validator.CheckArgs(args, (int)CommonThings.CountOfArgs.EightTask);
 
-            bool startProg = Validator.CheckArgs(args);
+            if (startProg == true)
+            {
+                validArgs = Validator.CheckCountAndTypeArgs(args, ref _borders);
+            }
 
-            while (validArgs == false && startProg == false)
+            while (validArgs == false)
             {
                 Console.WriteLine();
                 Console.WriteLine(_instruction);
                 string row = Console.ReadLine();
-                validArgs = Parser.ParseIntoIntNumbers(row, _taskNumber, out _border1, out _border2);
+                validArgs = Parser.ParseIntoIntNumbers(row, _taskNumber, ref _borders);
             }
-
         }
 
         #endregion
@@ -78,7 +78,7 @@ namespace Task8_FibonacciOrder
                 {
                     _provider = CommonThings.Logger<Borders>.HelperForLogging();
                     _range = _provider.GetRequiredService<Borders>();//new Borders();
-                    _range.SetValue(_border1, _border2, exeptions);
+                    _range.SetValue(_borders[0], _borders[1], exeptions);
                 }
 
                 using (_provider as IDisposable)
@@ -108,7 +108,7 @@ namespace Task8_FibonacciOrder
         {
             string result = null;
 
-            Console.WriteLine("The choosen diapazon from {0} to {1} is:", _border1, _border2);
+            Console.WriteLine("The choosen diapazon from {0} to {1} is:", _borders[0], _borders[1]);
             result = _order.GetOrderFromCollection(_collection);
 
             return result;

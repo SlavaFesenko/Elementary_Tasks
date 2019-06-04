@@ -9,7 +9,7 @@ namespace Task7_NumbersOrder
     {
         #region Constructors
 
-        public Borders(double border1, double border2)
+        public Borders(int border1, int border2)
         {
             FindLowAndUpBorder(border1, border2);
         }

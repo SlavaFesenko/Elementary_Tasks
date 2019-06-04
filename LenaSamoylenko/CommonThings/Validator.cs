@@ -5,50 +5,42 @@ using System.Text.RegularExpressions;
 
 namespace CommonThings
 {
-    public enum TaskNumber { Task1 = 1, Task2 = 2 }
+}
 
+namespace CommonThings
+{
     public static class Validator
     {
         #region Task7
 
-        public static bool CheckArgs(string[] args)
+        public static bool CheckArgs(string[] args, int countOfArgs)
         {
             bool couldContinue = false;
 
-            if (args.Length == (int)CommonThings.CountOfArgs.SeventhTask)
+            if (args.Length == countOfArgs)
             {
                 couldContinue = true;
             }
             return couldContinue;
         }
 
-        public static bool CheckCountAndTypeArgs(string[] args, out int border1, out int border2)
+        public static bool CheckCountAndTypeArgs(string[] args, ref int[] borders)
         {
             bool result = false;
-            border1 = 0;
-            border2 = 0;
-            int value = 0;
-
-
+            
             for (int number = 0; number < args.Length; number++)
             {
-                if (Int32.TryParse(args[number], out value) == true)
+                if (Int32.TryParse(args[number], out borders[number]) == true)
                 {
-                    if (value > border2)
+                    if (borders[number] > 0)
                     {
-                        border1 = border2;
-                        border2 = value;
+                        result = true;
+                    }
+                    else
+                    {
+                        break;
                     }
                 }
-                else
-                {
-                    break;
-                }
-            }
-
-            if (border1 > 0 && border2 > 0)
-            {
-                result = true;
             }
 
             return result;

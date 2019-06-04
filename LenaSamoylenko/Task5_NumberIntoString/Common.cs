@@ -28,7 +28,7 @@ namespace Task5_NumberIntoString
             return builder;
         }
 
-        private static StringBuilder CommonPartForTensAndUnits(GetHundreds getHundreds, int forCountHundreds, ICommonNumbers indexer)
+        internal static StringBuilder CommonPartForTensAndUnits(GetHundreds getHundreds, int forCountHundreds, ICommonNumbers indexer)
         {
             StringBuilder builder = null;
 
