@@ -18,8 +18,8 @@ namespace Task4_ParserForFiles
         private int _rowInText;
         private int _partSize;
         private int _currentPart;
-        private SortedDictionary<int, int> changedParts = null;
-         #endregion
+        private List<int> changedParts = null;
+        #endregion
 
         #region Constructors
 
@@ -48,19 +48,20 @@ namespace Task4_ParserForFiles
         #region Properties
 
         public string NewRow { get => _newRow; private set => _newRow = value; }
+        public List<int> ChangedParts { get => changedParts;}
 
         #endregion
 
         #region Methods
 
-        public bool GetNewFile(string oldRow, string newRow, out int count, string filePath)
+        public bool CountOfRow(string oldRow, string newRow, out int count)
         {
             _rowInText = 0;
             Row = oldRow;
             RowSize = oldRow.Length;
             _partSize = RowSize * 2;
             NewRow = newRow;
-            changedParts = new SortedDictionary<int, int>();
+            changedParts = new List<int>();
 
             int accuracy = (RowSize > 1000) ? (16) : ((RowSize > 100) ? 8 : 4);
 
@@ -82,8 +83,6 @@ namespace Task4_ParserForFiles
               });
             Console.WriteLine(DateTime.Now);
 
-
-
             count = _rowInText;
             if (count != 0)
             {
@@ -92,75 +91,55 @@ namespace Task4_ParserForFiles
             return outText;
         }
 
-        //private void WriteToFile(StringBuilder builder, StreamWriter stream, int range)
-        //{
-        //    string text = builder.ToString();
-        //    WriteToFile(text, stream, range);
-
-        //}
-        //private void WriteToFile(string text, StreamWriter stream, int range)
-        //{
-        //    char[] textChar = text.ToCharArray();
-        //    stream.Write(textChar, range, textChar.Length);
-        //}
-
-
-
-        private async bool ReplacePart(SortedDictionary<int, int> forChangeParts, string oldRow, string newRow, out string pathNewFile)
+        public bool NewFileWithNewRows(List<int> forChangeParts, string newRow, string oldRow, string pathNewFile)
         {
             bool succesResult = false;
+            int _listCount = forChangeParts.Count;
+            pathNewFile = null;
 
-            FileStream stream = new FileStream(TextPath, FileMode.Open);
-            BinaryReader reader = new BinaryReader(stream);
+            forChangeParts.Sort();
 
-            char[] text = reader.ReadChars(0);
-
-
-
-            //get new file path
-            StringBuilder newFilePath = new StringBuilder(TextPath.Substring(TextPath.LastIndexOf(Path.PathSeparator)));
-            newFilePath.Append(Path.PathSeparator);
-            newFilePath.Append(String.Format(@"{0}.txt", System.Guid.NewGuid()));
-            pathNewFile = newFilePath.ToString();
-
-           
             using (StreamWriter writer = new StreamWriter(pathNewFile))
             {
-                writer.Write(text, 0, forChangeParts[0]);
-                
-                foreach (var item in forChangeParts)
+                StringBuilder text = new StringBuilder(Text);
+                StringBuilder worker = new StringBuilder();
+                StringBuilder _forOut = null;
+
+                for (int i = 0; i <= _listCount - 1; i++)
                 {
-                    char []buffer=text.CopyTo
-                    writer.Write(text, item.Key, item.Value);
+                    worker = text;
+                    worker.Remove((int)forChangeParts[i], (int)ChangedParts[i + 1]);
+
+                    if (i != 0)
+                    {
+                        worker.Replace(oldRow, newRow);
+                    }
+                    _forOut.Append(worker);
                 }
 
+                text.Remove(forChangeParts[_listCount - 1], Text.Length);
+                text.Replace(oldRow, newRow);
+                _forOut.Append(text);
 
+                writer.WriteAsync(_forOut.ToString());
             }
 
-
-
+            return succesResult;
         }
 
-        public char[] ChangingSucces(string oldRow, string newRow, string text)
-        {
-            char[] textOut = Array.Empty<char>();
-
-            textOut = text.Replace(oldRow, newRow).ToCharArray();
-
-            return textOut;
-        }
-
-        public SortedDictionary<int, int> GetPointWhereChangeText(int textPartNumber, string rowPart1, string rowPart2, int accuracy)
+        public void GetPointWhereChangeText(int textPartNumber, string rowPart1, string rowPart2, int accuracy)
         {
             bool _isInText;
             bool _isInTextInEnd = false;
-            SortedDictionary<int, int> points = new SortedDictionary<int, int>();
+            List<int> points = new List<int>();
+            points.Add(0);
 
-            lock (this)
+
+            int _range = textPartNumber * _partSize;
+
+            try
             {
-                int _range = textPartNumber * _partSize;
-
-                try
+                lock (this)
                 {
                     StringBuilder _builder = new StringBuilder(Text.Substring(_range, _partSize));
 
@@ -189,7 +168,7 @@ namespace Task4_ParserForFiles
                     }
                     else if (_isInTextInEnd == true)
                     {
-                        if (!changedParts.ContainsKey(textPartNumber - 1))
+                        if (!ChangedParts.Contains(textPartNumber - 1))
                         {
                             _range = (textPartNumber - 1) * _partSize + accuracy;
                             _builder.Insert(0, Text.Substring((textPartNumber - 1) * _partSize + accuracy, _partSize - accuracy), 1);
@@ -202,31 +181,31 @@ namespace Task4_ParserForFiles
                     {
                         _isInText = false;
                     }
-
-                    //operation with common variable
-                    if (_isInText == true)
-                    {
-                        _rowInText++;
-                    }
                 }
-                catch (Exception exception)
+                //operation with common variable
+                if (_isInText == true)
                 {
-                    //add to log
+                    _rowInText++;
                 }
-
-                return points;
             }
+            catch (Exception exception)
+            {
+                //add to log
+            }
+
+            changedParts = points;
         }
 
-        //using (StreamWriter sw = new StreamWriter(filePath, true, System.Text.Encoding.Default))
-        //              WriteToFile(_builder, sw, _range);
-
-
-
-
-        public void GetNewFile(string toFile)
+        public string GetNewFilePath(string textPath)
         {
-            throw new NotImplementedException();
+            string outPath = null;
+
+            char separartor = Path.DirectorySeparatorChar;
+            outPath = textPath.Remove(textPath.LastIndexOf(separartor));
+            string fileName = String.Format(@"{0}.txt", System.Guid.NewGuid());
+            outPath = String.Concat(outPath, separartor, fileName);
+
+            return outPath;
         }
 
         #endregion

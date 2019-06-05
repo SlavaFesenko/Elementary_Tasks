@@ -86,8 +86,11 @@ namespace Task4_ParserForFiles
             int _count = 0;
             if (_founder is ChangePart)
             {
-                var path = String.Concat(Directory.GetCurrentDirectory(), "\\newFile.txt");
-                (_founder as ChangePart).GetNewFile(_args[1], _args[2], out _count, path);
+                CnangerRowInText changer = new CnangerRowInText(_args[0]);
+                string newFilePath = changer.GetNewFilePath(changer.TextPath);
+                changer.CountOfRow(_args[1], _args[2], out _count);
+                changer.NewFileWithNewRows(changer.ChangedParts, changer.NewRow, changer.Row, newFilePath);
+
             }
             //_count = _founder.GetRowCountInText(_args[1]);
             if (_count != 0)
@@ -113,11 +116,9 @@ namespace Task4_ParserForFiles
             //add to log file
             Environment.Exit(0);
         }
-       
+
 
         #endregion
-
-
     }
 
 }

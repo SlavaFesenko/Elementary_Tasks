@@ -10,8 +10,6 @@ namespace Task4_ParserForFiles
             string _message2 = null;
             string _data = null;
 
-            //greating
-            Console.WriteLine("Hello in Task4\n");
 
             //creating new UI 
             UI currentUI = new UI(args, out _message1);

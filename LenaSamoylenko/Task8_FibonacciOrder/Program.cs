@@ -15,8 +15,8 @@ namespace Task8_FibonacciOrder
 
             //creating new UI 
             UI currentUI = new UI(args, out _message1);
-            Console.WriteLine(_message1);
-            currentUI.CheckForExit(_message1);
+            //Console.WriteLine(_message1);
+            //currentUI.CheckForExit(_message1);
 
             //get calculation`s result and print message
             _message2 = currentUI.CalculateOK();
