@@ -1,20 +1,29 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
+using CommonThings;
+using Task4_ParserForFiles;
 
 namespace Tests
 {
-    [TestClass]
-    public class Tests
+    [TestFixture]
+    public class Task4
     {
+        
         [SetUp]
         public void Setup()
         {
+            
         }
 
-        [TestMethod]
-        public void Test1()
+
+        [TestCase]
+        public void IsValidCountOfRow()
         {
-            //Assert.Pass();
+            //arrange
+
+            //act
+
+            //assert
+
         }
     }
 }

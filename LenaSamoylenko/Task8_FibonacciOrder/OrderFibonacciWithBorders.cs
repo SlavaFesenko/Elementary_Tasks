@@ -9,10 +9,10 @@ using NLog;
 
 namespace Task8_FibonacciOrder
 {
-    
+
     enum EventIdForLogger { UseVoid = 10, UseProperty = 20, UseConstructor = 30 }
 
-    class OrderFibonacciWithBorders : Order
+    public class OrderFibonacciWithBorders : Order
     {
 
         #region Fields
@@ -44,19 +44,16 @@ namespace Task8_FibonacciOrder
             using (_provider as IDisposable)
             {
                 List<int> collection = new List<int>();
-                var fibonacciOrder = _provider.GetRequiredService<OrderFibonacciWithBorders>();
+                //var fibonacciOrder = _provider.GetRequiredService<OrderFibonacciWithBorders>();
 
                 for (int delta = range.LowerBorder; delta <= range.UpperBorder; delta++)
                 {
                     int _nextNumber = 0;
 
                     _nextNumber = OrderFibonacciWithBorders.FindFibonacciNumber(delta);
-                    _logger.LogInformation(10, "Method {0} was called for count {1} number ib order", System.Reflection.MethodBase.GetCurrentMethod().Name, delta);
 
                     collection.Add(_nextNumber);
                 }
-
-                _logger.LogInformation(10, "Method {0} was called", System.Reflection.MethodBase.GetCurrentMethod().Name);
 
                 return collection;
             }

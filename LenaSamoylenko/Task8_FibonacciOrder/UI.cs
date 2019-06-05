@@ -78,7 +78,7 @@ namespace Task8_FibonacciOrder
                 {
                     _provider = CommonThings.Logger<Borders>.HelperForLogging();
                     _range = _provider.GetRequiredService<Borders>();//new Borders();
-                    _range.SetValue(_borders[0], _borders[1], exeptions);
+                    (_range.LowerBorder, _range.UpperBorder) = _range.SetValue(_borders[0], _borders[1], exeptions);
                 }
 
                 using (_provider as IDisposable)

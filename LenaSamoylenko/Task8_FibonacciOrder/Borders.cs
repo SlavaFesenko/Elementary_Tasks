@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Task8_FibonacciOrder
 {
-    class Borders : Range
+    public class Borders : Range
     {
         #region Fields
         private static readonly double _sqrt = Math.Sqrt(5);
@@ -26,9 +26,13 @@ namespace Task8_FibonacciOrder
 
         #region Methods
 
-        public override void FindLowAndUpBorder(int border1, int border2)
+        public override (int, int) FindLowAndUpBorder(int border1, int border2)
         {
-            base.FindLowAndUpBorder(border1, border2);
+            int _b1 = 0;
+            int _b2 = 0;
+            (_b1, _b2)= base.FindLowAndUpBorder(border1, border2);
+
+            return (GetLowerBorderWithConditionals(_b1), GetUpperBoarderConditionals(_b2));
         }
 
         public override int GetLowerBorderWithConditionals(double lowerRange)

@@ -17,8 +17,8 @@ namespace CommonThings.AbstractClasses
 
         #region Properties
 
-        public int LowerBorder { get => lowerBorder; protected set => lowerBorder = value; }
-        public int UpperBorder { get => upperBorder; protected set => upperBorder = value; }
+        public int LowerBorder { get => lowerBorder; set => lowerBorder = value; }
+        public int UpperBorder { get => upperBorder; set => upperBorder = value; }
 
         #endregion
 
@@ -27,28 +27,34 @@ namespace CommonThings.AbstractClasses
         public abstract int GetLowerBorderWithConditionals(double lowerInSecondPow);
         public abstract int GetUpperBoarderConditionals(double upperInSecondPow);
 
-        public virtual void FindLowAndUpBorder(int border1, int border2)
+        public virtual (int, int) FindLowAndUpBorder(int border1, int border2)
         {
+            (int, int) borders = (0, 0);
+
             if (border1 > border2)
             {
-                LowerBorder = GetLowerBorderWithConditionals(border2);
-                UpperBorder = GetUpperBoarderConditionals(border1);
+                borders = (border2, border1);
             }
             else if (border2 > border1)
             {
-                LowerBorder = GetLowerBorderWithConditionals(border1);
-                UpperBorder = GetUpperBoarderConditionals(border2);
+                borders = (border1, border2);
             }
             else
             {
-                LowerBorder = UpperBorder = GetLowerBorderWithConditionals(border1);
+                borders = (border1, border1);
             }
+
+            return borders;
         }
 
-        public virtual void SetValue(int border1, int border2, IExeptionForFirstDemo exceptions)
+        public virtual (int, int) SetValue(int border1, int border2, IExeptionForFirstDemo exceptions)
         {
+            (int, int) borders = (0, 0);
+
             _exeptions = exceptions;
-            FindLowAndUpBorder(border1, border2);
+            borders=FindLowAndUpBorder(border1, border2);
+
+            return borders;
         }
         #endregion
     }

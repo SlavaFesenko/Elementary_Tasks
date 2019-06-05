@@ -13,4 +13,14 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CommonThings\CommonThings.csproj" />
+    <ProjectReference Include="..\Task4_ParserForFiles\Task4_ParserForFiles.csproj" />
+    <ProjectReference Include="..\Task8_FibonacciOrder\Task8_FibonacciOrder.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Task4\" />
+  </ItemGroup>
+
 </Project>
