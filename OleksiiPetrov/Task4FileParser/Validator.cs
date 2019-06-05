@@ -5,14 +5,13 @@ namespace Task4FileParser
 {
     public static class Validator
     {
-        public static bool IsValid(string[] args, out WorkMode mode)
+        public static bool IsValid(string[] args)
         {
             switch (args.Length)
             {
                 case (int)WorkMode.Find:
                     if (File.Exists(args[0]))
                     {
-                        mode = WorkMode.Find; //detect mode
                         return true;
                     }
                     else throw new ArgumentException($"File is not exist at the target directory");
@@ -20,7 +19,6 @@ namespace Task4FileParser
                 case (int)WorkMode.Replace:
                     if (File.Exists(args[0]))
                     {
-                        mode = WorkMode.Replace;
                         return true;
                     }
                     else throw new ArgumentException($"File is not exist at the target directory");

@@ -94,7 +94,11 @@ namespace Task4FileParser
             try
             {
                 if (countEntry > 0)
-                    File.Replace(tempFileName, _path, null);//rename and deletede path
+                {
+                    File.Delete(_path);
+                    //change name of tmp file to _path
+                    File.Move(tempFileName, _path);
+                }
                 if (countEntry == 0)
                     return;
             }

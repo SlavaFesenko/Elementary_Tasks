@@ -2,7 +2,8 @@
 using System.Configuration;
 using System.Collections.Generic;
 
-using SharedDll;
+using SharedLibrary;
+using NLog;
 
 namespace Task8FibonacciNumbers
 {
@@ -10,6 +11,7 @@ namespace Task8FibonacciNumbers
     {
         private string[] _args;
         private IView _view;
+        Logger logger = LogManager.GetCurrentClassLogger();
 
         public Application()
         {
@@ -24,34 +26,40 @@ namespace Task8FibonacciNumbers
         public virtual void Run()
         {
             _view.ShowInstruction(ConfigurationManager.AppSettings["Instruction"]);
-            Run(_view.ReInput());
+            if (ConfigurationManager.AppSettings["ReInputMode"].ToLower() == "true")
+            {
+                logger.Trace("ReInput mode started");
+                Run(_view.ReInput());
+            }
         }
         public virtual void Run(string[] args)
         {
             _args = (string[])args.Clone();
+
             try
             {
                 if (Validator.IsValid(args))
                 {
-                    Sequence sequence = new FibonacciSequence(int.Parse(args[0]), int.Parse(args[1]));
+                    InputModel input = new InputModel(args);
+                    Sequence sequence = new FibonacciSequence(input.LeftNumber, input.RightNumber);
                     IEnumerable<int> sequenceCollection = sequence.GetSequenceCollection();
 
-                    _view.ShowResult(sequence.GetStringSequence(sequenceCollection).ToString());
+                    string result = sequence.GetStringSequence(sequenceCollection).ToString();
+                    _view.ShowResult(result);
+                    logger.Info($"Application run and show result with valid arguments: {input.LeftNumber}, {input.RightNumber}");
+                    logger.Info($"Show result: {result}");
                 }
-            }
-            catch (ArgumentOutOfRangeException ex)
-            {
-                _view.ShowErrorMessage(ex.Message);
-                Run();
             }
             catch (ArgumentException ex)
             {
                 _view.ShowErrorMessage(ex.Message);
+                logger.Error(ex.Message);
                 Run();
             }
             catch (Exception ex)
             {
                 _view.ShowErrorMessage(ex.Message);
+                logger.Error(ex.Message);
                 Run();
             }
         }

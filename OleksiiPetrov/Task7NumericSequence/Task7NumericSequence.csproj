@@ -68,9 +68,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SharedDll\SharedDll.csproj">
+    <ProjectReference Include="..\SharedDll\SharedLibrary.csproj">
       <Project>{82d0a40f-56b0-4b62-88b1-986daa86a852}</Project>
-      <Name>SharedDll</Name>
+      <Name>SharedLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

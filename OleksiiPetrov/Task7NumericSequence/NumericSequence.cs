@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-using SharedDll;
+using SharedLibrary;
 
 namespace Task7NumericSequence
 {

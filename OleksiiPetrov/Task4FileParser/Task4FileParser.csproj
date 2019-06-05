@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Application.cs" />
     <Compile Include="ConsoleView.cs" />
+    <Compile Include="InputModel.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,9 +75,9 @@
     <Content Include="text.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SharedDll\SharedDll.csproj">
+    <ProjectReference Include="..\SharedDll\SharedLibrary.csproj">
       <Project>{82d0a40f-56b0-4b62-88b1-986daa86a852}</Project>
-      <Name>SharedDll</Name>
+      <Name>SharedLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

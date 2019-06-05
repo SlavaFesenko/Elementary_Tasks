@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SharedDll
+namespace SharedLibrary
 {
     public interface IView
     {

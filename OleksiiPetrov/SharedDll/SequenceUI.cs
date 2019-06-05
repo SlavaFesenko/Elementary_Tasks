@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SharedDll
+namespace SharedLibrary
 {
     public class SequenceUI : IView
     {
-        private const string LINE_SEPARATOR = "---------------------------------------------------------------------------";
-
         #region Methods
+
         public void ShowErrorMessage(string text)
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -21,20 +20,25 @@ namespace SharedDll
 
         public void ShowInstruction(string text)
         {
-            Console.WriteLine(LINE_SEPARATOR);
+            ShowSeparator();
             Console.WriteLine(text);
-            Console.WriteLine(LINE_SEPARATOR);
+            ShowSeparator();
             Console.WriteLine();
         }
 
         public void ShowResult(string text)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(LINE_SEPARATOR);
+            ShowSeparator();
             Console.WriteLine(text);
-            Console.WriteLine(LINE_SEPARATOR);
+            ShowSeparator();
             Console.WriteLine();
             Console.ResetColor();
+        }
+
+        private void ShowSeparator()
+        {
+            Console.WriteLine(new string('-', Console.WindowWidth));
         }
 
         public string[] ReInput()
@@ -44,6 +48,7 @@ namespace SharedDll
 
             return arguments;
         }
+
         #endregion
     }
 }

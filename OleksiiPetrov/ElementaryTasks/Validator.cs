@@ -10,8 +10,9 @@ namespace ElementaryTasks
 
         static Validator()
         {
-            //TODO: Add Check arguments
-            _maxValue = int.Parse(ConfigurationManager.AppSettings["MaxSideValue"]);
+            if (int.TryParse(ConfigurationManager.AppSettings["MaxSideValue"], out int mvalue))
+                _maxValue = mvalue;
+            else _maxValue = 30;
         }
 
         public static bool IsValid(string[] args, out int height, out int width)

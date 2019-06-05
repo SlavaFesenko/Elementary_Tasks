@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using NLog;
-using SharedDll;
+using SharedLibrary;
 
 namespace Task4FileParser
 {
@@ -26,33 +26,45 @@ namespace Task4FileParser
         {
             logger.Trace("Application start without arguments");
             _view.ShowInstruction(ConfigurationManager.AppSettings["Instruction"]);
-            Run(_view.ReInput());
+
+            if (ConfigurationManager.AppSettings["ReInputMode"].ToLower() == "true")
+            {
+                logger.Trace("ReInput mode started");
+                Run(_view.ReInput());
+            }
         }
         public virtual void Run(string[] args)
         {
             _args = (string[])args.Clone();//посмотреть про поверхносное копирование с пом. сериализации
-            //class input model args\ + props
-            try
-            { 
-                if (Validator.IsValid(_args, out WorkMode mode))
-                {
-                    //+detect mode
-                    if (mode == WorkMode.Find)
-                    {
-                        _parser = new Parser(_args[0]);//model OPtions models InputModel
-                        _view.ShowResult($"File {_args[0]}: Count entries \"{_args[1]}\" = {_parser.GetCountEntries(_args[1])}");
 
-                        logger.Info($"Application run and show result with valid arguments: {args[0]}, {args[1]}");
+            try
+            {
+                if (Validator.IsValid(_args))
+                {
+                    InputModel input = new InputModel(_args);
+                    
+                    if (input.WorkMode == WorkMode.Find)
+                    {
+                        _parser = new Parser(input.Path);
+                        string result = $"File {input.Path}: Count entries \"{input.SearchingString}\"" +
+                            $" = {_parser.GetCountEntries(input.SearchingString)}";
+                        _view.ShowResult(result);
+                        logger.Info($"Application run with valid arguments: {input.Path}, {input.SearchingString}");
+                        logger.Info($"Show result:\n {result}");
 
                     }
 
-                    if (mode == WorkMode.Replace)
+                    if (input.WorkMode == WorkMode.Replace)
                     {
-                        _parser = new Parser(_args[0]);
-                        _parser.ReplaceAll(_args[1], _args[2]);
-                        _view.ShowResult($"File {_args[0]}: String \"{_args[1]}\" have been replaced to \"{_args[2]}\" Count = {_parser.GetCountEntries(_args[2])} times");
+                        _parser = new Parser(input.Path);
+                        _parser.ReplaceAll(input.SearchingString, input.ReplacementString);
+                        string result = $"File {input.Path}: String \"{input.SearchingString}\" " +
+                            $"have been replaced to \"{input.ReplacementString}\" " +
+                            $"Count = {_parser.GetCountEntries(input.ReplacementString)} times";
+                        _view.ShowResult(result);
 
-                        logger.Info($"Application run and show result with valid arguments: {args[0]}, {args[1]}, {args[2]}");
+                        logger.Info($"Application run with valid arguments: {input.Path}, {input.SearchingString}, {input.ReplacementString}");
+                        logger.Info($"Show result:\n {result}");
                     }
                 }
             }

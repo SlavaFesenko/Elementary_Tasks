@@ -12,23 +12,19 @@ namespace Task8FibonacciNumbers
                 case 0:
                     throw new ArgumentException("Count values must be = 2.");
 
-                //args.Lenght only = 2, because range take only 2 argumnts
+                //args.Length only = 2, because range take only 2 arguments
                 case 2:
-                    args[0] = args[0].Trim(new char[] { ',' });//TODO: к типу данних аргс0
-                    if (int.TryParse(args[0], out int startPosition) && int.TryParse(args[1], out int endPosition))
+                    InputModel input = new InputModel(args);
+                    if (input.LeftNumber < input.RightNumber)
                     {
-                        if (startPosition < endPosition)
-                        {
-                            if ((startPosition >= 0) && (endPosition >= 0))
-                                return true;
-                            else
-                                throw new ArgumentException("Values must be > 0");
-                        }
+                        if ((input.LeftNumber >= 0) && (input.RightNumber >= 0))
+                            return true;
                         else
-                            throw new ArgumentException("First values must be less than second value.");
+                            throw new ArgumentException("Values must be > 0");
                     }
                     else
-                        throw new ArgumentException("Values is not integer");
+                        throw new ArgumentException("First values must be less than second value.");
+
 
                 default:
                     throw new ArgumentException("There should be 2 variables");
