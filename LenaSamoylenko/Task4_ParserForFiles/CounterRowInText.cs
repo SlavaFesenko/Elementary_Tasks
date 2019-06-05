@@ -3,7 +3,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using CommonThings;
-using CommonThings;
 
 namespace Task4_ParserForFiles
 {
@@ -14,6 +13,7 @@ namespace Task4_ParserForFiles
         private int _partSize;
         private int _currentPart;
         #endregion
+
         #region Constructors
 
         public CounterRowInText(string textPath) : base(textPath)

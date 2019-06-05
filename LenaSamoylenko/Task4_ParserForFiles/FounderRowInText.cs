@@ -1,4 +1,5 @@
 ﻿using System;
+using CommonThings;
 
 namespace Task4_ParserForFiles
 {
@@ -11,7 +12,8 @@ namespace Task4_ParserForFiles
         #endregion
 
         #region Fields
-
+        private int _taskNumber = 0;
+        protected IExeptionForFirstDemo _exeptions = null;
         private string _row;
         private readonly string _textPath;
         private string _text;
@@ -22,7 +24,13 @@ namespace Task4_ParserForFiles
 
         #region Constructors
 
-        public FounderRowInText(string textPath)
+        private FounderRowInText()
+        {
+            _taskNumber = (int)TaskNumber.Task4;
+            _exeptions = new ExceptionsForAllAplication(_taskNumber);
+        }
+
+        public FounderRowInText(string textPath) : this()
         {
             _textPath = textPath;
         }

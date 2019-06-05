@@ -1,2 +1,0 @@
-﻿If you want to get board, you should put 1st size and 2nd size.
-Sizes should be integer positive type.
