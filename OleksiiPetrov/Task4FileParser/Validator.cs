@@ -10,22 +10,23 @@ namespace Task4FileParser
             switch (args.Length)
             {
                 case (int)WorkMode.Find:
-                    if (File.Exists(args[0]))
-                    {
                         return true;
-                    }
-                    else throw new ArgumentException($"File is not exist at the target directory");
 
                 case (int)WorkMode.Replace:
-                    if (File.Exists(args[0]))
-                    {
                         return true;
-                    }
-                    else throw new ArgumentException($"File is not exist at the target directory");
 
                 default:
                     throw new ArgumentException($"Count of input values = {args.Length}. Count values must be = 2 or 3.");
             }
+        }
+
+        public static bool IsFileExists(string[] args)
+        {
+            if (File.Exists(args[0]))
+            {
+                return true;
+            }
+            else throw new ArgumentException($"File is not exist at the target directory");
         }
     }
 }

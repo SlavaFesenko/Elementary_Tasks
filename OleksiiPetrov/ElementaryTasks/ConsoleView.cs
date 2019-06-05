@@ -13,7 +13,7 @@ namespace ElementaryTasks
         #region Methods
         public void ShowErrorMessage(string text)
         {
-            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(text);
             Console.WriteLine();
             Console.ResetColor();

@@ -2,10 +2,10 @@
 {
     public class InputModel
     {
-        public string Path { get; set; }
-        public string SearchingString { get; set; }
-        public string ReplacementString { get; set; }
-        public WorkMode WorkMode { get; set; }
+        public string Path { get; private set; }
+        public string SearchingString { get; private set; }
+        public string ReplacementString { get; private set; }
+        public WorkMode WorkMode { get; private set; }
 
         public InputModel(string[] args)
         {

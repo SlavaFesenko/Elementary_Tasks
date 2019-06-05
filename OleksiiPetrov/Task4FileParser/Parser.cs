@@ -73,7 +73,6 @@ namespace Task4FileParser
                         {
                             line = line.Replace(searchingString, replacementString);
                             writer.WriteLine(line);
-                            //Console.WriteLine(line);
                         }
                         line.Clear();
                     }

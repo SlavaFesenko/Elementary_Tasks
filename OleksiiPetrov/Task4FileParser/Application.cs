@@ -7,10 +7,16 @@ namespace Task4FileParser
 {
     public class Application
     {
+        #region Fields
+
         private string[] _args;
         private IView _view;
         private Parser _parser;
         Logger logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
+        #region Ctors
 
         public Application()
         {
@@ -22,6 +28,9 @@ namespace Task4FileParser
             _view = view;
         }
 
+        #endregion
+
+        #region Methods
         public virtual void Run()
         {
             logger.Trace("Application start without arguments");
@@ -35,11 +44,11 @@ namespace Task4FileParser
         }
         public virtual void Run(string[] args)
         {
-            _args = (string[])args.Clone();//посмотреть про поверхносное копирование с пом. сериализации
+            _args = (string[])args.Clone();
 
             try
             {
-                if (Validator.IsValid(_args))
+                if (Validator.IsValid(_args) && Validator.IsFileExists(_args))
                 {
                     InputModel input = new InputModel(_args);
                     
@@ -63,7 +72,8 @@ namespace Task4FileParser
                             $"Count = {_parser.GetCountEntries(input.ReplacementString)} times";
                         _view.ShowResult(result);
 
-                        logger.Info($"Application run with valid arguments: {input.Path}, {input.SearchingString}, {input.ReplacementString}");
+                        logger.Info($"Application run with valid arguments: {input.Path}," +
+                            $" {input.SearchingString}, {input.ReplacementString}");
                         logger.Info($"Show result:\n {result}");
                     }
                 }
@@ -82,5 +92,6 @@ namespace Task4FileParser
                 Run();
             }
         }
+        #endregion
     }
 }
