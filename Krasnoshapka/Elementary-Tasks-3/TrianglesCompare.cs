@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Elementary_Tasks_3
 {
-    class TrianglesCompare: IComparer<IFigure>
+    class TrianglesCompare: IComparer<IFigureBehaviour>
     {
-        public int Compare(IFigure x, IFigure y)
+        public int Compare(IFigureBehaviour x, IFigureBehaviour y)
         {
             if (x.GetSquare() < y.GetSquare())
             {

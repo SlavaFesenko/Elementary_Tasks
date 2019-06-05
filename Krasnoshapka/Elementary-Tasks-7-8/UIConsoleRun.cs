@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Elementary_Tasks_7_8
 {
-    class UIConsole
+    class UIConsoleRun
     {
         private const int SQUARE = 1;
         private const int FIBONACCI = 2;
@@ -15,13 +15,10 @@ namespace Elementary_Tasks_7_8
         {
             switch (args.Length)
             {
-                case SQUARE:
-                    //int border = int.Parse(args[0]);
+                case SQUARE:   
                     Square(args);
                     break;
                 case FIBONACCI:
-                    //int leftBorder = int.Parse(args[0]);
-                    //int rightBorder = int.Parse(args[1]);
                     Fibonacci(args);
                     break;
                 default:
@@ -30,48 +27,62 @@ namespace Elementary_Tasks_7_8
             }
         }
 
+        #region OtherMethods
+
         private static void Fibonacci(string[] args)
         {
             int leftBorder = 0;
             int rightBorder = 0;
-            Validator.Parsed(args[0], args[1], ref leftBorder, ref rightBorder);
 
-            FibonacciSequence fibonacciSequence
-                = FibonacciSequence.FibonacciInitialize(leftBorder, rightBorder);
-
-            Console.WriteLine("Fibonacci sequence");
-
-            foreach (int number in fibonacciSequence.GetSequence())
+            if (Int32.TryParse(args[0], out leftBorder) && Int32.TryParse(args[1], out rightBorder))
             {
-                Console.WriteLine(number);
+                FibonacciSequence fibonacciSequence
+               = FibonacciSequence.FibonacciInitialize(leftBorder, rightBorder);
+
+                Console.WriteLine("Fibonacci sequence:");
+
+                foreach (int number in fibonacciSequence.GetSequence())
+                {
+                    Console.Write(number +", ");
+                }
             }
+            else
+            {
+                throw new FormatException("Please enter numbers");
+            }
+
+           
         }
 
         private static void Square(string[] args)
         {
             int border = Validator.Parsed(args[0]);
 
-
-            SquareSequence squareSequence
+            if (Int32.TryParse(args[0], out border))
+            {
+                SquareSequence squareSequence
                 = SquareSequence.SquareInitialize(border);
 
-            Console.WriteLine("Square sequence");
+                Console.WriteLine("Square sequence:");
 
-            foreach (int number in squareSequence.GetSequence())
+                foreach (int number in squareSequence.GetSequence())
+                {
+                    Console.Write(number+", ");
+                }
+            }
+            else
             {
-                Console.WriteLine(number);
+                throw new FormatException("Please enter numbers");
             }
         }
 
-        private void Square()
-        { }
 
         private static void Instruction()
         {
             Console.WriteLine("Please 1 border for Square or 2 for Fibonacci");
         }
 
-
+        #endregion
 
     }
 }

@@ -19,6 +19,8 @@ namespace Elementary_Tasks_3
 
                 List<Triangle> trianglesList = new List<Triangle>();
 
+                #region MainFunctional
+
                 do
                 {
                     Finish = false;
@@ -33,10 +35,12 @@ namespace Elementary_Tasks_3
                         float thirdTriangleSide;
                         bool success = true;
 
-                        success = NewMethod(input, out triangleName, out firstTriangleSide, out secondTriangleSide, out thirdTriangleSide, success);
+                        success = Parsing(input, out triangleName, out firstTriangleSide, out secondTriangleSide, out thirdTriangleSide, success);
+
                         if (success)
                         {
                             Triangle triangle = Triangle.TriangleInitialize(triangleName, firstTriangleSide, secondTriangleSide, thirdTriangleSide);
+
                             trianglesList.Add(triangle);
                             trianglesList.Sort(new TrianglesCompare());
 
@@ -58,6 +62,8 @@ namespace Elementary_Tasks_3
 
                 } while (Finish);
 
+                #endregion
+
             }
             else
             {
@@ -65,7 +71,9 @@ namespace Elementary_Tasks_3
             }
         }
 
-        private static bool NewMethod(string[] input, out string triangleName, out float firstTriangleSide, out float secondTriangleSide, out float thirdTriangleSide, bool success)
+        #region OtherMethods
+
+        private static bool Parsing(string[] input, out string triangleName, out float firstTriangleSide, out float secondTriangleSide, out float thirdTriangleSide, bool success)
         {
             triangleName = input[0];
             success &= float.TryParse(input[1], out firstTriangleSide);
@@ -95,6 +103,8 @@ namespace Elementary_Tasks_3
         string answer = Console.ReadLine().ToLower();
         return answer == "y" || answer == "yes";
         }
-        
+
+        #endregion
+
     }
 }

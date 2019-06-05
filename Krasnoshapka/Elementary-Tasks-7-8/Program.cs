@@ -12,7 +12,7 @@ namespace Elementary_Tasks_7_8
         {
             try
             {
-                UIConsole.BuildUI(args);
+                UIConsoleRun.BuildUI(args);
             }
             catch (ArgumentException ex)
             {

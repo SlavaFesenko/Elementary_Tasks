@@ -6,12 +6,18 @@ using System.Threading.Tasks;
 
 namespace Elementary_Tasks_3
 {
-    public class Triangle : IFigure
+    public class Triangle : IFigureBehaviour
     {
+        #region Properties
+
         public string TriangleName { get; set; }
         public float FirstSide { get; set; }
         public float SecondSide { get; set; }
         public float ThirdSide { get; set; }
+
+        #endregion
+
+        #region Methods
 
         private Triangle(string triangleName, float firstSide, float secondSide, float thirdSide)
         {
@@ -47,5 +53,7 @@ namespace Elementary_Tasks_3
         {
             return string.Format($"[Triangle {this.TriangleName}]: {this.GetSquare()} cm");
         }
+
+        #endregion
     }
 }
