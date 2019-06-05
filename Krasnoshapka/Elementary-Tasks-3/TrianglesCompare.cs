@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Elementary_Tasks_3
 {
-    class TrianglesCompare: IComparer<IFigureBehaviour>
+   public class TrianglesCompare: IComparer<IFigureBehaviour>
     {
         public int Compare(IFigureBehaviour x, IFigureBehaviour y)
         {

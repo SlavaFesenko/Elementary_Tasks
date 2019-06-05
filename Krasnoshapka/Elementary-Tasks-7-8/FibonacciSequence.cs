@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Elementary_Tasks_7_8
 {
-    class FibonacciSequence : Sequence
+   public class FibonacciSequence : Sequence
     {
         private FibonacciSequence(int leftBorder, int rightBorder) : base(leftBorder, rightBorder)
         {
@@ -22,7 +22,7 @@ namespace Elementary_Tasks_7_8
             }
             else
             {
-                throw new ArgumentException("Try again");
+                throw new ArgumentException("Nambers must be natural and Left number must be smaller than right");
             }
         }
 
