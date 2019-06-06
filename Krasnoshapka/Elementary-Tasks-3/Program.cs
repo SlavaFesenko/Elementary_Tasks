@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NLog;
 
 namespace ElementaryTasks3
 {
@@ -10,21 +7,26 @@ namespace ElementaryTasks3
     {
         static void Main(string[] args)
         {
+            Logger logger = LogManager.GetCurrentClassLogger();
             try
             {
-              UIConsoleRun.BuildUI(args);
+                UIConsoleRun.BuildUI(args);
+                logger.Trace("Application completed well");
             }
             catch (ArgumentException ex)
             {
                 Console.WriteLine(ex.Message);
+                logger.Error(ex.Message);
             }
             catch (FormatException ex)
             {
                 Console.WriteLine(ex.Message);
+                logger.Error(ex.Message);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex?.Message);
+                logger.Error(ex.Message);
             }
 
         }

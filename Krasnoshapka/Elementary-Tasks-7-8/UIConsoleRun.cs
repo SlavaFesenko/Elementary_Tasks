@@ -1,9 +1,5 @@
 ﻿using NLog;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace ElementaryTask7
@@ -16,7 +12,7 @@ namespace ElementaryTask7
 
         public static void BuildUI(string[] args)
         {
-            if (args.Length== SQUARE)
+            if (args.Length == SQUARE)
             {
                 Square(args);
             }

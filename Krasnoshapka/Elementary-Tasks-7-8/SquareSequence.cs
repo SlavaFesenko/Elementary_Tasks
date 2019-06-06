@@ -1,6 +1,4 @@
-﻿
-using System.Collections.Generic;
-using NLog;
+﻿using System.Collections.Generic;
 using Shared;
 
 namespace ElementaryTask7
@@ -26,7 +24,7 @@ namespace ElementaryTask7
         {
             int naturalNumber = 1;
 
-            while (naturalNumber * naturalNumber < RightBorder)// for
+            while (naturalNumber * naturalNumber < RightBorder)
             {
                 yield return naturalNumber;
                 naturalNumber++;

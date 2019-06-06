@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NLog;
 
 namespace ElementaryTasks3
 {
     static class UIConsoleRun
     {
+        static Logger logger = LogManager.GetCurrentClassLogger();
+
         private const int COMMAND_LINE_ARGS = 0;
         private const int ARGS_FOR_TRIANGLE=4;
 
@@ -52,12 +52,14 @@ namespace ElementaryTasks3
                         {
                             Finish = true;
                             Console.WriteLine("Please enter numbers as triangle parameters");
+                            logger.Error("Not numbers was entered!");
                         }
                     }
                     else
                     {
                         Finish = true;
-                        Console.WriteLine("Argument Error: wrong number of arguments!");
+                        Console.WriteLine("Argument Error: wrong count of arguments!");
+                        logger.Error("Wrong count of arguments!");
                     }
 
                 } while (Finish);
