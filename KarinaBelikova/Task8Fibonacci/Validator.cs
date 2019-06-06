@@ -1,28 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task8Fibonacci
 {
     public class Validator
     {
-        public static bool IsCorrectRange(int lowLimit, int upLimit)
+        public static bool Validate(string[] args, out int lowlimit, out int uplimit)
         {
-            if (lowLimit < upLimit)
-                return true;
+            if (args.Length == 0)
+                throw new ArgumentNullException("Please input number!");
 
-            return false;
-        }
-
-        public static bool IsCorrectArgs8Task(string[] args, out int[] paramsTask8)
-        {
-            paramsTask8 = Array.ConvertAll(args, int.Parse);
-            if (paramsTask8[0] == 8 && paramsTask8[1] < paramsTask8[2])
-                return true;
-
-            return false;
+            if (args.Length == 2)
+            {
+                if (int.TryParse(args[0], out lowlimit) && int.TryParse(args[1], out uplimit))
+                {
+                    return (lowlimit >= 0 && uplimit > 0 && lowlimit < uplimit);                   
+                }
+                else
+                    throw new FormatException("Unsuccessful format!");
+            }
+            else
+                throw new FormatException("Unsuccessful format!");
         }
     }
 }

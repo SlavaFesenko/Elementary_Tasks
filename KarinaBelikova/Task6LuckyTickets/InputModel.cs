@@ -6,9 +6,15 @@ namespace Task6LuckyTickets
     {
         private string[] _parametors = new string[3];
 
+        #region Props
+
         public LuckyAlgorithm AlgorithmType { get; set; }
         public int LowLimit { get; set; }
-        public int UpLimit { get; set; }      
+        public int UpLimit { get; set; }
+
+        #endregion
+
+        #region Ctor
 
         public InputModel(string path)
         {
@@ -17,6 +23,10 @@ namespace Task6LuckyTickets
             LowLimit = int.Parse(_parametors[1]);
             UpLimit = int.Parse(_parametors[2]);
         }
+
+        #endregion
+
+        #region Methods
 
         private void ReadFile(string path)
         {
@@ -48,5 +58,8 @@ namespace Task6LuckyTickets
 
             return algorithm;
         }
+
+        #endregion
+
     }
 }

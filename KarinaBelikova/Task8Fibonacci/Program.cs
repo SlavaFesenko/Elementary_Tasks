@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task8Fibonacci
 {
@@ -10,7 +6,22 @@ namespace Task8Fibonacci
     {
         static void Main(string[] args)
         {
-
+            try
+            {               
+                Application.Run(args);
+            }
+            catch (FormatException e)
+            {
+                UI.ShowErrorMessage(e);
+            }
+            catch (ArgumentNullException e)
+            {
+                UI.ShowErrorMessage(e);
+            }
+            catch (ArgumentException e)
+            {
+                UI.ShowErrorMessage(e);
+            }
         }
     }
 }

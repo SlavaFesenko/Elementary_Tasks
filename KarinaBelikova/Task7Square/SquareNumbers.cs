@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace Task7_8Sequences // _ - нельзя
+namespace Task7Square // _ - нельзя
 {
     public class SquareNumbers : Sequence //TODO : IEnumerable // GetEnumerator
     {      

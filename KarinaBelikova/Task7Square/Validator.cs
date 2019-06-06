@@ -8,22 +8,14 @@ namespace Task7Square
 {
     public class Validator
     {       
-        public static bool IsCorrectArgs7Task(string[] args, out int number)
+        public static bool HasParam(string[] args)
         {
-            bool isCorrect = false;
-            number = int.Parse(args[1]);
-            if (number > 0)
-                isCorrect = true;
-
-            return isCorrect;
+            return (args.Length == 1);                 
         }
 
         public static bool IsPozitiveNumber(int number)
         {
-            if (number > 0)
-                return true;
-
-            return false;
+            return (number > 0);
         }
     }
 }

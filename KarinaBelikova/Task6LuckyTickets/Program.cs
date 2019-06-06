@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+
 namespace Task6LuckyTickets
 {
     class Program
@@ -14,10 +16,9 @@ namespace Task6LuckyTickets
                 Application.Run(model);
                 Console.ReadKey();
             }
-            catch (Exception e)
+            catch (IOException e)
             {
-                Console.WriteLine(e.Message);
-                Console.ReadKey();
+                UI.ShowErrorMessage(e);
             }
 
         }

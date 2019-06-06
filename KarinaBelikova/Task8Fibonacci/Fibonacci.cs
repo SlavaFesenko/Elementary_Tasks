@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Task7_8Sequences
+namespace Task8Fibonacci
 {
     public class Fibonacci
     {

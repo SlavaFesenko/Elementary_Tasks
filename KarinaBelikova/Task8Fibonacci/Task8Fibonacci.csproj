@@ -51,9 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FibonacciUI.cs" />
+    <Compile Include="Application.cs" />
+    <Compile Include="Fibonacci.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI.cs" />
     <Compile Include="Validator.cs" />
   </ItemGroup>
   <ItemGroup>

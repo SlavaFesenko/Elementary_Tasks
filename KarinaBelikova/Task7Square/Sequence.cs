@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task7_8Sequences
+namespace Task7Square
 {
     public abstract class Sequence : IEnumerable
     {

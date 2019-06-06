@@ -8,14 +8,20 @@ namespace Task7Square
         {
             try
             {
-                if (Validator.IsCorrectArgs7Task(args, out int number ))
-                {
-
-                }
+                InputModel model = new InputModel(args);
+                Application.Run(model);
             }
-            catch (FormatException)
-            {           
-                 
+            catch (FormatException e)
+            {
+                UI.ShowErrorMessage(e);
+            }
+            catch (ArgumentNullException e)
+            {
+                UI.ShowErrorMessage(e);
+            }
+            catch (ArgumentException e)
+            {
+                UI.ShowErrorMessage(e);
             }
         }
     }
