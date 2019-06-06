@@ -3,9 +3,9 @@ using System.IO;
 
 namespace LuckyTickets_6
 {
-    internal class Validator
+    public class Validator
     {
-        internal static bool Validate(string[] args, int digitsCount, int[] range, out string message)
+        public static bool Validate(string[] args, int digitsCount, int[] range, out string message)
         {
             return IsCorrectCountOfArgs(args, out message) && IsCorrectFile(args[0], out message)
                 && IsCorrectDigits(digitsCount, out message) && IsCorrectRange(range, out message);

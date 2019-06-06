@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Envelops_2
 {
-    static class EnvelopAnalyzer
+    public static class EnvelopAnalyzer
     {
         public static string Analyze(Envelop e1, Envelop e2)
         {

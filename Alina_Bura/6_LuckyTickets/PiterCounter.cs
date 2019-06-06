@@ -8,10 +8,10 @@ namespace LuckyTickets_6
 {
     class PiterCounter : Counter
     {
-        public override int GetCount(int digitsCount)
+        public override int GetCount(int digitsCount, int startIndex, int finishIndex)
         {
             int count = 0;
-            for (int i = 0; i < Math.Pow(10, digitsCount); i++)
+            for (int i = startIndex; i < finishIndex; i++)
             {
                 Ticket t = new Ticket(i, digitsCount);
 

@@ -9,7 +9,7 @@ namespace FileParser_4
 {
     class FileFinder
     {
-        internal static int GetCount(string fileName, string target)
+        public static int GetCount(string fileName, string target)
         {
             int count = 0;
 

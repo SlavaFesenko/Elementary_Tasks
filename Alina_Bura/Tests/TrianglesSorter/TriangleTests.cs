@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TrianglesSorting_3;
 using System.Linq;
+using TrianglesSorting_3;
 
 namespace Tests
-{    
+{
     [TestClass]
     public class TriangleTests
     {

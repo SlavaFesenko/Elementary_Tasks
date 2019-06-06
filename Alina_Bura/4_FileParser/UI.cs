@@ -2,30 +2,23 @@
 
 namespace FileParser_4
 {
-    internal class UI
+    public class UI
     {
-        internal static void ShowInstruction()
+        public static void ShowInstruction()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Input via space:");
+            Console.WriteLine("1.File name, string to find");
+            Console.WriteLine("2.File name, string to repace, substitude string");
         }
 
-        internal static string[] ReadParameters()
+        public static void PrintErrorMessage(string message)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(message);
         }
 
-        internal static int GetMode()
+        public static void PrintResult(int count)
         {
-            Console.WriteLine("Select mode:");
-            Console.WriteLine("1.Count strings in file");
-            Console.WriteLine("2.Replace string in file");
-            int mode = int.Parse(Console.ReadLine());
-            return mode;
-        }
-
-        internal static void PrintErrorMessage(string message)
-        {
-            throw new NotImplementedException();
+            Console.WriteLine(count);
         }
     }
 }

@@ -8,8 +8,8 @@
     <ProjectGuid>{6C7E9874-3321-45D9-B1F9-F183DCB29C92}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SquareSequenceTests</RootNamespace>
-    <AssemblyName>SquareSequenceTests</AssemblyName>
+    <RootNamespace>Tests</RootNamespace>
+    <AssemblyName>Tests</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Envelops\EnvelopTests.cs" />
     <Compile Include="SquareSequnce\SquareSequenceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TrianglesSorter\TriangleComparerTests.cs" />
@@ -58,13 +59,37 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SquareSequence_7\7_SquareSequence.csproj">
+    <ProjectReference Include="..\1_ChessBoard\1_ChessBoard.csproj">
+      <Project>{5ccc3479-ee85-4049-a3cd-4b09169fc14c}</Project>
+      <Name>1_ChessBoard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\2_Envelops\2_Envelops.csproj">
+      <Project>{70a74f0a-bb86-4361-98cf-f3bd716c1531}</Project>
+      <Name>2_Envelops</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\3_TrianglesSorter\3_TrianglesSorter.csproj">
+      <Project>{ba9c7b23-4c4b-4d88-8343-97e588a8e7dd}</Project>
+      <Name>3_TrianglesSorter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\4_FileParser\4_FileParser.csproj">
+      <Project>{f67461d1-7268-452b-94fa-27f2a5273a35}</Project>
+      <Name>4_FileParser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\5_NumbersToString\5_NumbersToString.csproj">
+      <Project>{200bc2b8-622d-4385-8e2b-65ee9e93db61}</Project>
+      <Name>5_NumbersToString</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\6_LuckyTickets\6_LuckyTickets.csproj">
+      <Project>{a3b9f4d2-27ec-4734-ba8c-9187c94b3cca}</Project>
+      <Name>6_LuckyTickets</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\7_SquareSequence\7_SquareSequence.csproj">
       <Project>{c049b4cb-d47f-4c60-86dd-f6d67772fe97}</Project>
       <Name>7_SquareSequence</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TrianglesSorting_3\3_TrianglesSorter.csproj">
-      <Project>{ba9c7b23-4c4b-4d88-8343-97e588a8e7dd}</Project>
-      <Name>3_TrianglesSorter</Name>
+    <ProjectReference Include="..\8_FibonacciSequence\8_FibonacciSequence.csproj">
+      <Project>{856b365a-0e4c-4c4d-a483-1280fa54a054}</Project>
+      <Name>8_FibonacciSequence</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

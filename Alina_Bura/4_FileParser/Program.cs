@@ -10,10 +10,27 @@ namespace FileParser_4
     {
         static void Main(string[] args)
         {
-            bool isCorrect;
-            int mode = UI.GetMode();
+            ValidateArguments(args);
 
-            isCorrect = Validator.Validate(args, mode, out string message);
+            switch (args.Length)
+            {
+                case 2:
+                    int count = FileFinder.GetCount(args[0], args[1]);
+                    UI.PrintResult(count);
+                    break;
+                case 3:
+                    FileReplacer.ReplaceString(args[0], args[1], args[2]);
+                    break;
+                default:
+                    break;
+            }
+
+            Console.ReadKey();
+        }
+
+        private static void ValidateArguments(string[] args)
+        {
+            bool isCorrect = Validator.Validate(args, out string message);
             if (!isCorrect)
             {
                 if (!string.IsNullOrEmpty(message))
@@ -22,21 +39,6 @@ namespace FileParser_4
                 }
                 UI.ShowInstruction();
             }
-
-            switch (mode)
-            {
-                case 1:
-                    int count = FileFinder.GetCount(args[0], args[1]);
-                    break;
-                case 2:
-                    FileReplacer.ReplaceString(args[0], args[1], args[2]);
-                    break;
-                default:
-                    break;
-            }
-
-            Console.ReadKey();
-
         }
     }
 }

@@ -3,17 +3,17 @@ using System.IO;
 
 namespace FileParser_4
 {
-    internal class Validator
+    public class Validator
     {
-        internal static bool Validate(string[] args, int mode, out string message)
+        public static bool Validate(string[] args, out string message)
         {
             bool isCorrect = false;
 
-            if (IsCorrectCountOfArgs(args, mode, out message))
+            if (IsCorrectCountOfArgs(args, out message))
             {
                 if (IsCorrectFile(args[0], out message))
                 {
-                    isCorrect = IsCorrectString(args[1], out message);
+                    isCorrect = IsCorrectString(args, out message);
                 }
             }
             return isCorrect;
@@ -31,37 +31,27 @@ namespace FileParser_4
             return isCorrect;
         }
 
-        private static bool IsCorrectString(string str, out string message)
+        private static bool IsCorrectString(string[] args, out string message)
         {
             bool isCorrect = true;
             message = string.Empty;
-            if (string.IsNullOrEmpty(str))
+            for (int i = 0; i < args.Length; i++)
             {
-                isCorrect = false;
-                message = $"String {str} is empty!";
+                if (string.IsNullOrEmpty(args[i]))
+                {
+                    isCorrect = false;
+                    message = $"String {args[i]} is empty!";
+                }
             }
             return isCorrect;
         }
 
-        private static bool IsCorrectCountOfArgs(string[] args, int mode, out string message)
+        private static bool IsCorrectCountOfArgs(string[] args, out string message)
         {
             bool isCorrect = true;
             message = string.Empty;
 
-            int argsCount = 0;
-            switch (mode)
-            {
-                case 1:
-                    argsCount = 2;
-                    break;
-                case 2:
-                    argsCount = 3;
-                    break;
-                default:
-                    break;
-            }
-
-            if (args.Length != argsCount)
+            if (args.Length != 2 && args.Length != 3)
             {
                 isCorrect = false;
 

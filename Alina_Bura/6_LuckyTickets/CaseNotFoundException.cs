@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace LuckyTickets_6
 {
     [Serializable]
-    internal class CaseNotFoundException : Exception
+    public class CaseNotFoundException : Exception
     {
         public CaseNotFoundException()
         {

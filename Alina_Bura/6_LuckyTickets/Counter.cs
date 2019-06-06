@@ -8,7 +8,7 @@ namespace LuckyTickets_6
 {
     abstract class Counter
     {
-        public abstract int GetCount(int digits);
+        public abstract int GetCount(int digits, int startIndex, int finishIndex);
         
         protected int GetSum(List<int> digits, int startIndex, int endIndex)
         {

@@ -2,15 +2,16 @@
 
 namespace NumbersToString_5
 {
-    internal class Validator
+    public class Validator
     {
-        internal static bool Validate(string[] args, out string message)
+        public static bool Validate(string[] args, out int number, out string message)
         {
             bool isCorrect = false;
+            number = 0;
 
             if (IsCorrectCountOfArgs(args, out message))
             {
-                int number = ReadIntsFromStrings(args[0], out isCorrect, out message);
+                number = ReadIntsFromStrings(args[0], out isCorrect, out message);
                 if (isCorrect)
                 {
                     isCorrect = IsCorrectInts(number, out message);
@@ -19,7 +20,7 @@ namespace NumbersToString_5
             return isCorrect;
         }
 
-        private static int ReadIntsFromStrings(string arg, out bool isCorrect, out string message)
+        public static int ReadIntsFromStrings(string arg, out bool isCorrect, out string message)
         {
             isCorrect = true;
             message = string.Empty;
@@ -33,7 +34,7 @@ namespace NumbersToString_5
             return number;
         }
 
-        private static bool IsCorrectInts(int number, out string message)
+        public static bool IsCorrectInts(int number, out string message)
         {
             bool isCorrect = true;
             message = string.Empty;
@@ -46,7 +47,7 @@ namespace NumbersToString_5
             return isCorrect;
         }
 
-        private static bool IsCorrectCountOfArgs(string[] parameters, out string message)
+        public static bool IsCorrectCountOfArgs(string[] parameters, out string message)
         {
             bool isCorrect = true;
             message = string.Empty;

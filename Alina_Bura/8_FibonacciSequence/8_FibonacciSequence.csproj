@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{856B365A-0E4C-4C4D-A483-1280FA54A054}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>FibonacciSequence_8</RootNamespace>
-    <AssemblyName>FibonacciSequence_8</AssemblyName>
+    <RootNamespace>8_FibonacciSequence</RootNamespace>
+    <AssemblyName>8_FibonacciSequence</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

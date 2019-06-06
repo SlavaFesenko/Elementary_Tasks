@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{200BC2B8-622D-4385-8E2B-65EE9E93DB61}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>NumbersToString_5</RootNamespace>
-    <AssemblyName>NumbersToString_5</AssemblyName>
+    <RootNamespace>5_NumbersToString</RootNamespace>
+    <AssemblyName>5_NumbersToString</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

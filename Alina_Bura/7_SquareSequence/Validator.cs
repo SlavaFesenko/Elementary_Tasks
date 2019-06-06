@@ -2,9 +2,9 @@
 
 namespace SquareSequence_7
 {
-    internal class Validator
+    public class Validator
     {
-        internal static bool Validate(string[] args, out string message, out int number)
+        public static bool Validate(string[] args, out string message, out int number)
         {
             bool isCorrect = false;
             number = 0;

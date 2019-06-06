@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace TrianglesSorting_3
 {
     [Serializable]
-    internal class CantCompareException : Exception
+    public class CantCompareException : Exception
     {
         public CantCompareException()
         {

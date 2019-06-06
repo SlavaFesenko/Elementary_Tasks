@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text;
 using System.Collections.Generic;
-using TrianglesSorting_3;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TrianglesSorting_3;
 
 namespace Tests
 {

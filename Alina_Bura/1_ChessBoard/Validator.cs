@@ -8,13 +8,19 @@ namespace SoftServeFirstTasks
 {
     static class Validator
     {
-        public static bool Validate(string[] args, out string message)
+        public static bool Validate(string[] args, out int rows, out int columns, out string message)
         {
             bool isCorrect = false;
+            int[] numbers = new int[2];
+            rows = 0;
+            columns = 0;
 
             if (IsCorrectCountOfArgs(args, out message))
             {
-                int[] numbers = ReadIntsFromStrings(args, out isCorrect, out message);
+                numbers = ReadIntsFromStrings(args, out isCorrect, out message);
+                rows = numbers[0];
+                columns = numbers[1];
+
                 if (isCorrect)
                 {
                     isCorrect = IsCorrectInts(numbers, out message);

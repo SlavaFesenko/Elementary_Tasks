@@ -15,10 +15,13 @@ namespace SquareSequence_7
         {
             try
             {
-                int number = GetNumber(args);
-                ISequence sequence = new SquareSequence(number);
-                string result = SquareSequence.GetStringResult(sequence.GetSequence());
-                UI.PrintMessage(result);
+                int number = GetNumber(args, out bool isCorrect);
+                if (isCorrect)
+                {
+                    ISequence sequence = new SquareSequence(number);
+                    string result = SquareSequence.GetStringResult(sequence.GetSequence());
+                    UI.PrintMessage(result);
+                }                
             }
             catch (ArgumentNullException ex)
             {
@@ -34,9 +37,9 @@ namespace SquareSequence_7
             Console.ReadLine();
         }
 
-        private static int GetNumber(string[] args)
+        private static int GetNumber(string[] args, out bool isCorrect)
         {
-            bool isCorrect = Validator.Validate(args, out string message, out int number);
+            isCorrect = Validator.Validate(args, out string message, out int number);
             if (!isCorrect)
             {
                 if (!string.IsNullOrEmpty(message))
@@ -44,7 +47,7 @@ namespace SquareSequence_7
                     UI.PrintMessage(message);
                     log.Error(message);
                 }
-                UI.ShowInstruction();
+                UI.ShowInstruction();                
             }
 
             return number;

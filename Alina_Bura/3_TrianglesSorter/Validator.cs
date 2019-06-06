@@ -2,9 +2,9 @@
 
 namespace TrianglesSorting_3
 {
-    internal class Validator
+    public class Validator
     {
-        internal static bool Validate(string[] args, out string name, out double[] numbers, out string message)
+        public static bool Validate(string[] args, out string name, out double[] numbers, out string message)
         {
             bool isCorrect = false;
             name = string.Empty;

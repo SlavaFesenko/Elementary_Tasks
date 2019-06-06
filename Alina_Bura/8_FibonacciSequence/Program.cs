@@ -13,7 +13,7 @@ namespace FibonacciSequence_8
 
         static void Main(string[] args)
         {
-            bool isCorrect = Validator.Validate(args, out string message);
+            bool isCorrect = Validator.Validate(args, out int startRange, out int finishRange, out string message);
             if (!isCorrect)
             {
                 if (!string.IsNullOrEmpty(message))
@@ -23,9 +23,6 @@ namespace FibonacciSequence_8
                 }
                 UI.ShowInstruction();
             }
-
-            int startRange = int.Parse(args[0]);
-            int finishRange = int.Parse(args[1]);
 
             ISequence sequence = new FibonacciSequence(startRange, finishRange);
             UI.PrintMessage(sequence.GetStringResult(sequence.GetSequence()));

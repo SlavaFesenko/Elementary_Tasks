@@ -11,29 +11,17 @@ namespace LuckyTickets_6
     {
         static void Main(string[] args)
         {
-            int digitsCount = UI.GetDigits();
-            int[] range = UI.GetRange();
-
-            bool isCorrect = Validator.Validate(args, digitsCount, range, out string message);
-            if (!isCorrect)
-            {
-                if (!string.IsNullOrEmpty(message))
-                {
-                    UI.PrintErrorMessage(message);
-                }
-                UI.ShowInstruction();
-
-                Console.ReadLine();
-                return;
-            }
-
             try
             {
-                TicketsMode mode = GetMode(args[0]);
-                Counter counter = CounterFactory.GetCounter(mode);
-                int count = counter.GetCount(digitsCount);
+                bool isCorrect = GetParameters(args, out int digitsCount, out int[] range);
+                if (isCorrect)
+                {
+                    TicketsMode mode = GetMode(args[0]);
+                    Counter counter = CounterFactory.GetCounter(mode);
+                    int count = counter.GetCount(digitsCount, range[0], range[1]);
 
-                UI.PrintCount(count);
+                    UI.PrintCount(count);
+                }
             }
             catch (InvalidCastException ex)
             {
@@ -45,6 +33,24 @@ namespace LuckyTickets_6
             }
 
             Console.ReadLine();
+        }
+
+        private static bool GetParameters(string[] args, out int digitsCount, out int[] range)
+        {
+            digitsCount = UI.GetDigits();
+            range = UI.GetRange();
+
+            bool isCorrect = Validator.Validate(args, digitsCount, range, out string message);
+            if (!isCorrect)
+            {
+                if (!string.IsNullOrEmpty(message))
+                {
+                    UI.PrintErrorMessage(message);
+                }
+                UI.ShowInstruction();
+            }
+
+            return isCorrect;
         }
 
         private static TicketsMode GetMode(string path)

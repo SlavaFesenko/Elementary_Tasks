@@ -8,13 +8,18 @@ namespace FibonacciSequence_8
 {
     class Validator
     {
-        public static bool Validate(string[] args, out string message)
+        public static bool Validate(string[] args, out int startRange, out int finishRange, out string message)
         {
             bool isCorrect = false;
+            startRange = 0;
+            finishRange = 0;
 
             if (IsCorrectCountOfArgs(args, out message))
             {
                 int[] numbers = ReadIntsFromStrings(args, out isCorrect, out message);
+                startRange = numbers[0];
+                finishRange = numbers[1];
+
                 if (isCorrect)
                 {
                     isCorrect = IsCorrectInts(numbers, out message);

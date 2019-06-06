@@ -5,21 +5,21 @@ VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1_ChessBoard", "1_ChessBoard\1_ChessBoard.csproj", "{5CCC3479-EE85-4049-A3CD-4B09169FC14C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2_Envelops", "Envelops_2\2_Envelops.csproj", "{70A74F0A-BB86-4361-98CF-F3BD716C1531}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2_Envelops", "2_Envelops\2_Envelops.csproj", "{70A74F0A-BB86-4361-98CF-F3BD716C1531}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3_TrianglesSorter", "TrianglesSorting_3\3_TrianglesSorter.csproj", "{BA9C7B23-4C4B-4D88-8343-97E588A8E7DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3_TrianglesSorter", "3_TrianglesSorter\3_TrianglesSorter.csproj", "{BA9C7B23-4C4B-4D88-8343-97E588A8E7DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4_FileParser", "FileParser_4\4_FileParser.csproj", "{F67461D1-7268-452B-94FA-27F2A5273A35}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4_FileParser", "4_FileParser\4_FileParser.csproj", "{F67461D1-7268-452B-94FA-27F2A5273A35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5_NumbersToString", "NumbersToString_5\5_NumbersToString.csproj", "{200BC2B8-622D-4385-8E2B-65EE9E93DB61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5_NumbersToString", "5_NumbersToString\5_NumbersToString.csproj", "{200BC2B8-622D-4385-8E2B-65EE9E93DB61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6_LuckyTickets", "LuckyTickets_6\6_LuckyTickets.csproj", "{A3B9F4D2-27EC-4734-BA8C-9187C94B3CCA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6_LuckyTickets", "6_LuckyTickets\6_LuckyTickets.csproj", "{A3B9F4D2-27EC-4734-BA8C-9187C94B3CCA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7_SquareSequence", "SquareSequence_7\7_SquareSequence.csproj", "{C049B4CB-D47F-4C60-86DD-F6D67772FE97}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7_SquareSequence", "7_SquareSequence\7_SquareSequence.csproj", "{C049B4CB-D47F-4C60-86DD-F6D67772FE97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "8_FibonacciSequence", "FibonacciSequence_8\8_FibonacciSequence.csproj", "{856B365A-0E4C-4C4D-A483-1280FA54A054}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "8_FibonacciSequence", "8_FibonacciSequence\8_FibonacciSequence.csproj", "{856B365A-0E4C-4C4D-A483-1280FA54A054}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "SquareSequenceTests\Tests.csproj", "{6C7E9874-3321-45D9-B1F9-F183DCB29C92}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{6C7E9874-3321-45D9-B1F9-F183DCB29C92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

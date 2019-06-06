@@ -2,14 +2,14 @@
 
 namespace LuckyTickets_6
 {
-    internal class UI
+    public class UI
     {
-        internal static void PrintErrorMessage(string message)
+        public static void PrintErrorMessage(string message)
         {
             Console.WriteLine(message);
         }
 
-        internal static void ShowInstruction()
+        public static void ShowInstruction()
         {
             Console.WriteLine("Input name of text file, which has one of two strings: \"Moskov\" or \"Piter\"");
             Console.WriteLine("Input integer count of digits in ticket");
@@ -29,12 +29,12 @@ namespace LuckyTickets_6
             return range;
         }
 
-        internal static void PrintCount(int count)
+        public static void PrintCount(int count)
         {
             Console.WriteLine(count);
         }
 
-        internal static int GetDigits()
+        public static int GetDigits()
         {
             Console.WriteLine("Input count of digits");
             return int.Parse(Console.ReadLine());

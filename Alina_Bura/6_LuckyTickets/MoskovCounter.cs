@@ -8,12 +8,12 @@ namespace LuckyTickets_6
 {
     class MoskovCounter : Counter
     {
-        public override int GetCount(int digitsCount)
+        public override int GetCount(int digitsCount, int startIndex, int finishIndex)
         {
             int count = 0;
             int middle = digitsCount / 2;
 
-            for (int i = 0; i < Math.Pow(10, digitsCount); i++)
+            for (int i = startIndex; i < finishIndex; i++)
             {
                 Ticket t = new Ticket(i, digitsCount);
                 if (GetSum(t.Digits, 0, middle) == GetSum(t.Digits, middle, digitsCount))

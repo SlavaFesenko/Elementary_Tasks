@@ -8,15 +8,15 @@ namespace SoftServeFirstTasks
 {
     static class UI 
     {        
-        public static void PrintBoard(int r, int c)
+        public static void PrintBoard(int r, int c, ConsoleColor[,] backColors, ConsoleColor[,] foreColors, char[,] symbols)
         {
             for (int i = 0; i < r; i++)
             {
                 for (int j = 0; j < c; j++)
                 {
-                    Console.BackgroundColor = _controller.GetBackColorForCell(i, j);
-                    Console.ForegroundColor = _controller.GetForeColorForCell(i, j);
-                    Console.Write(_controller.GetSymbolForCell(i, j)); // interface iboard
+                    Console.BackgroundColor = backColors[i, j];
+                    Console.ForegroundColor = foreColors[i, j];
+                    Console.Write(symbols[i, j]); 
                 }
                 Console.WriteLine();
             }

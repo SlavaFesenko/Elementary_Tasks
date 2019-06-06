@@ -11,8 +11,26 @@ namespace NumbersToString_5
     {
         static void Main(string[] args)
         {
-            bool isCorrect;
-            isCorrect = Validator.Validate(args, out string message);
+            try
+            {
+                int number = GetNumber(args, out bool isCorrect);
+                if (isCorrect)
+                {
+                    NumberParser n = new NumberParser(ParserHelper.InitDictionary("numbers.txt"));
+
+                    UI.ShowResult(n.ToString(number));
+                }                
+            }
+            catch (FileNotFoundException ex)
+            {
+                UI.PrintErrorMessage(ex.Message);
+            }
+            Console.ReadLine();
+        }
+
+        private static int GetNumber(string[] args, out bool isCorrect)
+        {
+            isCorrect = Validator.Validate(args, out int number, out string message);
             if (!isCorrect)
             {
                 if (!string.IsNullOrEmpty(message))
@@ -22,18 +40,7 @@ namespace NumbersToString_5
                 UI.ShowInstruction();
             }
 
-            int number = int.Parse(args[0]);
-            try
-            {
-                NumberParser n = new NumberParser(ParserHelper.InitDictionary("numbers.txt"));
-
-                UI.ShowResult(n.ToString(number));
-            }
-            catch (FileNotFoundException ex)
-            {
-                UI.PrintErrorMessage(ex.Message);
-            }
-            Console.ReadLine();
+            return number;
         }
     }
 }

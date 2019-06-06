@@ -72,8 +72,21 @@ namespace SoftServeFirstTasks
 
         public void PrintBoard()
         {
-            UI.PrintBoard(_chessBoard.Rows, _chessBoard.Columns);            
-        }
+            ConsoleColor[,] backColors = new ConsoleColor[_chessBoard.Rows, _chessBoard.Columns];
+            ConsoleColor[,] foreColors = new ConsoleColor[_chessBoard.Rows, _chessBoard.Columns];
+            char[,] symbols = new char[_chessBoard.Rows, _chessBoard.Columns];
 
+            for (int i = 0; i < _chessBoard.Rows; i++)
+            {
+                for (int j = 0; j < _chessBoard.Columns; j++)
+                {
+                    backColors[i, j] = GetBackColorForCell(i, j);
+                    foreColors[i, j] = GetForeColorForCell(i, j);
+                    symbols[i, j] = GetSymbolForCell(i, j);
+                }
+            }
+
+            UI.PrintBoard(_chessBoard.Rows, _chessBoard.Columns, backColors, foreColors, symbols);
+        }
     }
 }

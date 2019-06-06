@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Envelops_2
 {
-    class Envelop : IComparable<Envelop>
+    public class Envelop : IComparable<Envelop>
     {
         public double Width { get; set; }
         public double Height { get; set; }

@@ -9,7 +9,7 @@ namespace FileParser_4
 {
     static class FileReplacer
     {
-        internal static void ReplaceString(string fileName, string target, string substitute)
+        public static void ReplaceString(string fileName, string target, string substitute)
         {
             using (StreamReader sr = new StreamReader(fileName))
             using (StreamWriter sw = new StreamWriter("new.txt"))
