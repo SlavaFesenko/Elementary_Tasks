@@ -8,26 +8,26 @@ namespace Task3TriangleSort
 {
     public class TriangleCollection
     {
-        private List<Triangle> triangleList;
+        private List<Triangle> _triangleList;
 
         public TriangleCollection()
         {
-            triangleList = new List<Triangle>();
+            _triangleList = new List<Triangle>();
         }
        
         public void AddTriangle(params Triangle[] triangles)
         {
             for (int i = 0; i < triangles.Length; i++)
             {
-                triangleList.Add(triangles[i]);
+                _triangleList.Add(triangles[i]);
             }
         }
 
         public void RemoveTriangle(Triangle triangleToRemove)
         {
-            if (triangleList.Contains(triangleToRemove))
+            if (_triangleList.Contains(triangleToRemove))
             {
-                triangleList.Remove(triangleToRemove);
+                _triangleList.Remove(triangleToRemove);
             }
             else
             {
@@ -37,24 +37,25 @@ namespace Task3TriangleSort
 
         public override string ToString()
         {
-            string result = null;
-            if (triangleList.Count != 0)
+            string result = string.Empty;
+
+            if (_triangleList.Count != 0)
             {
-                for (int i = 0; i < triangleList.Count; i++)
+                for (int i = 0; i < _triangleList.Count; i++)
                 {
-                    result += string.Format($"{i+1}.{triangleList[i].ToString()}\n");
+                    result += string.Format($"{i+1}.{_triangleList[i].ToString()}\n");
                 }
                 return result;
             }
             else
             {
-                return string.Format("No elements in the collection.");
+                return $"No elements in the collection.";
             }
         }
 
         public void SortBySquare()
         {
-            triangleList.Sort(new TrianglesComparer());
+            _triangleList.Sort(new TrianglesComparer());
         }
 
         // indexator
@@ -62,11 +63,11 @@ namespace Task3TriangleSort
         {
             get
             {
-                return triangleList[index];
+                return _triangleList[index];
             }
             set
             {
-                triangleList[index] = value;
+                _triangleList[index] = value;
             }
         }
         

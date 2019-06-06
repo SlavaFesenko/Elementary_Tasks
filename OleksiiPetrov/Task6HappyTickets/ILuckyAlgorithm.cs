@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Task6HappyTickets
 {
-    class HappyTicket
+    public interface ILuckyAlgorithm
     {
-
+        bool IsLucky(Ticket ticket);
     }
 }

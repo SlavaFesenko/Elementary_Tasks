@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task3TriangleSort
 {
-    public class Triangle
+    public class Triangle : ICloneable
     {
         private double _perimeter;
         private double _sideOne;
@@ -22,25 +22,36 @@ namespace Task3TriangleSort
             _sideOne = sideOne;
             _sideTwo = sideTwo;
             _sideThree = sideThree;
-            CalculatePerimeter();
-            CalculateArea();
+            _perimeter = GetPerimeter();
+            GetCalculatedArea();
         }
 
-        private void CalculatePerimeter()
+        #region Methods
+
+        private double GetPerimeter()
         {
-            _perimeter = _sideOne + _sideTwo + _sideThree;
+            return _perimeter = _sideOne + _sideTwo + _sideThree;
         }
 
-        private void CalculateArea()
+        private double GetCalculatedArea()
         {
-            double halfPerimeter = _perimeter / 2;
-            Area = Math.Sqrt(halfPerimeter * (halfPerimeter - _sideOne) * (halfPerimeter - _sideTwo) * (halfPerimeter - _sideThree));
+            double halfPerimeter = _perimeter / 2.0;
+            Area = Math.Sqrt(halfPerimeter * (halfPerimeter - _sideOne) *
+                (halfPerimeter - _sideTwo) * (halfPerimeter - _sideThree));
+
+            return Area;
         }
 
         public override string ToString()
         {
-            return string.Format($"[{Name}]: {Area:N2} cm");
+            return $"[{Name}]: {Area:N2} cm";
         }
 
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
+
+        #endregion
     }
 }

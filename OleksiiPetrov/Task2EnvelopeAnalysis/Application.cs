@@ -13,9 +13,7 @@ namespace Task2EnvelopeAnalysis
         const int COUNT_OF_SIDES = 4;
         #region Fields
 
-        private string[] _args;
         private Task2EnvelopeAnalysis.IView _view;
-        private Envelope _envelope;
         Logger logger = LogManager.GetCurrentClassLogger();
         private string[] sidesEnvelopsString;
         private double[] sidesEnvelops;

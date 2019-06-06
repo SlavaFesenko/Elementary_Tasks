@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SharedLibrary;
 
-namespace SharedLibrary
+namespace Task6HappyTickets
 {
-    public class SequenceUI : IView
+    public class ConsoleView : IView
     {
         #region Methods
 
@@ -38,33 +39,14 @@ namespace SharedLibrary
             Console.ResetColor();
         }
 
-        private void ShowSeparator()
+        public void ShowSeparator()
         {
             Console.WriteLine(new string('-', Console.WindowWidth));
         }
 
         public string[] ReInput()
-        {
-            Console.WriteLine("Press Enter to ReInput mode or Escape(esc) to EXIT");
-            ConsoleKeyInfo key = Console.ReadKey();
-            if (key.Key.Equals(ConsoleKey.Escape))
-                Environment.Exit(0);
-            else
-                if (key.Key.Equals(ConsoleKey.Enter))
-            {
-                Console.Write("Please input correct: ");
-                string[] arguments = Console.ReadLine().Split();
-                return arguments;
-            }
-            else
-            {
-                ShowErrorMessage("\nInvalid input.");
-                ReInput();
-            }
-
-            return null;
-        }
-
+        { return null; }
+        
         #endregion
     }
 }

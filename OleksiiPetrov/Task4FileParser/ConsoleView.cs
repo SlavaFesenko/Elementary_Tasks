@@ -17,7 +17,7 @@ namespace Task4FileParser
 
         public void ShowInstruction(string text)
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
             ShowSeparator();
             Console.WriteLine(text);
             ShowSeparator();
@@ -27,7 +27,7 @@ namespace Task4FileParser
 
         public void ShowResult(string text)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             ShowSeparator();
             Console.WriteLine(text);
             ShowSeparator();
@@ -52,6 +52,7 @@ namespace Task4FileParser
             switch (key.Key)
             {
                 case ConsoleKey.D1:
+                    arguments = new string[2];
                     Console.Write("\nPath to file: ");
                     arguments[0] = Console.ReadLine();
                     Console.Write("Searching string: ");

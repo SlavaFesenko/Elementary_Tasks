@@ -7,19 +7,40 @@ using System.Threading.Tasks;
 
 namespace Task6HappyTickets
 {
-    class Ticket : IEnumerable
+    public class Ticket
     {
-        private sbyte[] _numbers;
-        //public sbyte Number { set; get; }
+        private int[] _numbers = null;
+        private ILuckyAlgorithm _algorithm;
 
-        public Ticket(params sbyte[] digits)
+        public Ticket(int[] numbers, LuckyTicketType luckyTicketType)
         {
-            _numbers = digits;
+            _numbers = numbers;
+            if (luckyTicketType == LuckyTicketType.Moskow)
+                _algorithm = new MoskowTicket();
+            else if (luckyTicketType == LuckyTicketType.Piter)
+                _algorithm = new PiterTicket();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public bool IsLucky()
         {
-            return _numbers.GetEnumerator();
+            return _algorithm.IsLucky(this);
+        }
+
+        public int GetLength()
+        {
+            return _numbers.Length;
+        }
+
+         public int this[int index]
+        {
+            get
+            {
+                return _numbers[index];
+            }
+            set
+            {
+                _numbers[index] = value;
+            }
         }
     }
 }

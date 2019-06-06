@@ -87,6 +87,13 @@ namespace Task4FileParser
                 Run();
 
             }
+            catch (NullReferenceException ex)
+            {
+                _view.ShowErrorMessage(ex.Message);
+                logger.Error(ex.Message);
+                Run();
+
+            }
             catch (Exception ex)
             {
                 _view.ShowErrorMessage(ex.Message);
