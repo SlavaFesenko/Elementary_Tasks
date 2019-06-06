@@ -46,8 +46,12 @@ namespace SquareSequence_7
             }
         }
 
-        public string GetStringResult(IEnumerable<int> sequence)
+        public static string GetStringResult(IEnumerable<int> sequence)
         {
+            if (sequence is null)
+            {
+                throw new ArgumentNullException();
+            }
             return string.Join(", ", sequence);
         }
 

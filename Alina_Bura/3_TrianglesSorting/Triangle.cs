@@ -1,4 +1,4 @@
-﻿using NLog;
+﻿ using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TrianglesSorting_3
 {
-    class Triangle
+    public class Triangle
     {
         #region Field
 
@@ -40,32 +40,26 @@ namespace TrianglesSorting_3
         #endregion
 
         #region Ctor
-        private Triangle(string n, double a, double b, double c)
+        public Triangle(string n, double a, double b, double c)
         {
+            if (!Validate(a, b, c) || !Validate(b, c, a) || !Validate(a, c, b))
+            {
+                throw new ArgumentException("Can't create triangle!");
+            }
+
             Name = n;
             A = a;
             B = b;
             C = c;
-        }
+        } 
 
         #endregion
 
         #region Methods
-
-        public static Triangle Create(string name, double a, double b, double c)
+       
+        private static bool Validate(double a, double b, double c)
         {
-            if (!Validate(a, b, c) || !Validate(b, c, a) || !Validate(a, c, b))
-            {
-                throw new InvalidTriangleException("Can't create triangle!");
-            }
-
-            log.Info($"Triangle {name} ({a},{b},{c}) was created");
-            return new Triangle(name, a, b, c);
-        }
-
-        private static bool Validate(double a, double b, double c) // IN TRIANGLE OR IN VALIDATOR? 
-        {
-            if (a + b < c)
+            if (a + b <= c || a <= 0 || b <= 0 || c <= 0)
             {
                 log.Error($"Sum of {a} and {b} is less than {c}");
                 return false;
@@ -75,7 +69,7 @@ namespace TrianglesSorting_3
 
         public override string ToString()
         {
-            return $"[Triangle {Name}]: {Square} cm";
+            return $"[Triangle {Name}]: {Square:0.####} cm";
         }
 
         #endregion

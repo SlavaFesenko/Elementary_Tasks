@@ -15,27 +15,27 @@ namespace FileParser_4
 
             isCorrect = Validator.Validate(args, mode, out string message);
             if (!isCorrect)
-            {               
+            {
                 if (!string.IsNullOrEmpty(message))
                 {
                     UI.PrintErrorMessage(message);
                 }
-                
                 UI.ShowInstruction();
-                args = UI.ReadParameters();
             }
 
             switch (mode)
             {
                 case 1:
-                    int count = FileParser.GetCountOfString(args[0], args[1]);
+                    int count = FileFinder.GetCount(args[0], args[1]);
                     break;
                 case 2:
-                    FileParser.ReplaceString(args[0], args[1], args[2]);
+                    FileReplacer.ReplaceString(args[0], args[1], args[2]);
                     break;
                 default:
                     break;
             }
+
+            Console.ReadKey();
 
         }
     }

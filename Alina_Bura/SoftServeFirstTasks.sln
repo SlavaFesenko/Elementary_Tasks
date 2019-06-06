@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1_ChessBoard", "SoftServeFirstTasks\1_ChessBoard.csproj", "{5CCC3479-EE85-4049-A3CD-4B09169FC14C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1_ChessBoard", "1_ChessBoard\1_ChessBoard.csproj", "{5CCC3479-EE85-4049-A3CD-4B09169FC14C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2_Envelops", "Envelops_2\2_Envelops.csproj", "{70A74F0A-BB86-4361-98CF-F3BD716C1531}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3_TrianglesSorting", "TrianglesSorting_3\3_TrianglesSorting.csproj", "{BA9C7B23-4C4B-4D88-8343-97E588A8E7DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3_TrianglesSorter", "TrianglesSorting_3\3_TrianglesSorter.csproj", "{BA9C7B23-4C4B-4D88-8343-97E588A8E7DD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4_FileParser", "FileParser_4\4_FileParser.csproj", "{F67461D1-7268-452B-94FA-27F2A5273A35}"
 EndProject
@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7_SquareSequence", "SquareS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "8_FibonacciSequence", "FibonacciSequence_8\8_FibonacciSequence.csproj", "{856B365A-0E4C-4C4D-A483-1280FA54A054}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7_SquareSequenceTests", "SquareSequenceTests\7_SquareSequenceTests.csproj", "{6C7E9874-3321-45D9-B1F9-F183DCB29C92}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "SquareSequenceTests\Tests.csproj", "{6C7E9874-3321-45D9-B1F9-F183DCB29C92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

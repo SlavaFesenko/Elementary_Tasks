@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SquareSequence_7;
 
-namespace SquareSequenceTests
+namespace Tests
 {
     //[TestInitialize] - execute method before each test
 
@@ -12,9 +12,8 @@ namespace SquareSequenceTests
     public class SquareSequenceTests
     {
         [TestMethod]
-        public void TestGetSequence_InputPositive_ReturnOK()
+        public void GetSequence_Positive_Success()
         {
-            // arrange 
             List<int> numbers = new List<int>() { 1, 5, 10 };
 
             List<IEnumerable<int>> actualResults = new List<IEnumerable<int>>();
@@ -24,13 +23,11 @@ namespace SquareSequenceTests
             expectedResults.Add(new List<int> { 0, 1, 2 });
             expectedResults.Add(new List<int> { 0, 1, 2, 3 });
 
-            //act
             for (int i = 0; i < numbers.Count; i++)
             {
                 actualResults.Add(new SquareSequence(numbers[i]).GetSequence());
             }
 
-            //assert
             for (int i = 0; i < numbers.Count; i++)
             {
                 CollectionAssert.AreEqual(expectedResults[0].ToList(), actualResults[0].ToList());
@@ -39,45 +36,49 @@ namespace SquareSequenceTests
 
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestGetSequence_Input0_ReturnError()
+        public void GetSequence_Zero_ArgumentException()
         {
-            // arrange 
-            int number = 0;
-            ISequence sequence = new SquareSequence(number);
+            int number = 0; 
 
-            //act
-            IEnumerable<int> result = sequence.GetSequence();
+            Assert.ThrowsException<ArgumentException>(() => new SquareSequence(number).GetSequence());
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestGetSequence_InputNegative_ReturnError()
+        public void TestGetSequence_Negative_ArgumentException()
         {
             List<int> numbers = new List<int>() { -1, -5, -10 };
-
-            List<IEnumerable<int>> actualResults = new List<IEnumerable<int>>();
-            
-            //act
+           
             for (int i = 0; i < numbers.Count; i++)
             {
-                actualResults.Add(new SquareSequence(numbers[i]).GetSequence());
+                Assert.ThrowsException<ArgumentException>(() => new SquareSequence(numbers[i]).GetSequence());
             }
         }
 
         [TestMethod]
-        public void TestGetStringResult_Input10_ReturnStr0123()
+        public void GetStringResult_NotEmptySequence_CorrectString()
         {
-            // arrange 
-            int number = 10;
             List<int> getSequenceResult = new List<int>() { 0, 1, 2, 3 };
-            ISequence sequence = new SquareSequence(number);
             string expectedResult = "0, 1, 2, 3";
 
-            //act
-            string actualResult = sequence.GetStringResult(getSequenceResult);
+            string actualResult = SquareSequence.GetStringResult(getSequenceResult);
             
-            //assert
+            Assert.AreEqual(actualResult, expectedResult);
+        }
+
+        [TestMethod]
+        public void GetStringResult_Null_ArgumentNullException()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => SquareSequence.GetStringResult(null));            
+        }
+
+        [TestMethod]
+        public void GetStringResult_Empty_ArgumentNullException()
+        {
+            List<int> getSequenceResult = new List<int>();
+            string expectedResult = string.Empty;
+           
+            string actualResult = SquareSequence.GetStringResult(getSequenceResult);
+
             Assert.AreEqual(actualResult, expectedResult);
         }
     }

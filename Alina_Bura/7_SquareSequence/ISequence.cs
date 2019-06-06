@@ -12,7 +12,5 @@ namespace SquareSequence_7
         int FinishNumber { get; }
 
         IEnumerable<int> GetSequence();
-
-        string GetStringResult(IEnumerable<int> sequence);
     }
 }

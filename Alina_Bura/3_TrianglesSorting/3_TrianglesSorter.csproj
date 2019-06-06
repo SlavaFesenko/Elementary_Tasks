@@ -52,11 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CantCompareException.cs" />
-    <Compile Include="InvalidTriangleException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TriangleComparer.cs" />
-    <Compile Include="Triangles.cs" />
+    <Compile Include="Triangle.cs" />
     <Compile Include="UI.cs" />
     <Compile Include="Validator.cs" />
   </ItemGroup>

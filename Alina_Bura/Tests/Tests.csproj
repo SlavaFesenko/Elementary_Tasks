@@ -49,8 +49,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SquareSequenceTests.cs" />
+    <Compile Include="SquareSequnce\SquareSequenceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TrianglesSorter\TriangleComparerTests.cs" />
+    <Compile Include="TrianglesSorter\TriangleTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -59,6 +61,10 @@
     <ProjectReference Include="..\SquareSequence_7\7_SquareSequence.csproj">
       <Project>{c049b4cb-d47f-4c60-86dd-f6d67772fe97}</Project>
       <Name>7_SquareSequence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TrianglesSorting_3\3_TrianglesSorter.csproj">
+      <Project>{ba9c7b23-4c4b-4d88-8343-97e588a8e7dd}</Project>
+      <Name>3_TrianglesSorter</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
