@@ -63,6 +63,7 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="ClassDiagramFibonacci.cd" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

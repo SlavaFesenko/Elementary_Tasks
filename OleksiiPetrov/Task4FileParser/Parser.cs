@@ -7,13 +7,13 @@ namespace Task4FileParser
     public class Parser
     {
         #region Field
-        private string _path;
+        private string _testPath;
         #endregion
 
         #region Ctor
         public Parser(string path)
         {
-            _path = path;
+            _testPath = path;
         }
 
         #endregion
@@ -28,7 +28,7 @@ namespace Task4FileParser
         {
             int countEntry = 0;
 
-            using (StreamReader reader = new StreamReader(_path, Encoding.Default))
+            using (StreamReader reader = new StreamReader(_testPath, Encoding.Default))
             {
                 string line = string.Empty;
 
@@ -54,7 +54,7 @@ namespace Task4FileParser
             int countEntry = 0;
             string tempFileName = System.IO.Path.GetRandomFileName() + ".txt";
 
-            using (StreamReader reader = new StreamReader(_path, Encoding.Default)) 
+            using (StreamReader reader = new StreamReader(_testPath, Encoding.Default)) 
             {
                 using (StreamWriter writer = new StreamWriter(tempFileName, true))
                 {
@@ -82,9 +82,9 @@ namespace Task4FileParser
 
                 if (countEntry > 0)
                 {
-                    File.Delete(_path);
-                    //change name of tmp file to _path
-                    File.Move(tempFileName, _path);
+                    File.Delete(_testPath);
+                    //change name of tmp file to _testPath
+                    File.Move(tempFileName, _testPath);
                 }
             }
             catch(IOException ex)

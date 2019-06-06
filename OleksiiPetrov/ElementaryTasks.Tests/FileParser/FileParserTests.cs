@@ -9,54 +9,47 @@ namespace ElementaryTasks.tests.FileParser
     public class FileParserTests
     {
         Parser _parser;
-        string _path;
+        private static string _mainPath;
+        private static string _testPath;
+
+        #region Inits
+
+        [ClassInitialize]
+        public static void ClassInitialize(TestContext context)
+        {
+            _testPath = "test.txt";
+            using (File.Create(_testPath)) { }
+            _mainPath = "main.txt";
+            using (File.Create(_mainPath)) { }
+            File.WriteAllText(_mainPath, "One, Two, Three\r\n Two, Three\r\n");
+
+        }
 
         [TestInitialize]
         public void TestInitialize()
         {
-            _path = "test.txt";
-            using (File.Create(_path)) { }
-            File.WriteAllText(_path, "One, Two, Three\r\n Two, Three\r\n");
-            _parser = new Parser(_path);
+            File.Copy(_mainPath, _testPath, true);
+
+            _parser = new Parser(_testPath);
         }
 
         [TestCleanup]
         public void TestCleanup()
         {
-            if (File.Exists(_path))
-                File.Delete(_path);
-            _path = string.Empty;
-
         }
+
+        #endregion
+
+        #region AreEquals
 
         [TestMethod]
         public void ParserGetCountEntries_ONENUMBERfindInPath_Return0()
         {
-            // Arrange
             string find = "ONENUMBER";
             int expected = 0;
 
-            // Act
             int actual = _parser.GetCountEntries(find);
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-
-        }
-
-        [TestMethod]
-        public void ParserReplaceAll_TwoReplace2_Replaced()
-        {
-            //Arrange
-            string searching = "Two";
-            string replacing = "2";
-            string expected = "One, 2, Three\r\n 2, Three\r\n";
-
-            //Act
-            _parser.ReplaceAll(searching, replacing);
-            string actual = File.ReadAllText(_path);
-
-            //Assert
             Assert.AreEqual(expected, actual);
         }
 
@@ -75,6 +68,25 @@ namespace ElementaryTasks.tests.FileParser
         }
 
         [TestMethod]
+        public void ParserReplaceAll_TwoReplace2_Replaced()
+        {
+            //Arrange
+            string searching = "Two";
+            string replacing = "2";
+            string expected = "One, 2, Three\r\n 2, Three\r\n";
+
+            //Act
+            _parser.ReplaceAll(searching, replacing);
+            string actual = File.ReadAllText(_testPath);
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+           
+        #endregion
+
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void ParserReplaceAll_NUMBERReplace1_ArgumentException()
         {
@@ -83,5 +95,6 @@ namespace ElementaryTasks.tests.FileParser
 
             _parser.ReplaceAll(searching, replacing);
         }
+
     }
 }
