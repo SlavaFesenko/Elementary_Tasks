@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application.cs" />
+    <Compile Include="CompareEnvelops.cs" />
     <Compile Include="ConsoleView.cs" />
     <Compile Include="Envelope.cs" />
     <Compile Include="IView.cs" />

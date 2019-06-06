@@ -8,9 +8,8 @@ namespace Task2EnvelopeAnalysis
 {
     class ConsoleView : IView
     {
-        private const string LINE_SEPARATOR = "---------------------------------------------------------------------------";
-
         #region Methods
+
         public void ShowErrorMessage(string text)
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -21,38 +20,43 @@ namespace Task2EnvelopeAnalysis
 
         public void ShowInstruction(string text)
         {
-            Console.WriteLine(LINE_SEPARATOR);
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            ShowSeparator();
             Console.WriteLine(text);
-            Console.WriteLine(LINE_SEPARATOR);
+            ShowSeparator();
             Console.WriteLine();
+            Console.ResetColor();
         }
 
         public void ShowResult(string text)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(LINE_SEPARATOR);
+            ShowSeparator();
             Console.WriteLine(text);
-            Console.WriteLine(LINE_SEPARATOR);
+            ShowSeparator();
             Console.WriteLine();
             Console.ResetColor();
         }
 
-        public string[] ReInput()
+        private void ShowSeparator()
         {
-            Console.WriteLine("reinput");
-            ////TODO: ASK About 2-3 elements case Mode?? BUG string with space
-            string[] arguments = new string[3];
-            //Console.Write("Path to file: ");//TODO: With file name
-            //arguments[0] = Console.ReadLine();
-            //Console.Write("Search string: ");
-            //arguments[1] = Console.ReadLine();
-
-            ////only for replace mode
-            //Console.Write("String to replace: ");
-            //arguments[2] = Console.ReadLine();
-
-            return arguments;
+            Console.WriteLine(new string('-', Console.WindowWidth));
         }
+
+        public void ShowMessage(string text)
+        {
+            ShowSeparator();
+            Console.WriteLine(text);
+            ShowSeparator();
+        }
+
+        public string Input(string text)
+        {
+            Console.Write(text);
+
+            return Console.ReadLine();
+        }
+
         #endregion
     }
 }

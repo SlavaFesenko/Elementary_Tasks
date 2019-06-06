@@ -11,7 +11,7 @@ namespace Task2EnvelopeAnalysis
         static void Main(string[] args)
         {
             Application app = new Application();
-            app.Run(args);
+            app.Run();
         }
     }
 }

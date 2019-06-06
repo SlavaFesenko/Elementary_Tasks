@@ -11,6 +11,7 @@ namespace Task2EnvelopeAnalysis
         void ShowErrorMessage(string text);
         void ShowInstruction(string text);
         void ShowResult(string text);
-        string[] ReInput();
+        void ShowMessage(string text);
+        string Input(string text);
     }
 }
