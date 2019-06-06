@@ -16,15 +16,15 @@ namespace UnitTestElementaryTask3
         public void TestTriangleInitialize_Correct
                     (string triangleName, float firstTriangleSide,
                     float secondTriangleSide, float thirdTriangleSide, 
-                    string expectedTriangleName, float expectedfirstTriangleSide,
-                    float expectedsecondTriangleSide, float expectedthirdTriangleSide)
+                    string expectedTriangleName, float expectedFirstTriangleSide,
+                    float expectedSecondTriangleSide, float expectedThirdTriangleSide)
         {
             Triangle triangle = Triangle.TriangleInitialize(triangleName, firstTriangleSide, secondTriangleSide, thirdTriangleSide);
 
             Assert.IsTrue((expectedTriangleName == triangle.TriangleName)
-                && (expectedfirstTriangleSide == triangle.FirstSide)
-                && (expectedsecondTriangleSide == triangle.SecondSide)
-                && (expectedsecondTriangleSide == triangle.ThirdSide));
+                && (expectedFirstTriangleSide == triangle.FirstSide)
+                && (expectedSecondTriangleSide == triangle.SecondSide)
+                && (expectedThirdTriangleSide == triangle.ThirdSide));
         }
 
         [TestMethod]
@@ -39,7 +39,7 @@ namespace UnitTestElementaryTask3
 
             float actual = triangle.GetSquare();
 
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, actual, "Not correct square calculated");
         }
 
         [TestMethod]
@@ -54,13 +54,13 @@ namespace UnitTestElementaryTask3
 
             actual.Sort(new TrianglesCompare());
 
-            CollectionAssert.AreEqual(expected, actual);
+            CollectionAssert.AreEqual(expected, actual, "Not correct sorting by square");
         }
 
 
         [TestMethod]
 
-        public void TestCreatingOfNegativeSidesTriangle_OverflowExceptionThrow()
+        public void TestCreatingOfNegativeSidesTriangle_ArgumentExceptionThrow()
         {
             Assert.ThrowsException<ArgumentException> (() => Triangle.TriangleInitialize("wrongTriangle", -3, 1, 1));
         }

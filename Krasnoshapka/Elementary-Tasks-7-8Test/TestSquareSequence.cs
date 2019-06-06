@@ -14,12 +14,8 @@ namespace Elementary_Tasks_7_8Test
         [DataRow(5, 20, 5, 20)]
         public void TestFibonachiSequncesCorrectInitialize(int leftBorder, int rightBorder, int expectedLeftBorder, int expectedRightBorder)
         {
-            //Arrange
-
-            //Act
-            FibonacciSequence sequence = FibonacciSequence.FibonacciInitialize(leftBorder, rightBorder);
-
-            //Assert
+           FibonacciSequence sequence = FibonacciSequence.FibonacciInitialize(leftBorder, rightBorder);
+     
             Assert.IsTrue((expectedLeftBorder == sequence.LeftBorder)
                 && (expectedRightBorder == sequence.RightBorder));
         }
@@ -30,12 +26,8 @@ namespace Elementary_Tasks_7_8Test
 
         public void LessThanNSequncesCorrectInitialize(int rightBorder, int expectedLeftBorder, int expectedRightBorder)
         {
-            //Arrange
-
-            //Act
             SquareSequence sequence = SquareSequence.SquareInitialize(rightBorder);
 
-            //Assert
             Assert.IsTrue((expectedLeftBorder == sequence.LeftBorder)
             && (expectedRightBorder == sequence.RightBorder));
         }
@@ -49,17 +41,14 @@ namespace Elementary_Tasks_7_8Test
         public void FibbonachiNumberRange_Correct(int leftBorder,
             int rightBorder, int[] expected)
         {
-            //Arrange
             List<int> real = new List<int>();
 
-            //Act
             FibonacciSequence sequence = FibonacciSequence.FibonacciInitialize(leftBorder, rightBorder);
             foreach (int item in sequence.GetSequence())
             {
                 real.Add(item);
             }
 
-            //Assert
             CollectionAssert.AreEqual(expected, real.ToArray());
         }
 
@@ -70,26 +59,27 @@ namespace Elementary_Tasks_7_8Test
 
         public void LessThanNNumberRange_Correct(int rightBorder, int[] expected)
         {
-            //Arange
+           
             List<int> real = new List<int>();
 
-            //Act
             SquareSequence sequence = SquareSequence.SquareInitialize(rightBorder);
             foreach (int item in sequence.GetSequence())
             {
                 real.Add(item);
             }
 
-            //Assert
             CollectionAssert.AreEqual(expected, real.ToArray());
         }
 
         [TestMethod]
 
-        public void TestArgumentExceptionThrow()
+        [DataRow (-3, 1)]
+        [DataRow (10, 1)]
+
+        public void TestArgumentExceptionThrow(int leftBorder, int rightBorder)
         {
-            Assert.ThrowsException<ArgumentException>(() => FibonacciSequence.FibonacciInitialize( -3, 1));
-            Assert.ThrowsException<ArgumentException>(() => FibonacciSequence.FibonacciInitialize(10, 1));
+            Assert.ThrowsException<ArgumentException>(() => FibonacciSequence.FibonacciInitialize(leftBorder, rightBorder));
+            Assert.ThrowsException<ArgumentException>(() => FibonacciSequence.FibonacciInitialize(leftBorder, rightBorder));
         }
 
   
