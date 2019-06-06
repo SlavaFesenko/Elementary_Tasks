@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0CCD4BE1-4DBA-4373-A2AC-6B4BA9CB6719}</ProjectGuid>
+    <ProjectGuid>{DC24B60A-BB14-4E7A-8FCC-75F7E6A31428}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Elementary_Tasks_7_8Test</RootNamespace>
-    <AssemblyName>Elementary-Tasks-7-8Test</AssemblyName>
+    <RootNamespace>ElementaryTask8Test</RootNamespace>
+    <AssemblyName>ElementaryTask8Test</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -49,20 +49,20 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestSquareSequence.cs" />
+    <Compile Include="TestFibonacciSequence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Elementary-Tasks-7-8\Elementary-Tasks-7-8.csproj">
-      <Project>{1b9f52ce-cbb6-4b59-bd69-5f890efe8f51}</Project>
-      <Name>Elementary-Tasks-7-8</Name>
+    <ProjectReference Include="..\ElementaryTasks8\ElementaryTask8.csproj">
+      <Project>{bf977a00-bfd0-4cee-a80f-29dcdb636c05}</Project>
+      <Name>ElementaryTask8</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SLib\SLib.csproj">
+    <ProjectReference Include="..\SLib\SharedLib.csproj">
       <Project>{1abbfca6-5b79-4ac6-bc0d-a421ce63b318}</Project>
-      <Name>SLib</Name>
+      <Name>SharedLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

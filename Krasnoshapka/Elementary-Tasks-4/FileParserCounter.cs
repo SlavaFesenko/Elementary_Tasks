@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using System.IO;
 
-namespace Elementary_Tasks_4
+namespace ElementaryTask4
 {
     class FileParserCounter : FileParser
     {

@@ -2,7 +2,7 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using Elementary_Tasks_3;
+using ElementaryTasks3;
 
 namespace UnitTestElementaryTask3
 {
@@ -10,6 +10,8 @@ namespace UnitTestElementaryTask3
     public class TestTriangleClass
     {
         [TestMethod]
+
+        //Arrange
         [DataRow("first", 3, 4, 5, "first", 3, 4, 5)]
         [DataRow("second", 10, 6, 8, "second", 10, 6, 8)]
 
@@ -19,8 +21,10 @@ namespace UnitTestElementaryTask3
                     string expectedTriangleName, float expectedFirstTriangleSide,
                     float expectedSecondTriangleSide, float expectedThirdTriangleSide)
         {
+            //Act
             Triangle triangle = Triangle.TriangleInitialize(triangleName, firstTriangleSide, secondTriangleSide, thirdTriangleSide);
 
+            //Assert
             Assert.IsTrue((expectedTriangleName == triangle.TriangleName)
                 && (expectedFirstTriangleSide == triangle.FirstSide)
                 && (expectedSecondTriangleSide == triangle.SecondSide)
@@ -28,6 +32,7 @@ namespace UnitTestElementaryTask3
         }
 
         [TestMethod]
+        //Arrange
         [DataRow("first", 3, 4, 5, 6)]
         [DataRow("second", 10, 6, 8, 24)]
 
@@ -35,10 +40,12 @@ namespace UnitTestElementaryTask3
                     (string triangleName, float firstTriangleSide,
                     float secondTriangleSide, float thirdTriangleSide, int expected)
         {
+            //Act
             Triangle triangle = Triangle.TriangleInitialize(triangleName, firstTriangleSide, secondTriangleSide, thirdTriangleSide);
 
             float actual = triangle.GetSquare();
 
+            //Assert
             Assert.AreEqual(expected, actual, "Not correct square calculated");
         }
 
@@ -46,6 +53,10 @@ namespace UnitTestElementaryTask3
 
         public void TestListOfTrianglesSort_Correct()
         {
+            //Arrange
+
+            //Act
+
             Triangle triangleFirst = Triangle.TriangleInitialize("first", 4, 6, 7);
             Triangle triangleSecond = Triangle.TriangleInitialize("second", 7, 11, 9);
             Triangle triangleThird = Triangle.TriangleInitialize("third", 2, 3, 4);
@@ -54,6 +65,7 @@ namespace UnitTestElementaryTask3
 
             actual.Sort(new TrianglesCompare());
 
+            //Assert
             CollectionAssert.AreEqual(expected, actual, "Not correct sorting by square");
         }
 

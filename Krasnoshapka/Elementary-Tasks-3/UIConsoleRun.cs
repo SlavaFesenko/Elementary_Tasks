@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Elementary_Tasks_3
+namespace ElementaryTasks3
 {
     static class UIConsoleRun
     {

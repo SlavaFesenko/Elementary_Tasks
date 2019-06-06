@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElementaryTask7
+namespace ElementaryTasks8
 {
     class Validator
     {
@@ -28,7 +28,6 @@ namespace ElementaryTask7
             return result;
         }
 
-        
 
     }
 }

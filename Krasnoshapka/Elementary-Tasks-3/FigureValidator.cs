@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Elementary_Tasks_3
+namespace ElementaryTasks3
 {
-    class Validator
+    class FigureValidator
     {
         public static bool ValidSides(float firstSide, float secondSide, float thirdSide)
         {

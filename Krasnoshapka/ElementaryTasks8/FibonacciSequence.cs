@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shared;
 
-namespace Elementary_Tasks_7_8
+
+namespace ElementaryTasks8
 {
    public class FibonacciSequence : Sequence
     {

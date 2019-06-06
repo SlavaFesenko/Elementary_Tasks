@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Elementary_Tasks_3
+namespace ElementaryTasks3
 {
     public class Triangle : IFigureBehaviour
     {
@@ -29,7 +29,7 @@ namespace Elementary_Tasks_3
 
         public static Triangle TriangleInitialize(string triangleName, float firstSide, float secondSide, float thirdSide)
         {
-            if (Validator.ValidSides(firstSide, secondSide, thirdSide))
+            if (FigureValidator.ValidSides(firstSide, secondSide, thirdSide))
             {
                 return new Triangle(triangleName, firstSide, secondSide, thirdSide);
             }

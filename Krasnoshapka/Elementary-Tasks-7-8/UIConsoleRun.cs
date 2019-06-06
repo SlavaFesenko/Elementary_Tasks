@@ -6,59 +6,26 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Elementary_Tasks_7_8
+namespace ElementaryTask7
 {
     class UIConsoleRun
     {
-        private const int SQUARE = 1;
-        private const int FIBONACCI = 2;
+        private const int SQUARE = 1;    
         static Logger logger = LogManager.GetCurrentClassLogger();
 
 
         public static void BuildUI(string[] args)
         {
-            switch (args.Length)
+            if (args.Length== SQUARE)
             {
-                case SQUARE:   
-                    Square(args);
-                    break;
-                case FIBONACCI:
-                    Fibonacci(args);
-                    break;
-                default:
-                    Instruction();
-                    break;
+                Square(args);
             }
+            else
+                Instruction();
         }
 
         #region OtherMethods
-
-        private static void Fibonacci(string[] args)
-        {
-            int leftBorder = 0;
-            int rightBorder = 0;
-
-            if (Int32.TryParse(args[0], out leftBorder) && Int32.TryParse(args[1], out rightBorder))
-            {
-                FibonacciSequence fibonacciSequence
-               = FibonacciSequence.FibonacciInitialize(leftBorder, rightBorder);
-
-                string result = "Fibonacci sequence:";
-                Console.WriteLine(result);
-                logger.Info(result);
-
-                foreach (int number in fibonacciSequence.GetSequence())
-                {
-                    Console.Write(number +", ");
-                }
-            }
-            else
-            {
-                throw new FormatException("Please enter numbers");
-            }
-
-           
-        }
+     
 
         private static void Square(string[] args)
         {
@@ -85,7 +52,7 @@ namespace Elementary_Tasks_7_8
 
         private static void Instruction()
         {
-            Console.WriteLine("Please 1 border for Square or 2 for Fibonacci");
+            Console.WriteLine("Please enter only one number, like border of your seqence");
         }
 
         #endregion

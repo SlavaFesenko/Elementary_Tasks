@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Elementary_Tasks_7_8
+namespace Shared
 {
    public abstract class Sequence
     {
-
         public int LeftBorder { get; set; }
         public int RightBorder { get; set; }
 

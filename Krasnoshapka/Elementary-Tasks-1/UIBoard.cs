@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Elementary_Tasks_1
+namespace ElementaryTask1
 {
     class UIBoard
     {
