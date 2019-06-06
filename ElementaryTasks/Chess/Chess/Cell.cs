@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace Chess
 
         private int _rows;
         private int _columns;
+        private Logger _log = LogManager.GetCurrentClassLogger();
 
         #endregion
 

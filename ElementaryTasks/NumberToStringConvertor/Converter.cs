@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 
 namespace NumberToStringConvertor
 {
@@ -14,6 +15,7 @@ namespace NumberToStringConvertor
         private static int _million;
         private static int _thousand;
         private static int _hundred;
+        private static Logger _log  = LogManager.GetCurrentClassLogger();
 
         #endregion
 
@@ -38,30 +40,55 @@ namespace NumberToStringConvertor
             _million = ((number % 1000000000) - (number % 1000000)) / 1000000;
             _thousand = ((number % 1000000) - (number % 1000)) / 1000;
             _hundred = number % 1000;
+            _log.Trace($"The number {number} was splitted.");
         }
 
         private static string ConvertBillionToString()
         {
             if (_billion == 0)
+            {
+                _log.Trace("The billion digit was equal zero.");
+
                 return string.Empty;
+            }
             else
+            {
+                _log.Trace($"The billion digit({_billion}) was converted.");
+
                 return $"{ConvertHundredToString(_billion)} billion";
+            }
         }
 
         private static string ConvertMillionToString()
         {
             if (_million == 0)
+            {
+                _log.Trace("The million digit was equal zero.");
+
                 return string.Empty;
+            }
             else
+            {
+                _log.Trace($"The million digit({_million}) was converted.");
+
                 return $"{ConvertHundredToString(_million)} million";
+            }
         }
         
         private static string ConvertThousandToString()
         {
             if (_thousand == 0)
+            {
+                _log.Trace("The thousand digit was equal zero.");
+
                 return string.Empty;
+            }
             else
+            {
+                _log.Trace($"The thousand digit({_thousand}) was converted.");
+
                 return $"{ConvertHundredToString(_thousand)} thousand";
+            }
         }
 
         private static string ConvertUnitToString(int number)
@@ -101,7 +128,8 @@ namespace NumberToStringConvertor
                     result = "nine";
                     break;                   
             }
-            
+            _log.Trace($"Unit digit({number}) was converted.");
+
             return result;
         }
 
@@ -135,6 +163,7 @@ namespace NumberToStringConvertor
             }
             else
                 result = ConvertUnitToString(number);
+            _log.Trace($"The ten digit({number}) was converted.");
 
             return result;
         }
@@ -173,6 +202,7 @@ namespace NumberToStringConvertor
                     result = $"ninety-{ConvertUnitToString(unit)}";
                     break;
             }
+            _log.Trace($"The ten digit({number}) was converted.");
 
             return result.TrimEnd('-');
         }
@@ -183,9 +213,17 @@ namespace NumberToStringConvertor
             int hundred = (number - ten) / 100;
 
             if (hundred != 0)
-                return  $"{ConvertUnitToString(hundred)} hundred {ConvertTenToString(ten)}";
+            {
+                _log.Trace("The hundred digit was equal 0.");
+
+                return $"{ConvertUnitToString(hundred)} hundred {ConvertTenToString(ten)}";
+            }
             else
+            {
+                _log.Trace($"The hundred digit({_hundred}) was converted.");
+
                 return $"{ConvertTenToString(ten)}";
+            }
         }
 
         #endregion
@@ -202,13 +240,17 @@ namespace NumberToStringConvertor
             string result = string.Empty;
 
             if (number == 0)
+            {
                 result = "zero";
+                _log.Trace("Number was equal zero.");
+            }
             else
             {
                 if (number > 0)
                 {
                     SplitNumberByDigits(number);
                     result = ReturnResultingString();
+                    _log.Trace($"Number {number} was converted.");
                 }
                 else
                 {
@@ -216,6 +258,7 @@ namespace NumberToStringConvertor
                     SplitNumberByDigits(number);
                     result = ReturnResultingString();
                     result = $"minus {result}";
+                    _log.Trace($"Number {number} and was converted.");
                 }
             }         
             

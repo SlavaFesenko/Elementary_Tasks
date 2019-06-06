@@ -24,85 +24,94 @@ namespace ElementaryTasks.Test
             }
         }
 
-        #region Tests
+        #region Converter Tests
 
         [TestMethod]
         public void CorrectConverting()
         {
             string expectedString = "one hundred";
-            string actualString = Converter.Convert(100);
-            Assert.AreEqual(expectedString, actualString);
+            int actualNumber = 100;
+            string actualString = Converter.Convert(actualNumber);
+            string testFailMessage = "Test was failed on converting 100";
+
+            Assert.AreEqual(expectedString, actualString, testFailMessage);
         }
 
         [TestMethod]
         public void CorrectConvertingWithMinus()
         {
             string expectedString = "minus one hundred";
-            string actualString = Converter.Convert(-100);
-            Assert.AreEqual(expectedString, actualString);
+            int actualNumber = -100;
+            string actualString = Converter.Convert(actualNumber);
+            string testFailMessage = "Test was failed on converting -100";
+
+            Assert.AreEqual(expectedString, actualString, testFailMessage);
         }
+
+        [TestMethod]
+        public void CorrectConvertingWithZero()
+        {
+            string expectedString = "zero";
+            int actualNumber = 0;
+            string actualString = Converter.Convert(actualNumber);
+            string testFailMessage = "Test was failed on converting 0";
+
+            Assert.AreEqual(expectedString, actualString, testFailMessage);
+        }
+
+        #endregion
+
+        #region Validator Tests
 
         [TestMethod]
         public void CorrectValidation()
         {
-            string[] args = { "1000" };
+            string[] actualArgs = { "1000" };
             int expectedNumber = 1000;
-            int actualNumber = Validator.Validate(args);
-            Assert.AreEqual(expectedNumber, actualNumber);
+            int actualNumber = Validator.Validate(actualArgs);
+            string testFailMessage = "Test was failed on validating 1000";
+
+            Assert.AreEqual(expectedNumber, actualNumber, testFailMessage);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException), "Argument null exception wasn't thrown")]
         public void ThrowingNullArgumentException()
         {
-            string[] args = { };
-            int number = Validator.Validate(args);         
+            string[] actualArgs = { };
+            int actualNumber = Validator.Validate(actualArgs);         
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentException), "Argument exception wasn't thrown")]
         public void ThrowingArgumentException()
         {
-            string[] args = {"100", "200" };
-            int number = Validator.Validate(args);
+            string[] actualArgs = {"100", "200" };
+            int actualNumber = Validator.Validate(actualArgs);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FormatException))]
+        [ExpectedException(typeof(FormatException), "Format exception(user input string) wasn't thrown")]
         public void ThrowingFormatException()
         {
-            string[] args = { "string" };
-            int number = Validator.Validate(args);
+            string[] actualArgs = { "string" };
+            int actualNumber = Validator.Validate(actualArgs);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(FormatException), "Format exception(user input more than 10 symbolth) wasn't thrown")]
         public void ThrowingExceptionMoreThanTen()
         {           
-            try
-            {
-                string[] args = { "12345678910" };
-                int number = Validator.Validate(args);
-                Assert.Fail("An exception should have been thrown");
-            }
-            catch (FormatException ae)
-            {
-                Assert.AreEqual("Unseccessful format! (May be more than 10 symbols)", ae.Message);
-            }            
+            string[] actualArgs = { "12345678910" };
+            int actualNumber = Validator.Validate(actualArgs);      
         }
 
         [TestMethod]
+        [ExpectedException(typeof(FormatException), "Format exception(number starts with zero) wasn't thrown")]
         public void ThrowingExceptionStartWithZero()
         {
-            try
-            {
-                string[] args = { "012345678" };
-                int number = Validator.Validate(args);
-                Assert.Fail("An exception should have been thrown");
-            }
-            catch (FormatException ae)
-            {
-                Assert.AreEqual("Unseccessful format! (Number couldn't start with 0)", ae.Message);
-            }
+            string[] actualArgs = { "012345678" };
+            int actualNumber = Validator.Validate(actualArgs);   
         }
 
         #endregion

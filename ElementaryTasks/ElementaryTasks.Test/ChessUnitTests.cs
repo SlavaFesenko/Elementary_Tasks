@@ -12,18 +12,10 @@ namespace ElementaryTasks.Test
     [TestClass]
     public class ChessUnitTests
     {
-        public ChessUnitTests()
-        {
-            //
-            // TODO: добавьте здесь логику конструктора
-            //
-        }
-
         private TestContext testContextInstance;
-
         /// <summary>
-        ///Получает или устанавливает контекст теста, в котором предоставляются
-        ///сведения о текущем тестовом запуске и обеспечивается его функциональность.
+        ///Gets or sets the test context which provides
+        ///information about and functionality for the current test run.
         ///</summary>
         public TestContext TestContext
         {
@@ -37,102 +29,84 @@ namespace ElementaryTasks.Test
             }
         }
 
-        #region Дополнительные атрибуты тестирования
-        //
-        // При написании тестов можно использовать следующие дополнительные атрибуты:
-        //
-        // ClassInitialize используется для выполнения кода до запуска первого теста в классе
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
-        // ClassCleanup используется для выполнения кода после завершения работы всех тестов в классе
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
-        //
-        // TestInitialize используется для выполнения кода перед запуском каждого теста 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // TestCleanup используется для выполнения кода после завершения каждого теста
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
-        #endregion
+        #region Building Board and Coloring Cell Tests
 
         [TestMethod]
-        public void CorrectColloringCell()
-        {
-            ChessBoardColor expectedColor = ChessBoardColor.White;
+        public void CorrectColoringCell()
+        {            
             Cell testCell = new Cell(0,0);
-            Assert.AreEqual(expectedColor, testCell.CellColor);
+            ChessBoardColor actualColor = testCell.CellColor;
+            ChessBoardColor expectedColor = ChessBoardColor.White;
+
+            string testFailMessage = "Tests was failed on coloring cell";
+
+            Assert.AreEqual(expectedColor, actualColor, testFailMessage);
         }
 
         [TestMethod]
         public void CorrectBuildingTable()
         {
             Board testBoard = new Board(1, 2);
-            for (int i = 0; i < 1; i++)
-            {
-                for (int j = 0; j < 2; j++)
-                {
-                    if (j % 2 == 0)
-                        Assert.AreEqual(ChessBoardColor.White, testBoard.CellsTable[i,j].CellColor);
-                    else
-                        Assert.AreEqual(ChessBoardColor.Black, testBoard.CellsTable[i, j].CellColor);
-                }
-            }
+            ChessBoardColor actualColor = testBoard.CellsTable[0, 0].CellColor;
+            ChessBoardColor expectedColor = ChessBoardColor.White;
+
+            string testFailMessage = "Tests was failed on building board";
+
+            Assert.AreEqual(expectedColor, actualColor, testFailMessage);
         }
 
+        #endregion
+
+        #region Exception Tests
+
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException), "Argument null exception wasn't thrown")]
         public void ThrowingNullArgumentException()
         {
-            string[] args = { };
-            Validator.Validate(args);
+            string[] actualArgs = { };
+            Validator.Validate(actualArgs);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentException), "Argument exception(for less than zero argument) wasn't thrown")]
         public void ThrowingArgumentExceptionLess0()
         {
-            string[] args = {"-1", "8"};
-            Validator.Validate(args);
+            string[] actualArgs = {"-1", "8"};
+            Validator.Validate(actualArgs);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentException), "Argument exception(for equal zero argument) wasn't thrown")]
+        public void ThrowingArgumentExceptionEqual0()
+        {
+            string[] actualArgs = { "0", "8" };
+            Validator.Validate(actualArgs);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException), "Argument exception(for greater than 30 argument) wasn't thrown")]
         public void ThrowingArgumentExceptionMore30()
         {
-            string[] args = { "31", "8" };
-            Validator.Validate(args);
+            string[] actualArgs = { "31", "8" };
+            Validator.Validate(actualArgs);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(FormatException), "Format exception(user input string) wasn't thrown")]
         public void ThrowingExceptionCantParse()
         {
-            try
-            {
-                string[] args = { "string", "8" };
-                Validator.Validate(args);
-            }
-            catch (FormatException ae)
-            {
-                Assert.AreEqual("Can't parse rows or colomns", ae.Message);
-            }
+            string[] actualArgs = { "string", "8" };
+            Validator.Validate(actualArgs);
         }
 
         [TestMethod]
-        public void ThrowingExceptionMoreThanTwoArgs()
+        [ExpectedException(typeof(FormatException), "Format exception(user input more than 2 arguments) wasn't thrown")]
+        public void ThrowingExceptionMoreThanTwoactualArgs()
         {
-            try
-            {
-                string[] args = { "8", "8", "8" };
-                Validator.Validate(args);
-            }
-            catch (FormatException ae)
-            {
-                Assert.AreEqual("Unsuccessful format. You must write only two arguments!", ae.Message);
-            }
-        }      
+            string[] actualArgs = { "8", "8", "8" };
+            Validator.Validate(actualArgs);          
+        }
+
+        #endregion
     }
 }

@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 
 namespace Chess
 {
     public class Board
     {
+        private static Logger _log = LogManager.GetCurrentClassLogger();
+
         #region Prop
 
         public Cell[,] CellsTable { get; set; }
@@ -31,7 +34,7 @@ namespace Chess
                     CellsTable[i, j] = new Cell(i + 1, j + 1);
                 }
             }
-
+            _log.Trace($"The board was building. Board with {CellsTable.Length} cells.");
         }
 
         #endregion
