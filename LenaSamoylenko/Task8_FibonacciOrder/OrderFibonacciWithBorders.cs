@@ -19,20 +19,15 @@ namespace Task8_FibonacciOrder
 
         private static readonly double _sqrt = Math.Sqrt(5);
         private static readonly double _fi = (1 + _sqrt) / 2;
-        private IExeptionForFirstDemo toRecorgnizeExceptionType;
-        private readonly ILogger<OrderFibonacciWithBorders> _logger;
-        private IServiceProvider _provider = null;
+
         #endregion
 
         #region Constructors
 
-        public OrderFibonacciWithBorders(IServiceProvider provider, ILogger<OrderFibonacciWithBorders> logger)
+        public OrderFibonacciWithBorders(IServiceProvider provider, ILogger<Order> logger) : base(provider, logger)
         {
-            _provider = provider;
-            _logger = logger;
 
             SetTaskNumber((int)TaskNumber.Task8);
-            toRecorgnizeExceptionType = new ExceptionsForAllAplication((int)TaskNumber.Task8);
         }
 
         #endregion
@@ -44,16 +39,24 @@ namespace Task8_FibonacciOrder
             using (_provider as IDisposable)
             {
                 List<int> collection = new List<int>();
-                //var fibonacciOrder = _provider.GetRequiredService<OrderFibonacciWithBorders>();
+                _logger.LogDebug(String.Format("{0} was started", System.Reflection.MethodBase.GetCurrentMethod().Name));
 
-                for (int delta = range.LowerBorder; delta <= range.UpperBorder; delta++)
+                try
                 {
-                    int _nextNumber = 0;
+                    for (int delta = range.LowerBorder; delta <= range.UpperBorder; delta++)
+                    {
+                        int _nextNumber = 0;
 
-                    _nextNumber = OrderFibonacciWithBorders.FindFibonacciNumber(delta);
+                        _nextNumber = OrderFibonacciWithBorders.FindFibonacciNumber(delta);
 
-                    collection.Add(_nextNumber);
+                        collection.Add(_nextNumber);
+                    }
                 }
+                catch (Exception exception)
+                {
+                    _exceptions.GetException(exception);
+                }
+
 
                 return collection;
             }

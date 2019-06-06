@@ -6,10 +6,6 @@ using System.Collections.Generic;
 
 namespace TestForTasks
 {
-    partial class Task8
-    {
-    }
-
     [TestFixture]
     class OrderFibonacciWithBordersClassTesting
     {

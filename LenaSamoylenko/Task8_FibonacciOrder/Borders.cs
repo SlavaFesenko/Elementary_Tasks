@@ -30,7 +30,7 @@ namespace Task8_FibonacciOrder
         {
             int _b1 = 0;
             int _b2 = 0;
-            (_b1, _b2)= base.FindLowAndUpBorder(border1, border2);
+            (_b1, _b2) = base.FindLowAndUpBorder(border1, border2);
 
             return (GetLowerBorderWithConditionals(_b1), GetUpperBoarderConditionals(_b2));
         }
@@ -48,8 +48,7 @@ namespace Task8_FibonacciOrder
             }
             catch (Exception exception)
             {
-                Exception expFinal = _exeptions.GetException(exception);
-                _logger.LogError(expFinal, "Error in {0} method", System.Reflection.MethodBase.GetCurrentMethod().Name);
+                _exeptions.GetException(exception);
             }
 
 
@@ -70,8 +69,7 @@ namespace Task8_FibonacciOrder
             }
             catch (Exception exception)
             {
-                Exception expFinal = _exeptions.GetException(exception);
-                _logger.LogError(expFinal, "Error in {0} method", System.Reflection.MethodBase.GetCurrentMethod().Name);
+                _exeptions.GetException(exception);
             }
 
 
@@ -90,8 +88,7 @@ namespace Task8_FibonacciOrder
             }
             catch (Exception exception)
             {
-                Exception expFinal = _exeptions.GetException(exception);
-                _logger.LogError(expFinal, "Error in {0} method", System.Reflection.MethodBase.GetCurrentMethod().Name);
+                _exeptions.GetException(exception);
             }
 
             return numberOf;

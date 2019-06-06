@@ -40,7 +40,7 @@ namespace Task4_ParserForFiles
 
             _taskNumber = (int)TaskNumber.Task4;
 
-            _exeptions = new ExceptionsForAllAplication(_taskNumber);
+            _exeptions = new ExceptionsForAllAplication(_taskNumber, _logger);
         }
 
         #endregion
@@ -54,12 +54,14 @@ namespace Task4_ParserForFiles
         public int TextSize { get => _textSize; protected set => _textSize = value; }
         public string Text { get => _text; protected set => _text = value; }
         internal List<int> ChangedParts { get => _changedParts; }
-        internal Encoding CurrentEncoding { get => _currentEncoding;}
+        internal Encoding CurrentEncoding { get => _currentEncoding; }
         #endregion
 
         #region Methods
         public void GetText(string textPath)
         {
+            _logger.LogDebug(System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             bool isTextReadable = false;
             try
             {
@@ -72,13 +74,11 @@ namespace Task4_ParserForFiles
             }
             catch (Exception exception)
             {
-                Exception exceptionFinal = _exeptions.GetException(exception);
-                _logger.LogError(exceptionFinal, "Stopped program because of exception in method {0}",
-                                                    System.Reflection.MethodBase.GetCurrentMethod().Name);
+                _exeptions.GetException(exception);
             }
         }
 
-        public virtual void NewFileWithNewRows(List<int> forChangeParts, string oldRow, string pathNewFile, string newRow = null)
+        public virtual void NewFileWithNewRows(List<int> forChangeParts, string oldRow, string pathNewFile, string newRow)
         { }
 
         public abstract bool CountOfRowInText(string oldRow, out int count);

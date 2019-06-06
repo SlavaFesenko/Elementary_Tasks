@@ -2,6 +2,5 @@
 
 public interface IExeptionForFirstDemo
 {
-    Exception getLastException { get; }
-    Exception GetException(Exception exceptionFromTask);
+    void GetException(Exception exceptionFromTask);
 }

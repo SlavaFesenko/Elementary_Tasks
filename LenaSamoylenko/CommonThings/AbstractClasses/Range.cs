@@ -47,11 +47,11 @@ namespace CommonThings.AbstractClasses
             return borders;
         }
 
-        public virtual (int, int) SetValue(int border1, int border2, IExeptionForFirstDemo exceptions)
+        public virtual (int, int) SetValue(int border1, int border2, int appNumb)
         {
             (int, int) borders = (0, 0);
 
-            _exeptions = exceptions;
+            _exeptions = new ExceptionsForAllAplication(appNumb, _logger);
             borders=FindLowAndUpBorder(border1, border2);
 
             return borders;

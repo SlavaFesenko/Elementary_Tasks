@@ -1,3 +1,3 @@
 ﻿This is an application help to you find Fibonacci numbers with ranges.
 You could put argumets from console or array of args when programm started.
-The count of agruments should be two, every argument must be positive integer type.
+The count of agruments should be two, every argument must be positive integer type from 0 to 2147483647.

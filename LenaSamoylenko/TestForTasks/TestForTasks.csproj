@@ -19,8 +19,4 @@
     <ProjectReference Include="..\Task8_FibonacciOrder\Task8_FibonacciOrder.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Task4\" />
-  </ItemGroup>
-
 </Project>

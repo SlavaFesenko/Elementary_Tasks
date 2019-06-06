@@ -129,10 +129,7 @@ namespace Task4_ParserForFiles
             }
             catch (Exception exception)
             {
-                Exception exceptionFinal = _exeptions.GetException(exception);
-                _logger.LogError(exceptionFinal, "Error in method{0}\nmessage:{1}",
-                                    System.Reflection.MethodBase.GetCurrentMethod().Name,
-                                    exceptionFinal.Message);
+                _exeptions.GetException(exception);
             }
         }
 
@@ -192,10 +189,7 @@ namespace Task4_ParserForFiles
 
                 catch (Exception exception)
                 {
-                    Exception exceptionFinal = _exeptions.GetException(exception);
-                    _logger.LogError(exceptionFinal, "Error in method{0}\nmessage:{1}",
-                                        System.Reflection.MethodBase.GetCurrentMethod().Name,
-                                        exceptionFinal.Message);
+                    _exeptions.GetException(exception);
                 }
             }
         }

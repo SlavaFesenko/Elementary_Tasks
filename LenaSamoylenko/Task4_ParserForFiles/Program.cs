@@ -12,10 +12,6 @@ namespace Task4_ParserForFiles
             //get calculation`s result and print message
             currentUI.CalculateOK();
             
-            //get results and print it
-            //_data = currentUI.PrintIntoConsole();
-            //Console.WriteLine(_data);
-
             Console.ReadKey();
         }
     }

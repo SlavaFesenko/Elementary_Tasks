@@ -27,12 +27,14 @@ namespace CommonThings
         public static bool CheckCountAndTypeArgs(string[] args, ref int[] borders)
         {
             bool result = false;
-            
+
             for (int number = 0; number < args.Length; number++)
             {
-                if (Int32.TryParse(args[number], out borders[number]) == true)
+                bool afterParsing = Int32.TryParse(args[number], out borders[number]);
+
+                if (afterParsing)
                 {
-                    if (borders[number] > 0)
+                    if (borders[number] >=  0)
                     {
                         result = true;
                     }
@@ -136,9 +138,9 @@ namespace CommonThings
         public static bool IsFileExist(string path)
         {
             bool result;
-          
+
             result = File.Exists(path);
-                        
+
             return result;
         }
 

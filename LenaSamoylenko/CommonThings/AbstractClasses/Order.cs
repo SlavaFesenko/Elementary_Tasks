@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using CommonThings.AbstractClasses;
+using Microsoft.Extensions.Logging;
 
 namespace CommonThings.Interfaces
 {
@@ -11,7 +12,9 @@ namespace CommonThings.Interfaces
         #region Fields
 
         int _taskNumber=0;
-        
+        protected IExeptionForFirstDemo _exceptions = null;
+        protected readonly ILogger<Order> _logger;
+        protected IServiceProvider _provider = null;
         #endregion
 
         #region Indexer
@@ -22,6 +25,13 @@ namespace CommonThings.Interfaces
         //}
 
         #endregion
+
+        public Order(IServiceProvider provider, ILogger<Order> logger)
+        {
+            _provider = provider;
+            _logger = logger;
+            _exceptions = new ExceptionsForAllAplication((int)TaskNumber.Task8, logger);
+        }
 
         #region Methods
 
@@ -47,9 +57,9 @@ namespace CommonThings.Interfaces
                 lenght = orderInString.Length;
                 result = orderInString.ToString(0, lenght - 2);
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                //Add to log file
+                _exceptions.GetException(exception);
             }
 
             return result;

@@ -112,8 +112,7 @@ namespace Task4_ParserForFiles
                 }
                 catch (Exception exception)
                 {
-                    Exception exceptionFinal = _exeptions.GetException(exception);
-                    _logger.LogError(exceptionFinal, "Error in class{0}", System.Reflection.MethodBase.GetCurrentMethod().Name);
+                    _exeptions.GetException(exception);
                 }
             }
         }

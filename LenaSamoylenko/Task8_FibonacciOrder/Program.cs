@@ -20,8 +20,6 @@ namespace Task8_FibonacciOrder
             _data = currentUI.PrintIntoConsole();
             currentUI.PrintMessage(_data);
 
-            currentUI.Exit();
-
             Console.ReadKey();
         }
     }

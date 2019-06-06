@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using NLog;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -7,31 +9,32 @@ namespace CommonThings
 {
     public sealed class InstructionReader
     {
-        public static string GiveInstruction()
+        private static Logger _logger = null;
+
+        public static string GiveInstruction(string filePath, Logger logger)
         {
             string instruction = null;
+            _logger = logger;
 
-            InstructionReader.ReadFromFile(out instruction);
+            InstructionReader.ReadFromFile(filePath, out instruction);
 
             return instruction;
         }
-        public static bool ReadFromFile(out string instruction)
+
+        public static bool ReadFromFile(string filePath, out string instruction)
         {
             instruction = null;
             bool operationIsSucces = false;
-            string link = null;
-
+         
             try
             {
-                link = GetFilePath();
-                StreamReader reader = new StreamReader(link);
+                StreamReader reader = new StreamReader(filePath);
                 instruction = reader.ReadToEnd();
                 operationIsSucces = true;
             }
             catch (Exception exeption)
             {
-                //add to log file
-
+                _logger.Error(exeption);
             }
 
             return operationIsSucces;
@@ -51,7 +54,7 @@ namespace CommonThings
             }
             catch (Exception exeption)
             {
-                //add to log file
+                _logger.Error(exeption);
 
             }
 
@@ -66,7 +69,7 @@ namespace CommonThings
 
             try
             {
-                using (StreamReader reader = new StreamReader(link)) 
+                using (StreamReader reader = new StreamReader(link))
                 {
                     text = reader.ReadToEnd();
                     operationIsSucces = true;
@@ -76,14 +79,14 @@ namespace CommonThings
             }
             catch (Exception exeption)
             {
-                //add to log file
+                _logger.Error(exeption);
 
             }
 
             return operationIsSucces;
         }
 
-        private static string GetFilePath()
+        public static string GetFilePath()
         {
             string _path = null;
             var _info = new DirectoryInfo(Directory.GetCurrentDirectory());

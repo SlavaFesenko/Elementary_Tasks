@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using CommonThings;
+﻿using CommonThings;
 using Microsoft.Extensions.DependencyInjection;
 using NLog;
+using System;
+using System.Collections.Generic;
 
 namespace Task4_ParserForFiles
 {
@@ -18,7 +17,6 @@ namespace Task4_ParserForFiles
         private FounderRowInText _founder = null;
         private Logger _logger = null;
         private IServiceProvider _servicesProvider = null;
-        //private IServiceProvider _provFounder = null;
         protected IExeptionForFirstDemo _exeptions = null;
         private List<string> _messages = new List<string>
         {
@@ -32,11 +30,11 @@ namespace Task4_ParserForFiles
 
         private UI()
         {
+            string _instrLink = InstructionReader.GetFilePath();
+
             _logger = LogManager.GetCurrentClassLogger();
             _taskNumber = (int)TaskNumber.Task4;
-            _instruction = InstructionReader.GiveInstruction();
-
-            _exeptions = new ExceptionsForAllAplication(_taskNumber);
+            _instruction = InstructionReader.GiveInstruction(_instrLink, _logger);
 
             Console.WriteLine("{0} Hello in Task{1} {0}", new string('*', 10), _taskNumber);
         }
@@ -45,66 +43,62 @@ namespace Task4_ParserForFiles
         {
             bool _isContinue = true;
             bool _isTextFileExist = false;
+            _args = new string[(int)CountOfArgs.FourthTaskSecond];
 
             Console.WriteLine(_instruction);
 
             while (_isContinue)
             {
                 int _lenght = args.Length;
-                if (_lenght!=0)
+                if (_lenght != 0)
                 {
+                    _args[0] = args[0];
+                    _args[1] = args[1];
                     _isTextFileExist = Validator.IsFileExist(args[0]);
                 }
-                
+
                 using (_servicesProvider as IDisposable)
                 {
-                    if (_lenght == (int)CountOfArgs.FourthTaskFirst
-                                    || (_lenght == (int)CountOfArgs.FourthTaskSecond && args[2] == ""))
+                    if (_lenght != 0 && _isTextFileExist == true)
                     {
-                        if (_isTextFileExist == true)
+                        if (_lenght == (int)CountOfArgs.FourthTaskFirst
+                            || (_lenght == (int)CountOfArgs.FourthTaskSecond && args[2] == ""))
                         {
                             _servicesProvider = Logger<CounterRowInText>.HelperForLogging();
 
                             _founder = _servicesProvider.GetRequiredService<CounterRowInText>();
                             _founder.GetText(args[0]);
+                            _isContinue = false;
                         }
-
-                        _isContinue = false;
-                    }
-                    else if (_lenght == (int)CountOfArgs.FourthTaskSecond)
-                    {
-                        if (_isTextFileExist == true)
+                        else if (_lenght == (int)CountOfArgs.FourthTaskSecond)
                         {
+                            _args[2] = args[2];
+
                             _servicesProvider = Logger<CnangerRowInText>.HelperForLogging();
 
                             _founder = _servicesProvider.GetRequiredService<CnangerRowInText>();
                             _founder.GetText(args[0]);
+                            _isContinue = false;
                         }
-
-                        _isContinue = false;
                     }
                     else
                     {
-                        string message = "Sorry, there are some error with count of agrs.\nPlease put agrument again";
+                        string message = "Sorry, there are some error with count or type of agrs.\nPlease put agrument again";
                         Console.WriteLine(message);
-
-                        if (_lenght != (int)CountOfArgs.FourthTaskSecond)
-                        {
-                            args = new string[(int)CountOfArgs.FourthTaskSecond];
-                        }
 
                         for (int i = 0; i < (int)CountOfArgs.FourthTaskSecond; i++)
                         {
-                            args[i] = Parser.GetArgument(_messages[i]);
+                            _args[i] = Parser.GetArgument(_messages[i]);
                         }
+                        args = _args;
                     }
                 }
             }
 
-            _args = args;//not so sure
+            string mesForUser = String.Format("You choose TextPath:\t{0}\nRow for find:\t{1}\nNew row in text:\t{2}",
+                _args[0], _args[1], _args[2]);
+            PrintToUser(mesForUser);
         }
-
-
 
         #endregion
 
@@ -114,20 +108,12 @@ namespace Task4_ParserForFiles
         {
             string _message = null;
             int _count = 0;
-            try
-            {
-                string newFilePath = _founder.GetNewFilePath(_args[0]);
-                _founder.CountOfRowInText(_args[1], out _count);
 
-                _founder.NewFileWithNewRows(_founder.ChangedParts, _args[1], newFilePath, newRow: _args[2]);
-            }
-            catch (Exception exception)
-            {
-                Exception exceptionFinal = _exeptions.GetException(exception);
-                _logger.Error(exceptionFinal, "Error in class{0}", System.Reflection.MethodBase.GetCurrentMethod().Name);
-            }
+            string newFilePath = _founder.GetNewFilePath(_args[0]);
+            _founder.CountOfRowInText(_args[1], out _count);
 
-            //_count = _founder.GetRowCountInText(_args[1]);
+            _founder.NewFileWithNewRows(_founder.ChangedParts, _args[1], newFilePath, newRow: _args[2]);
+
             if (_count != 0)
             {
                 _message = $"Congratulations, there are {_count} times you could see row in the text from file {_args[0]}";

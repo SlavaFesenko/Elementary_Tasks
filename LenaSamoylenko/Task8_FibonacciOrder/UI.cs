@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CommonThings;
+﻿using CommonThings;
 using CommonThings.AbstractClasses;
+using CommonThings.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using NLog;
+using System;
+using System.Collections.Generic;
 
 namespace Task8_FibonacciOrder
 {
@@ -20,10 +19,9 @@ namespace Task8_FibonacciOrder
 
         private IEnumerable<int> _collection = null;
         private Range _range = null;
-        private OrderFibonacciWithBorders _order = null;
+        private Order _order = null;
         private Logger _logger = null;
         private IServiceProvider _provider = null;
-        private IExeptionForFirstDemo exeptions = null;
 
         #endregion
 
@@ -31,10 +29,11 @@ namespace Task8_FibonacciOrder
 
         private UI()
         {
+            string _instrLink = InstructionReader.GetFilePath();
+
             _logger = LogManager.GetCurrentClassLogger();
             _taskNumber = (int)TaskNumber.Task8;
-            _instruction = InstructionReader.GiveInstruction();
-            exeptions = new ExceptionsForAllAplication(_taskNumber);
+            _instruction = InstructionReader.GiveInstruction(_instrLink, _logger);
 
             Console.WriteLine("{0} Hello in Task{1} {0}", new string('*', 10), _taskNumber);
         }
@@ -70,15 +69,15 @@ namespace Task8_FibonacciOrder
         public override string CalculateOK()
         {
             string _message = null;
-            //_logger.LogDebug()
-
+            
             try
             {
                 using (_provider as IDisposable)
                 {
                     _provider = CommonThings.Logger<Borders>.HelperForLogging();
+
                     _range = _provider.GetRequiredService<Borders>();//new Borders();
-                    (_range.LowerBorder, _range.UpperBorder) = _range.SetValue(_borders[0], _borders[1], exeptions);
+                    (_range.LowerBorder, _range.UpperBorder) = _range.SetValue(_borders[0], _borders[1], _taskNumber);
                 }
 
                 using (_provider as IDisposable)
@@ -95,10 +94,8 @@ namespace Task8_FibonacciOrder
             catch (Exception exception)
             {
                 //add to log file
-                Exception exceptionFinal = exeptions.GetException(exception);
-
-                _message = "Some problems\n";
-                _logger.Error(exceptionFinal, "Stopped program because of exception");
+                _logger.Error(exception, "Stopped program because of exception");
+                throw;
             }
 
             return _message;

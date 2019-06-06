@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.Extensions.Logging;
+using System;
+
 
 namespace CommonThings
 {
@@ -9,61 +9,56 @@ namespace CommonThings
         #region Fields
 
         private int aplicationNumber;
-        private Exception exception;
+        private Exception _exception;
+        private ILogger _logger;
 
         #endregion
 
         #region Constructors
 
-        public ExceptionsForAllAplication(int aplicationNumber)
+        public ExceptionsForAllAplication(int aplicationNumber, ILogger logger)
         {
             this.aplicationNumber = aplicationNumber;
+            _logger = logger;
         }
-
-        #endregion
-
-        #region Properties
-
-        public Exception getLastException { get { return this.exception; } }
 
         #endregion
 
         #region Methods
 
-        public Exception GetException(Exception exceptionFromTask)
+        public void GetException(Exception exceptionFromTask)
         {
+            _exception = exceptionFromTask;
 
             switch (aplicationNumber)
             {
                 case 1:
-                    exception = Task1Exception(exceptionFromTask);
+                    _exception = Task1Exception(exceptionFromTask);
                     break;
                 case 2:
-                    exception = Task2Exception(exceptionFromTask);
+                    _exception = Task2Exception(exceptionFromTask);
                     break;
                 case 3:
-                    exception = Task3Exception(exceptionFromTask);
+                    _exception = Task3Exception(exceptionFromTask);
                     break;
                 case 4:
-                    exception = Task4Exception(exceptionFromTask);
+                    _exception = Task4Exception(exceptionFromTask);
                     break;
                 case 5:
-                    exception = Task5Exception(exceptionFromTask);
+                    _exception = Task5Exception(exceptionFromTask);
                     break;
                 case 6:
-                    exception = Task6Exception(exceptionFromTask);
+                    _exception = Task6Exception(exceptionFromTask);
                     break;
                 case 7:
-                    exception = Task7Exception(exceptionFromTask);
+                    _exception = Task7Exception(exceptionFromTask);
                     break;
                 case 8:
-                    exception = Task8Exception(exceptionFromTask);
+                    _exception = Task8Exception(exceptionFromTask);
                     break;
                 default:
                     break;
             }
-
-            return exception;
         }
 
         #region Task1
@@ -94,15 +89,39 @@ namespace CommonThings
 
             if (exception is System.ArgumentOutOfRangeException)
             {
-
+                _logger.LogError(exception, "throw System.ArgumentOutOfRangeException");
             }
             else if (exception is System.InvalidOperationException)
             {
-                finalException = exception;
+                _logger.LogError(exception, "throw System.InvalidOperationException");
+            }
+            else if (exception is System.ArgumentNullException)
+            {
+                _logger.LogError(exception, "throw System.ArgumentNullException");
+            }
+            else if (exception is System.Security.SecurityException)
+            {
+                _logger.LogError(exception, "throw System.Security.SecurityException");
+            }
+            else if (exception is System.IO.FileNotFoundException)
+            {
+                _logger.LogError(exception, "throw System.IO.FileNotFoundException");
+            }
+            else if (exception is System.ArgumentException)
+            {
+                _logger.LogError(exception, "throw System.ArgumentException");
+            }
+            else if (exception is System.ObjectDisposedException)
+            {
+                _logger.LogError(exception, "throw System.ObjectDisposedException");
+            }
+            else if (exception is System.InvalidOperationException)
+            {
+                _logger.LogError(exception, "throw System.InvalidOperationException");
             }
             else
             {
-                finalException = exception;
+                _logger.LogError(exception, "Just exception");
             }
             return finalException;
         }
@@ -134,6 +153,14 @@ namespace CommonThings
         {
             Exception task1Exception = null;
 
+            if (exception is System.ArgumentOutOfRangeException)
+            {
+                _logger.LogError(exception, "throw System.ArgumentOutOfRangeException");
+            }
+            else if (exception is System.InvalidOperationException)
+            {
+                _logger.LogError(exception, "throw System.InvalidOperationException");
+            }
 
             return task1Exception;
         }
