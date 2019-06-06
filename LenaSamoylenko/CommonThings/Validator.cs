@@ -133,18 +133,12 @@ namespace CommonThings
 
         #region Task4
 
-        public static bool IsFileExist(string path, out string message)
+        public static bool IsFileExist(string path)
         {
             bool result;
-            message = null;
-
+          
             result = File.Exists(path);
-
-            if (result == false)
-            {
-                message = "File, which you put, doesn`t exist";
-            }
-
+                        
             return result;
         }
 

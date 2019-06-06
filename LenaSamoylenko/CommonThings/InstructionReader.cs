@@ -66,11 +66,13 @@ namespace CommonThings
 
             try
             {
-                StreamReader reader = new StreamReader(link);
-                text = reader.ReadToEnd();
-                operationIsSucces = true;
-                encoding = reader.CurrentEncoding;
-                reader.Close();
+                using (StreamReader reader = new StreamReader(link)) 
+                {
+                    text = reader.ReadToEnd();
+                    operationIsSucces = true;
+                    encoding = reader.CurrentEncoding;
+                    reader.Close();
+                }
             }
             catch (Exception exeption)
             {

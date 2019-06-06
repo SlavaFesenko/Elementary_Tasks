@@ -3,10 +3,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using CommonThings;
+using Microsoft.Extensions.Logging;
 
 namespace Task4_ParserForFiles
 {
-    public class CounterRowInText : FounderRowInText, GetCount
+    public class CounterRowInText : FounderRowInText
     {
         #region Fields
         private int _rowInText;
@@ -16,31 +17,16 @@ namespace Task4_ParserForFiles
 
         #region Constructors
 
-        public CounterRowInText(string textPath) : base(textPath)
-        {
-            bool isTextReadable = false;
-            try
-            {
-                isTextReadable = InstructionReader.IsCouldGetText(textPath, out string text);
-                if (isTextReadable == true)
-                {
-                    Text = text;
-                    TextSize = text.Length;
-                }
-            }
-            catch (Exception exception)
-            {
-
-                throw;
-            }
-
-        }
+        public CounterRowInText(IServiceProvider provider, ILogger<FounderRowInText> logger) : base(provider, logger)
+        { }
 
         #endregion
 
 
-        public int GetRowCountInText(string row)
+        public override bool CountOfRowInText(string row, out int count)
         {
+            bool outText = false;
+
             _rowInText = 0;
             RowSize = row.Length;
             _partSize = RowSize * 2;
@@ -49,16 +35,23 @@ namespace Task4_ParserForFiles
 
             CountOfThread = (int)Math.Floor((double)TextSize / _partSize);
 
-            Console.WriteLine(DateTime.Now);
-
             Parallel.For(0, CountOfThread, (int textPartNumber) =>
             {
                 GetCountofRowInPart(textPartNumber);
-                //Console.WriteLine(Thread.GetCurrentProcessorId());
             });
-            Console.WriteLine(DateTime.Now);
 
-            return _rowInText;
+            count = _rowInText;
+
+            if (count != 0)
+            {
+                outText = true;
+            }
+            return outText;
+        }
+
+        public override string GetNewFilePath(string textPath)
+        {
+            return null;
         }
 
         private void GetCountofRowInPart(int textPartNumber)
@@ -119,7 +112,8 @@ namespace Task4_ParserForFiles
                 }
                 catch (Exception exception)
                 {
-                    //add to log
+                    Exception exceptionFinal = _exeptions.GetException(exception);
+                    _logger.LogError(exceptionFinal, "Error in class{0}", System.Reflection.MethodBase.GetCurrentMethod().Name);
                 }
             }
         }

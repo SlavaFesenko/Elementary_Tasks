@@ -28,8 +28,7 @@ namespace CommonThings
 
         #endregion
 
-
-        #region PublicMethods
+        #region Methods
 
         public Exception GetException(Exception exceptionFromTask)
         {
@@ -42,6 +41,24 @@ namespace CommonThings
                 case 2:
                     exception = Task2Exception(exceptionFromTask);
                     break;
+                case 3:
+                    exception = Task3Exception(exceptionFromTask);
+                    break;
+                case 4:
+                    exception = Task4Exception(exceptionFromTask);
+                    break;
+                case 5:
+                    exception = Task5Exception(exceptionFromTask);
+                    break;
+                case 6:
+                    exception = Task6Exception(exceptionFromTask);
+                    break;
+                case 7:
+                    exception = Task7Exception(exceptionFromTask);
+                    break;
+                case 8:
+                    exception = Task8Exception(exceptionFromTask);
+                    break;
                 default:
                     break;
             }
@@ -49,26 +66,80 @@ namespace CommonThings
             return exception;
         }
 
+        #region Task1
+        private Exception Task1Exception(Exception exceptionFromTask)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
-        #region PrivateMethods
+        #region Task2
+        private Exception Task2Exception(Exception exceptionFromTask)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
 
-        private Exception Task1Exception(Exception exception)
+        #region Task3
+        private Exception Task3Exception(Exception exceptionFromTask)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        #region Task4
+        private Exception Task4Exception(Exception exception)
+        {
+            Exception finalException = null;
+
+            if (exception is System.ArgumentOutOfRangeException)
+            {
+
+            }
+            else if (exception is System.InvalidOperationException)
+            {
+                finalException = exception;
+            }
+            else
+            {
+                finalException = exception;
+            }
+            return finalException;
+        }
+        #endregion
+
+        #region Task5
+        private Exception Task5Exception(Exception exceptionFromTask)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        #region Task6
+        private Exception Task6Exception(Exception exceptionFromTask)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        #region Task7
+        private Exception Task7Exception(Exception exceptionFromTask)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        #region Task8
+        private Exception Task8Exception(Exception exception)
         {
             Exception task1Exception = null;
 
-            return task1Exception;
-        }
-
-        private Exception Task2Exception(Exception exception)
-        {
-            Exception task1Exception = null;
 
             return task1Exception;
         }
-
         #endregion
 
+        #endregion
 
     }
 }

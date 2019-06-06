@@ -5,63 +5,41 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using CommonThings;
-using CommonThings;
+using Microsoft.Extensions.Logging;
 
 namespace Task4_ParserForFiles
 {
-    public class CnangerRowInText : FounderRowInText, ChangePart
+    public class CnangerRowInText : FounderRowInText
     {
         #region Fields
-        private string _newRow;
-        private readonly Encoding currentEncoding = null;
         private int _rowInText;
         private int _partSize;
-        private int _currentPart;
-        private List<int> changedParts = null;
+
         #endregion
 
         #region Constructors
 
-        internal CnangerRowInText(string textPath) : base(textPath)
+        public CnangerRowInText(IServiceProvider provider, ILogger<FounderRowInText> logger) : base(provider, logger)
         {
-            bool isTextReadable = false;
-            try
-            {
-                isTextReadable = InstructionReader.IsCouldGetText(textPath, out string _text, out currentEncoding);
-                if (isTextReadable == true)
-                {
-                    Text = _text;
-                    TextSize = _text.Length;
-                }
-
-            }
-            catch (Exception exception)
-            {
-
-                throw;
-            }
+            _servicesProvider = provider;
+            _logger = logger;
         }
-
-        #endregion
-
-        #region Properties
-
-        public string NewRow { get => _newRow; private set => _newRow = value; }
-        public List<int> ChangedParts { get => changedParts; }
 
         #endregion
 
         #region Methods
 
-        public bool CountOfRow(string oldRow, string newRow, out int count)
+        #region PublicMethods
+
+        public override bool CountOfRowInText(string oldRow, out int count)
         {
             _rowInText = 0;
             Row = oldRow;
             RowSize = oldRow.Length;
             _partSize = RowSize * 2;
-            NewRow = newRow;
-            changedParts = new List<int>();
+
+            _changedParts = new List<int>();
+            ChangedParts.Add(TextSize);
 
             int accuracy = (RowSize > 1000) ? (16) : ((RowSize > 100) ? 8 : 4);
 
@@ -71,24 +49,16 @@ namespace Task4_ParserForFiles
 
             CountOfThread = (int)Math.Floor((double)TextSize / _partSize);
 
-            Console.WriteLine(DateTime.Now);
-            //FileStream outStream = new FileStream(filePath, FileMode.OpenOrCreate);
-
-            _rowInText = 0;
-            changedParts.Add(TextSize);
-
-            Console.WriteLine(DateTime.Now);
-
+            //to find 
             var result = Parallel.For(0, CountOfThread, (int textPartNumber) =>
             {
-                GetPointWhereChangeText(textPartNumber, rowPart1, rowPart2, accuracy, ref changedParts);
-
-                //Console.WriteLine(Thread.GetCurrentProcessorId());
+                GetPointWhereChangeText(textPartNumber, rowPart1, rowPart2, accuracy, ref _changedParts);
             });
-            _rowInText = changedParts.Count - 1;
-            Console.WriteLine(DateTime.Now);
+
+            _rowInText = ChangedParts.Count - 1;
 
             count = _rowInText;
+
             if (count != 0)
             {
                 outText = true;
@@ -96,17 +66,39 @@ namespace Task4_ParserForFiles
             return outText;
         }
 
-        public async void NewFileWithNewRows(List<int> forChangeParts, string newRow, string oldRow, string pathNewFile)
+        public override void NewFileWithNewRows(List<int> forChangeParts, string oldRow, string pathNewFilestring, string newRow)
+        {
+            NewFile(forChangeParts, oldRow, pathNewFilestring, newRow);
+        }
+
+        public override string GetNewFilePath(string textPath)
+        {
+            string outPath = null;
+            _logger.LogInformation(20, "Doing hard work! {System.Reflection.MethodBase.GetCurrentMethod().Name}");
+
+            char separartor = Path.DirectorySeparatorChar;
+            outPath = textPath.Remove(textPath.LastIndexOf(separartor));
+            string fileName = String.Format(@"{0}.txt", System.Guid.NewGuid());
+            outPath = String.Concat(outPath, separartor, fileName);
+
+            return outPath;
+        }
+
+        #endregion
+
+
+        private async void NewFile(List<int> forChangeParts, string oldRow, string pathNewFile, string newRow)
         {
             //isSucces = false;
             int _listCount = forChangeParts.Count - 1;
 
             forChangeParts.Sort();
+
             try
             {
                 using (FileStream stream = new FileStream(pathNewFile, FileMode.OpenOrCreate))
                 {
-                    StreamWriter writer = new StreamWriter(stream);
+                    StreamWriter writer = new StreamWriter(stream, base.CurrentEncoding);
 
                     string worker = null;
                     StringBuilder _forOut = new StringBuilder();
@@ -114,12 +106,14 @@ namespace Task4_ParserForFiles
                     for (int i = 0; i <= _listCount - 1; i++)
                     {
                         worker = Text;
-                        worker = worker.Remove((int)forChangeParts[i]);
 
-                        if (i != 0)
-                        {
-                            worker = worker.Replace(oldRow, newRow);
-                        }
+                        int firstRange = (forChangeParts[i + 1]);
+                        int secondRange = TextSize - firstRange;
+
+                        worker = worker.Remove(firstRange, secondRange);
+                        worker = worker.Remove(0, (int)(forChangeParts[i]));
+                        worker = worker.Replace(oldRow, newRow);
+
                         _forOut.Append(worker);
                     }
 
@@ -130,32 +124,28 @@ namespace Task4_ParserForFiles
                     await writer.WriteAsync(_forOut.ToString());
                     stream.Close();
 
-                    Console.WriteLine(_forOut.ToString().Contains(newRow));
-                    Console.WriteLine(DateTime.Now);
                     Console.WriteLine(pathNewFile);
                 }
             }
             catch (Exception exception)
             {
-
-                throw;
+                Exception exceptionFinal = _exeptions.GetException(exception);
+                _logger.LogError(exceptionFinal, "Error in method{0}\nmessage:{1}",
+                                    System.Reflection.MethodBase.GetCurrentMethod().Name,
+                                    exceptionFinal.Message);
             }
-
-
-            //return succesResult;
         }
 
-        public void GetPointWhereChangeText(int textPartNumber, string rowPart1, string rowPart2, int accuracy, ref List<int> list)
+        private void GetPointWhereChangeText(int textPartNumber, string rowPart1, string rowPart2, int accuracy, ref List<int> list)
         {
-            bool _isInText;
-            bool _isInTextInEnd = false;
-
-            int _range = textPartNumber * _partSize;
-
-            try
+            lock (this)
             {
-                lock (this)
+                bool _isInText;
+                bool _isInTextInEnd = false;
+
+                try
                 {
+                    int _range = textPartNumber * _partSize;
                     StringBuilder _builder = new StringBuilder(Text.Substring(_range, _partSize));
 
                     //StringWriter reader = new StringWriter()
@@ -173,11 +163,10 @@ namespace Task4_ParserForFiles
                     else if (_isInText == true)
                     {
                         //if we got only start of row
-                        _range = (textPartNumber + 1) * _partSize;
+                        var _rangeHelp = (textPartNumber + 1) * _partSize;
 
-                        _builder.Append(Text.Substring(_range, _partSize - accuracy));
+                        _builder.Append(Text.Substring(_rangeHelp, _partSize - accuracy));
                         _textPart = _builder.ToString();
-                        //_currentPart = textPartNumber;
 
                         list.AddToChangedList(_textPart, Row, _range);
                     }
@@ -185,41 +174,33 @@ namespace Task4_ParserForFiles
                     {
                         if (!ChangedParts.Contains(textPartNumber - 1))
                         {
-                            _range = (textPartNumber - 1) * _partSize + accuracy;
+                            var _rangeHelper = (textPartNumber - 1) * _partSize + accuracy;
                             _builder.Insert(0, Text.Substring((textPartNumber - 1) * _partSize + accuracy, _partSize - accuracy), 1);
                             _textPart = _builder.ToString();
 
-                            list.AddToChangedList(_textPart, Row, _range);
+                            bool _isIn = _textPart.Contains(Row);
+                            if (_isIn == true)
+                                list.AddToChangedList(_textPart, Row, _rangeHelper + _textPart.IndexOf(Row));
                         }
                     }
                     else
                     {
                         _isInText = false;
                     }
+
                 }
-                //operation with common variable
 
-
-
-            }
-            catch (Exception exception)
-            {
-                //add to log
+                catch (Exception exception)
+                {
+                    Exception exceptionFinal = _exeptions.GetException(exception);
+                    _logger.LogError(exceptionFinal, "Error in method{0}\nmessage:{1}",
+                                        System.Reflection.MethodBase.GetCurrentMethod().Name,
+                                        exceptionFinal.Message);
+                }
             }
         }
-
-        public string GetNewFilePath(string textPath)
-        {
-            string outPath = null;
-
-            char separartor = Path.DirectorySeparatorChar;
-            outPath = textPath.Remove(textPath.LastIndexOf(separartor));
-            string fileName = String.Format(@"{0}.txt", System.Guid.NewGuid());
-            outPath = String.Concat(outPath, separartor, fileName);
-
-            return outPath;
-        }
-
-        #endregion
     }
+
+    #endregion
 }
+

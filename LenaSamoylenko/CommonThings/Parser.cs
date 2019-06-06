@@ -51,6 +51,14 @@ namespace CommonThings
             return result;
         }
 
+        public static string GetArgument(string message)
+        {
+            Console.WriteLine(message);
+            string _argument = Console.ReadLine();
+
+            return _argument;
+        }
+
         #endregion
 
 

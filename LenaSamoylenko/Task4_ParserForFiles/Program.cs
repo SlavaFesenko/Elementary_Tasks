@@ -6,19 +6,12 @@ namespace Task4_ParserForFiles
     {
         static void Main(string[] args)
         {
-            string _message1 = null;
-            string _message2 = null;
-            string _data = null;
-
-
             //creating new UI 
-            UI currentUI = new UI(args, out _message1);
-            //Console.WriteLine(_message1);
+            UI currentUI = new UI(args);
 
             //get calculation`s result and print message
-            _message2 = currentUI.CalculateOK();
-            Console.WriteLine(_message2);
-
+            currentUI.CalculateOK();
+            
             //get results and print it
             //_data = currentUI.PrintIntoConsole();
             //Console.WriteLine(_data);
