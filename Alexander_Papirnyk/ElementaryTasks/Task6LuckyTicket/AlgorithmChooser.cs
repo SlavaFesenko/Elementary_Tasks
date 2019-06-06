@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace Task6LuckyTicket
 {
-    class Program
+    abstract class AlgorithmChooser
     {
-        static void Main(string[] args)
-        {
-            
-            Controller.Run(args);
-            Console.ReadKey();
-        }
+       public abstract bool IsTicketLucky(Ticket ticket);
     }
 }
