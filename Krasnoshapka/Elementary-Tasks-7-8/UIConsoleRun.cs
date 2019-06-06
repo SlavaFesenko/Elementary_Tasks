@@ -56,7 +56,7 @@ namespace Elementary_Tasks_7_8
 
         private static void Square(string[] args)
         {
-            int border=0;
+            int border = Validator.Parsed(args[0]);
 
             if (Int32.TryParse(args[0], out border))
             {

@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0CCD4BE1-4DBA-4373-A2AC-6B4BA9CB6719}</ProjectGuid>
+    <ProjectGuid>{D4F5B49C-7A1B-4F2F-8C75-94656E2AAB4D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Elementary_Tasks_7_8Test</RootNamespace>
-    <AssemblyName>Elementary-Tasks-7-8Test</AssemblyName>
+    <RootNamespace>UnitTestProject2</RootNamespace>
+    <AssemblyName>UnitTestProject2</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -49,16 +49,17 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestSquareSequence.cs" />
+    <Compile Include="UnitTest.cs" />
+    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Elementary-Tasks-7-8\Elementary-Tasks-7-8.csproj">
-      <Project>{1b9f52ce-cbb6-4b59-bd69-5f890efe8f51}</Project>
-      <Name>Elementary-Tasks-7-8</Name>
+    <ProjectReference Include="..\Elementary-Tasks-3\Elementary-Tasks-3.csproj">
+      <Project>{8310cf75-1b8b-4830-bacd-8d3b455a0fd8}</Project>
+      <Name>Elementary-Tasks-3</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

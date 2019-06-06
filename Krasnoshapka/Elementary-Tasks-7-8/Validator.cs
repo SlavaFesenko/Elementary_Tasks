@@ -10,12 +10,21 @@ namespace Elementary_Tasks_7_8
     {
         public static bool ValidFibonacci(int leftBorder, int rightBorder)
         {
-            bool result = false;
-            if ((leftBorder > 0 && rightBorder > 0) && (leftBorder < rightBorder))
+            if (leftBorder > 0 && rightBorder > 0)
             {
-                result = true;
+                if (leftBorder < rightBorder)
+                {
+                    return true;
+                }
+                else
+                {
+                    throw new ArgumentException("Left number must be smaller than right");
+                }
             }
-            return result;
+            else
+            {
+                throw new ArgumentException("Nambers must be natural");
+            }
         }
 
         public static bool ValidSquare(int rightBorder)
@@ -28,7 +37,33 @@ namespace Elementary_Tasks_7_8
             return result;
         }
 
-        
+        public static int Parsed(string value)
+        {
+            int number;
+
+            bool success = Int32.TryParse(value, out number);
+
+            if (success)
+            {
+                return number;
+            }
+            else
+            {
+                throw new FormatException("Please enter numbers");
+            }
+
+        }
+
+        public static void Parsed(string firstValue, string secondValue, ref int firstNumber, ref int secondNumber)
+        {
+            bool success = Int32.TryParse(firstValue, out firstNumber);
+            success &= Int32.TryParse(secondValue, out secondNumber);
+
+            if (!success)
+            {
+                throw new FormatException("Please enter numbers");
+            }
+        }
 
     }
 }

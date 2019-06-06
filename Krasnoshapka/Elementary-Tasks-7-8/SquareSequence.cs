@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Elementary_Tasks_7_8
 {
-   public class SquareSequence : Sequence
+    class SquareSequence : Sequence
     {
         private SquareSequence(int leftBorder, int rightBorder) : base(leftBorder, rightBorder) { }
 

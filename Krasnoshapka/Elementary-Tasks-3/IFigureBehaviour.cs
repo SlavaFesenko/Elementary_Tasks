@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Elementary_Tasks_3
 {
-     public interface IFigureBehaviour
+    interface IFigureBehaviour
     {
         float GetPerimeter();
         float GetSquare();
