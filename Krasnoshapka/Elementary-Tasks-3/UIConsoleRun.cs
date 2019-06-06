@@ -57,7 +57,7 @@ namespace Elementary_Tasks_3
                     else
                     {
                         Finish = true;
-                        Console.WriteLine(" Not enough parameters for building triangle!");
+                        Console.WriteLine("Argument Error: wrong number of arguments!");
                     }
 
                 } while (Finish);

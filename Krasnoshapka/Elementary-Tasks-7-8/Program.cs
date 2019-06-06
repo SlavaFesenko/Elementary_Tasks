@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 
 namespace Elementary_Tasks_7_8
 {
@@ -10,8 +11,10 @@ namespace Elementary_Tasks_7_8
     {
         static void Main(string[] args)
         {
+            Logger logger = LogManager.GetCurrentClassLogger();
             try
             {
+                logger.Trace("VSE KRUTO");
                 UIConsoleRun.BuildUI(args);
             }
             catch (ArgumentException ex)

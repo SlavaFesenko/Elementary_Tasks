@@ -1,8 +1,10 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace Elementary_Tasks_7_8
 {
@@ -10,6 +12,8 @@ namespace Elementary_Tasks_7_8
     {
         private const int SQUARE = 1;
         private const int FIBONACCI = 2;
+        static Logger logger = LogManager.GetCurrentClassLogger();
+
 
         public static void BuildUI(string[] args)
         {
@@ -39,7 +43,9 @@ namespace Elementary_Tasks_7_8
                 FibonacciSequence fibonacciSequence
                = FibonacciSequence.FibonacciInitialize(leftBorder, rightBorder);
 
-                Console.WriteLine("Fibonacci sequence:");
+                string result = "Fibonacci sequence:";
+                Console.WriteLine(result);
+                logger.Info(result);
 
                 foreach (int number in fibonacciSequence.GetSequence())
                 {

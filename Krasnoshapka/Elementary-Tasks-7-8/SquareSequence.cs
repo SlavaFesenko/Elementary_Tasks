@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 
 namespace Elementary_Tasks_7_8
 {
@@ -10,6 +11,7 @@ namespace Elementary_Tasks_7_8
     {
         private SquareSequence(int leftBorder, int rightBorder) : base(leftBorder, rightBorder) { }
 
+       
         public static SquareSequence SquareInitialize(int rightBorder)
         {
             SquareSequence sequence = null;
