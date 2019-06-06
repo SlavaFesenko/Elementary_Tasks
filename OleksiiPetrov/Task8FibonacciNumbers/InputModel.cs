@@ -8,8 +8,8 @@ namespace Task8FibonacciNumbers
 {
     public class InputModel
     {
-        public int LeftNumber { get; set; }
-        public int RightNumber { get; set; }
+        public int LeftNumber { get; private set; }
+        public int RightNumber { get; private set; }
 
         public InputModel(string[] args)
         {

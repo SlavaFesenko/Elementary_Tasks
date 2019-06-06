@@ -20,10 +20,12 @@ namespace SharedLibrary
 
         public void ShowInstruction(string text)
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
             ShowSeparator();
             Console.WriteLine(text);
             ShowSeparator();
             Console.WriteLine();
+            Console.ResetColor();
         }
 
         public void ShowResult(string text)
@@ -43,10 +45,19 @@ namespace SharedLibrary
 
         public string[] ReInput()
         {
-            Console.Write("Please input correct: ");
-            string[] arguments = Console.ReadLine().Split();
+            Console.WriteLine("Press Enter to ReInput mode or Escape(esc) to EXIT");
+            ConsoleKeyInfo key = Console.ReadKey();
+            if (key.Key.Equals(ConsoleKey.Escape))
+                Environment.Exit(0);
+            else
+                if (key.Key.Equals(ConsoleKey.Enter))
+            {
+                Console.Write("Please input correct: ");
+                string[] arguments = Console.ReadLine().Split();
+                return arguments;
+            }
 
-            return arguments;
+            return null;
         }
 
         #endregion

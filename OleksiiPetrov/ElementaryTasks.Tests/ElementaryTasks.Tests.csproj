@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChessBoard\ChessBoardTests.cs" />
+    <Compile Include="FibonacciNumbers\FibonacciSequence.cs" />
     <Compile Include="FileParser\FileParserTests.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,6 +84,10 @@
     <ProjectReference Include="..\ElementaryTasks\Task1ChessBoard.csproj">
       <Project>{7e482697-286d-4347-8bbc-f839eaf93ccf}</Project>
       <Name>Task1ChessBoard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharedDll\SharedLibrary.csproj">
+      <Project>{82d0a40f-56b0-4b62-88b1-986daa86a852}</Project>
+      <Name>SharedLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\Task2EnvelopeAnalysis\Task2EnvelopeAnalysis.csproj">
       <Project>{1574cc80-833d-41fb-adb9-9a9dc3d153a9}</Project>

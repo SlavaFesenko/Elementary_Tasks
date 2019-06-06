@@ -54,25 +54,27 @@ namespace Task4FileParser
                     
                     if (input.WorkMode == WorkMode.Find)
                     {
-                        _parser = new Parser(input.Path);
-                        string result = $"File {input.Path}: Count entries \"{input.SearchingString}\"" +
+                        _parser = new Parser(input.Source);
+                        string result = $"File {input.Source}: Count entries \"{input.SearchingString}\"" +
                             $" = {_parser.GetCountEntries(input.SearchingString)}";
+
                         _view.ShowResult(result);
-                        logger.Info($"Application run with valid arguments: {input.Path}, {input.SearchingString}");
+                        logger.Info($"Application run with valid arguments: {input.Source}, {input.SearchingString}");
                         logger.Info($"Show result:\n {result}");
 
                     }
 
                     if (input.WorkMode == WorkMode.Replace)
                     {
-                        _parser = new Parser(input.Path);
+                        _parser = new Parser(input.Source);
                         _parser.ReplaceAll(input.SearchingString, input.ReplacementString);
-                        string result = $"File {input.Path}: String \"{input.SearchingString}\" " +
-                            $"have been replaced to \"{input.ReplacementString}\" " +
-                            $"Count = {_parser.GetCountEntries(input.ReplacementString)} times";
+
+
+                        string result = $"File {input.Source}: String \"{input.SearchingString}\" " +
+                            $"have been replaced to \"{input.ReplacementString}\" ";
                         _view.ShowResult(result);
 
-                        logger.Info($"Application run with valid arguments: {input.Path}," +
+                        logger.Info($"Application run with valid arguments: {input.Source}," +
                             $" {input.SearchingString}, {input.ReplacementString}");
                         logger.Info($"Show result:\n {result}");
                     }

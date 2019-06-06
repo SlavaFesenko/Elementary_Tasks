@@ -46,24 +46,34 @@ namespace Task4FileParser
 
             Console.WriteLine("Input in stages:");
             ShowSeparator();
-            Console.WriteLine("Press 1 to Find mode or press 2 to Replace modes");
+            Console.WriteLine("Press 1 to Find mode or press 2 to Replace modes. Escape(esc) to EXIT");
             ConsoleKeyInfo key = Console.ReadKey();
-            
-            if(key.Key.Equals(ConsoleKey.D1))
+
+            switch (key.Key)
             {
-                Console.Write("\nPath to file: ");
-                arguments[0] = Console.ReadLine();
-                Console.Write("Searching string: ");
-                arguments[1] = Console.ReadLine();
-            }
-            if (key.Key.Equals(ConsoleKey.D2))
-            {
-                Console.Write("\nPath to file: ");
-                arguments[0] = Console.ReadLine();
-                Console.Write("Searching string: ");
-                arguments[1] = Console.ReadLine();
-                Console.Write("String to replace: ");
-                arguments[2] = Console.ReadLine();
+                case ConsoleKey.D1:
+                    Console.Write("\nPath to file: ");
+                    arguments[0] = Console.ReadLine();
+                    Console.Write("Searching string: ");
+                    arguments[1] = Console.ReadLine();
+                    break;
+
+                case ConsoleKey.D2:
+                    Console.Write("\nPath to file: ");
+                    arguments[0] = Console.ReadLine();
+                    Console.Write("Searching string: ");
+                    arguments[1] = Console.ReadLine();
+                    Console.Write("String to replace: ");
+                    arguments[2] = Console.ReadLine();
+                    break;
+
+                case ConsoleKey.Escape:
+                    Environment.Exit(0);
+                    break;
+                default:
+                    ShowErrorMessage("\nInvalid input.");
+                    ReInput();
+                    break;
             }
 
             return arguments;

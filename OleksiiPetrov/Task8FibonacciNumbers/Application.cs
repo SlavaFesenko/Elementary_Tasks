@@ -9,9 +9,15 @@ namespace Task8FibonacciNumbers
 {
     public class Application
     {
+        #region Fields
+
         private string[] _args;
         private IView _view;
         Logger logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
+        #region Ctors
 
         public Application()
         {
@@ -22,10 +28,15 @@ namespace Task8FibonacciNumbers
         {
             _view = view;
         }
+        #endregion
+
+        #region Methods
 
         public virtual void Run()
         {
+            logger.Trace("Application start without arguments");
             _view.ShowInstruction(ConfigurationManager.AppSettings["Instruction"]);
+
             if (ConfigurationManager.AppSettings["ReInputMode"].ToLower() == "true")
             {
                 logger.Trace("ReInput mode started");
@@ -63,6 +74,8 @@ namespace Task8FibonacciNumbers
                 Run();
             }
         }
+
+        #endregion
     }
 }
 

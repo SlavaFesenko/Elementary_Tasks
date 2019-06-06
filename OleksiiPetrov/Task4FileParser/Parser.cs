@@ -6,12 +6,17 @@ namespace Task4FileParser
 {
     public class Parser
     {
+        #region Field
         private string _path;
+        #endregion
 
+        #region Ctor
         public Parser(string path)
         {
             _path = path;
         }
+
+        #endregion
 
         #region Methods
         /// <summary>
@@ -25,16 +30,11 @@ namespace Task4FileParser
 
             using (StreamReader reader = new StreamReader(_path, Encoding.Default))
             {
-                // more effective than string
-                StringBuilder line = new StringBuilder();
+                string line = string.Empty;
 
-                //методи стринга в место getcount enrtyсерч
-                while ((line.Append(reader.ReadLine())) != null)
+                while ((line = reader.ReadLine()) != null)
                 {
-                    if (line.Length == 0)
-                        break;
-                    countEntry += GetCountEntry(line.ToString(), searchingString);
-                    line.Clear();
+                    countEntry += GetCountEntryInLine(line.ToString(), searchingString);
                 }
             }
             
@@ -52,37 +52,22 @@ namespace Task4FileParser
         public virtual void ReplaceAll(string searchingString, string replacementString)
         {
             int countEntry = 0;
-
             string tempFileName = System.IO.Path.GetRandomFileName() + ".txt";
 
-            using (File.Create(tempFileName)) { }
-            
-            using (StreamWriter writer = new StreamWriter(tempFileName))
+            using (StreamReader reader = new StreamReader(_path, Encoding.Default)) 
             {
-                using (StreamReader reader = new StreamReader(_path, Encoding.Default))
+                using (StreamWriter writer = new StreamWriter(tempFileName, true))
                 {
-                    // more effective than string
-                    StringBuilder line = new StringBuilder();
-                    
-                    while ((line.Append(reader.ReadLine())) != null)
+                    string line = string.Empty;
+
+                    while((line = reader.ReadLine()) !=null)
                     {
-                        if (line.Length == 0)
-                            break;
-                        countEntry += GetCountEntry(line.ToString(), searchingString);
-                        if (countEntry > 0)
-                        {
-                            line = line.Replace(searchingString, replacementString);
-                            writer.WriteLine(line);
-                        }
-                        line.Clear();
+                        countEntry += GetCountEntryInLine(line, searchingString);
+
+                        line = line.Replace(searchingString, replacementString);
+                        writer.WriteLine(line);
                     }
-                    
                 }
-            }
-            if (countEntry == 0)
-            {
-                TrySaveFile(countEntry, tempFileName);
-                throw new ArgumentException("Searching string not found at this text");
             }
 
             TrySaveFile(countEntry, tempFileName);
@@ -92,14 +77,15 @@ namespace Task4FileParser
         {
             try
             {
+                if (countEntry == 0)
+                    throw new ArgumentException("Searching string not found at this text");
+
                 if (countEntry > 0)
                 {
                     File.Delete(_path);
                     //change name of tmp file to _path
                     File.Move(tempFileName, _path);
                 }
-                if (countEntry == 0)
-                    return;
             }
             catch(IOException ex)
             {
@@ -107,7 +93,7 @@ namespace Task4FileParser
             }
         }
 
-        private static int GetCountEntry(string line, string searchingString)
+        private int GetCountEntryInLine(string line, string searchingString)
         {
             int startIndex = 0;
             int countEntry = 0;
