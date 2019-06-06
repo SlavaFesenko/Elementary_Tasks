@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NLog;
 
 namespace Task2Envelopes
 {
     public class Envelope : IComparable<Envelope>
     {
+        public Logger _log = LogManager.GetCurrentClassLogger();
+
         #region Props
 
         public double Height { get; set; }
@@ -21,6 +20,7 @@ namespace Task2Envelopes
         {
             Height = height;
             Width = width;
+            _log.Info($"Envelope was created. Width: {width}, Height: {height}");
         }
 
         #endregion
@@ -30,7 +30,7 @@ namespace Task2Envelopes
         public int CompareTo(Envelope other)
         {
             if ((this.Height > other.Height) && (this.Width > other.Width))
-            {
+            {              
                 return 1;
             }
             else if ((this.Height == other.Height) && (this.Width == other.Width))

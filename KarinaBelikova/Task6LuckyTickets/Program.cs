@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.IO;
 
 namespace Task6LuckyTickets
@@ -7,17 +8,16 @@ namespace Task6LuckyTickets
     {
         static void Main(string[] args)
         {
-            //string path = @"instructions.txt";
-            string path = @"C:\Users\kiit1\Desktop\instructions.txt";
+            Logger logger = LogManager.GetCurrentClassLogger();
 
             try
             {
-                InputModel model = new InputModel(path);
+                InputModel model = new InputModel(args);
                 Application.Run(model);
-                Console.ReadKey();
             }
             catch (IOException e)
             {
+                logger.Error($"IOException {e.Message}");
                 UI.ShowErrorMessage(e);
             }
 

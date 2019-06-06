@@ -5,15 +5,13 @@ VisualStudioVersion = 15.0.28307.539
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task5Numbers", "Task5Numbers\Task5Numbers.csproj", "{6ACA9910-AA1E-43B2-95A0-F7AE543A2944}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task78Sequences", "Task7_8Sequences\Task78Sequences.csproj", "{AFEA87D2-C684-4768-834C-62D7495BA49E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task8Fibonacci", "Task8Fibonacci\Task8Fibonacci.csproj", "{19E405D8-C732-4344-8B1E-E9A80F6A9E85}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task7Square", "Task7Square\Task7Square.csproj", "{15AFF880-5EF3-4C03-8DF0-E918E496AB40}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task2Envelopes", "Task3Envelopes\Task2Envelopes.csproj", "{6A1D88EF-D79C-4945-AECE-48E6F8980B46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task2EnvelopesTests", "Task3EnvelopesTests\Task2EnvelopesTests.csproj", "{DB6B84E3-34CB-4777-BA0D-C2E7BEC90799}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Task3EnvelopesTests\Tests.csproj", "{DB6B84E3-34CB-4777-BA0D-C2E7BEC90799}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task3Triangles", "Task2Triangles\Task3Triangles.csproj", "{4BA6564A-9E68-4757-8183-572FAF403990}"
 EndProject
@@ -31,10 +29,6 @@ Global
 		{6ACA9910-AA1E-43B2-95A0-F7AE543A2944}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6ACA9910-AA1E-43B2-95A0-F7AE543A2944}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6ACA9910-AA1E-43B2-95A0-F7AE543A2944}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AFEA87D2-C684-4768-834C-62D7495BA49E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AFEA87D2-C684-4768-834C-62D7495BA49E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AFEA87D2-C684-4768-834C-62D7495BA49E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AFEA87D2-C684-4768-834C-62D7495BA49E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19E405D8-C732-4344-8B1E-E9A80F6A9E85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19E405D8-C732-4344-8B1E-E9A80F6A9E85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19E405D8-C732-4344-8B1E-E9A80F6A9E85}.Release|Any CPU.ActiveCfg = Release|Any CPU

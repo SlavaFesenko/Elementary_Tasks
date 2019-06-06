@@ -9,18 +9,17 @@ namespace ChessBoardApp
     class Program
     {
         static void Main(string[] args)
-        {
-           
+        {          
             if(Validator.IsCorrect(args))
             {
                 int rows = int.Parse(args[0]);
                 int columns = int.Parse(args[1]);
 
-                BoardUI.Print(rows, columns);
+                UI.Print(rows, columns);
             } 
             else
             {
-                BoardUI.ShowInstructions();
+                UI.ShowInstructions();
             }
 
             Console.ReadKey();

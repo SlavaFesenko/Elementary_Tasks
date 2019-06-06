@@ -16,10 +16,6 @@ namespace Task6LuckyTickets
             {
                 return _digits[index];
             }
-            set
-            {
-                _digits[index] = value;
-            }
         }
 
         public Ticket(int number, LuckyAlgorithm algorithm)
@@ -31,7 +27,7 @@ namespace Task6LuckyTickets
 
         private int[] GetArray(int number)
         {
-            int[] array = new int[6];
+            int[] array = new int[Constants.DIGITS_IN_NUMBER_COUNT];
             for (int i = 0; i < array.Length; i++)
             {
                 array[i] = number % 10;

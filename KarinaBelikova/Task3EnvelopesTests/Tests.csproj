@@ -57,6 +57,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="EnvelopeTests.cs" />
+    <Compile Include="LuckyTicketsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +67,10 @@
     <ProjectReference Include="..\Task3Envelopes\Task2Envelopes.csproj">
       <Project>{6A1D88EF-D79C-4945-AECE-48E6F8980B46}</Project>
       <Name>Task2Envelopes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Task6LuckyTickets\Task6LuckyTickets.csproj">
+      <Project>{b103caa3-4f28-419c-804e-efd297195419}</Project>
+      <Name>Task6LuckyTickets</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

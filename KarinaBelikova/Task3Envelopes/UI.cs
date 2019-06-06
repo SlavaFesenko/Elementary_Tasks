@@ -1,25 +1,31 @@
 ﻿using System;
+using NLog;
 
 namespace Task2Envelopes
 {
-    public class UI
+    public static class UI
     {
+        private static Logger _log = LogManager.GetCurrentClassLogger();
+
         public static double[] InputEnvelopesData()
         {
-            double[] parameters = new double[4];
+            double[] parametors = new double[Constants.COUNT_OF_SIDES];
             Display("Input 4 numbers (width and height for two envelopes): ");         
             
-            for (int i = 0; i < parameters.Length; i++)
+            for (int i = 0; i < parametors.Length; i++)
             {
-                if(!double.TryParse(Console.ReadLine(), out parameters[i]) ||
-                    !Validator.IsCorrectEnvelopeSide(parameters[i]))
+                if(!double.TryParse(Console.ReadLine(), out parametors[i]) ||
+                    !Validator.IsCorrectEnvelopeSide(parametors[i]))
                 {
+                    _log.Info($"Input isn't correct");
                     IncorrectInput();                   
                     i--;
                 }
             }
 
-            return parameters;
+            _log.Info("Input is correct");
+
+            return parametors;
         }
 
         public static void Display(string message)
@@ -29,11 +35,13 @@ namespace Task2Envelopes
 
         public static void IncorrectInput()
         {
-            Display("Envelope side must be a number, above zero. Try again: ");           
+            _log.Info("Incorrect input");
+            Display("Envelope side must be a number, above zero. Try again: ");            
         }
 
         public static void ShowErrorMessage(Exception e)
         {
+            _log.Info(e.Message);
             Display(e.Message);
             Console.ReadLine();
         }

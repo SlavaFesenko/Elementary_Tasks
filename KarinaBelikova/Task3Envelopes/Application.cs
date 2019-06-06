@@ -1,9 +1,12 @@
 ﻿using System;
+using NLog;
 
 namespace Task2Envelopes
 {
-    public class Application
+    public static class Application
     {
+        public static Logger _log = LogManager.GetCurrentClassLogger();
+
         public static void Run()
         {
             double[] envelopesSides = UI.InputEnvelopesData();
@@ -12,26 +15,26 @@ namespace Task2Envelopes
             Envelope secondEnvelope = new Envelope(envelopesSides[2], envelopesSides[3]);
 
             UI.Display(ResultOfComparison(firstEnvelope, secondEnvelope));
-
-            Console.ReadKey();
         }
 
-        private static string ResultOfComparison(Envelope firstEnvelope, Envelope secondEnvelope)
+        public static string ResultOfComparison(Envelope firstEnvelope, Envelope secondEnvelope)
         {
             string result = "";
 
             if (firstEnvelope.CompareTo(secondEnvelope) == 1)
             {
-                result = "Second envelope can be put in first envelope";                
+                result = Constants.SECOND_IN_FIRST;
             }
             else if (secondEnvelope.CompareTo(firstEnvelope) == 1)
             {
-                result = "First envelope can be put in second envelope. ";
+                result = Constants.FIRST_IN_SECOND;
             }
             else
             {
-                result = "Envelopes cannot be nested in other";
+                result = Constants.NOT_NESTED;
             }
+
+            _log.Info($"Result of comparison: {result}");
 
             return result;
         }
@@ -39,7 +42,7 @@ namespace Task2Envelopes
         public static bool Exit()
         {
             UI.Display("Do you want to exit? Press 'Esc' ");
-
+          
             return (Console.ReadKey(true).Key == ConsoleKey.Escape);
         }
     }

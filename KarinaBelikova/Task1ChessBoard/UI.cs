@@ -2,7 +2,7 @@
 
 namespace ChessBoardApp
 {
-    public class BoardUI
+    public class UI
     {
         public static void Print(int rows, int columns)
         {

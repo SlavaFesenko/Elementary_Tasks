@@ -1,11 +1,14 @@
 ﻿using System;
+using NLog;
 
 namespace Task2Envelopes
 {
     class Program
-    {
+    {        
         static void Main(string[] args)
         {
+            Logger logger = LogManager.GetCurrentClassLogger();
+
             try
             {
                 do
@@ -16,6 +19,7 @@ namespace Task2Envelopes
             }
             catch (FormatException e)
             {
+                logger.Error($"Format Exception: {e.Message}");
                 UI.ShowErrorMessage(e);
             }           
         }
