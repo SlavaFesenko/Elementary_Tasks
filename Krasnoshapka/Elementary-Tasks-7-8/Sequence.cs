@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Elementary_Tasks_7_8
 {
-    abstract class Sequence //TODO IEnumerable
+   public abstract class Sequence //TODO IEnumerable
     {
 
         public int LeftBorder { get; set; }
