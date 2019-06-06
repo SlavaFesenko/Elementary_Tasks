@@ -15,18 +15,19 @@ namespace Task1
 
         internal static int ReadParametr()
         {
-            int result;
+            string input;
 
             do
             {
                 ShowMessage("Введите целое число от 1 до 32 включительно");
+                input = Console.ReadLine();
             }
-            while (!Validator.IsValidNumber(Console.ReadLine(), out result));
+            while (!Validator.IsNumber(input));
 
-            return result;
+            return Convert.ToInt32(input);
         }
 
-        public static void PrintBoard(IBoard board)
+        public static void PrintBoard(Board board)
         {
             UI.ShowMessage(string.Format("Доска с высотой {0} и шириной {1} :", board.Height, board.Weight));
             for( int indexX = 0; indexX < board.Height; indexX++)

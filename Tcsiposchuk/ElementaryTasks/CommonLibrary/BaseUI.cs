@@ -19,13 +19,9 @@ namespace CommonLibrary
             ShowResult(print);
 
         }
-        /// <summary>
-        /// Выводит переданную строку на консоль, без перехода на новую строку
-        /// </summary>
-        /// <param name="message">Строка содержащая форматирующие последовательности для корректного отображения</param>
         public static void ShowError(string message)
         {
-            Console.Write(message);
+            Console.WriteLine(message);
         }
         /// <summary>
         /// Выводит сообщения консоль о неверности пути к файлу и приводит пример корректного пути
@@ -54,9 +50,10 @@ namespace CommonLibrary
         /// <summary>
         /// Ожидает ввод пользователем строки
         /// </summary>
-        /// <returns>Возвращает true, если пользователем была введено y/Yes (без учета регистра) и false в ином случае</returns>
+        /// <returns>Возвращает false, если пользователем была введено y/Yes (без учета регистра) и true в ином случае</returns>
         public static bool AskUserAboutEndProgram()
         {
+            ShowMessage("Вы хотите продолжить?Введите \"y\" или \"yes\", если да");
             bool isEndSession = true;
             string response = Console.ReadLine();
             response = response.ToUpperInvariant();

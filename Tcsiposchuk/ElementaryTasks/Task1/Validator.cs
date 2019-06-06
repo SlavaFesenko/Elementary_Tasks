@@ -6,9 +6,9 @@ namespace Task1
 {
     public class Validator
     {
-        public static bool IsValidNumber(string number, out int result)
+        public static bool IsNumber(string number)
         {
-            return Int32.TryParse(number, out result) && result >= 1 && result <= 32;
+            return Int32.TryParse(number, out int result);
         }
 
         public static bool IsLenghtArgsInvalid(string [] args)
@@ -16,10 +16,10 @@ namespace Task1
             return args.Length != 2;
         }
 
-        public static bool IsValidArgs(string [] args, out int firstArgument, out int secondArgument)
+        public static bool IsValidArgs(string [] args)
         {
-            bool isFirstArgValid = Validator.IsValidNumber(args[0], out firstArgument);
-            bool isSecondArgValid = Validator.IsValidNumber(args[1], out secondArgument);
+            bool isFirstArgValid = Validator.IsNumber(args[0]);
+            bool isSecondArgValid = Validator.IsNumber(args[1]);
 
             return isFirstArgValid && isSecondArgValid;
         }

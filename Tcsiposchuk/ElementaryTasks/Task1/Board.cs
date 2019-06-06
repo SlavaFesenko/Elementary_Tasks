@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Task1
 {
-    public class Board : IBoard
+    public class Board
     {
         #region Properties and Fields
 
@@ -44,6 +44,11 @@ namespace Task1
                     }
                 }
             }
+        }
+
+        public Board(InputModel inputModel) : this(inputModel.WeightBoard, inputModel.HeightBoard)
+        {
+            
         }
 
         #endregion

@@ -22,7 +22,6 @@ namespace Task2EnvelopeAnalyzer
             do
             {
                 UI.ShowResult(AnalyzeEnvelopes());
-                UI.ShowMessage("Вы хотите продолжить?");
                 isEndSession = UI.AskUserAboutEndProgram();
             }
             while (!isEndSession);
