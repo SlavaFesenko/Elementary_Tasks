@@ -111,9 +111,14 @@ namespace Task4_ParserForFiles
                         int secondRange = TextSize - firstRange;
 
                         worker = worker.Remove(firstRange, secondRange);
-                        worker = worker.Remove(0, (int)(forChangeParts[i]));
-                        worker = worker.Replace(oldRow, newRow);
 
+                        if (i!=0)
+                        {
+                            worker = worker.Remove(0, (int)(forChangeParts[i]));
+
+                        }
+
+                        worker = worker.Replace(oldRow, newRow);
                         _forOut.Append(worker);
                     }
 

@@ -105,7 +105,7 @@ namespace Task8_FibonacciOrder
         {
             string result = null;
 
-            Console.WriteLine("The choosen diapazon from {0} to {1} is:", _borders[0], _borders[1]);
+            Console.WriteLine("The choosen diapazon between args {0} to {1} is:", _borders[0], _borders[1]);
             result = _order.GetOrderFromCollection(_collection);
 
             return result;
