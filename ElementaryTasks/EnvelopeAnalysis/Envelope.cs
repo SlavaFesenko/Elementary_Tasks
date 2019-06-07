@@ -8,10 +8,37 @@ namespace EnvelopeAnalysis
 {
     public class Envelope
     {
+        #region Prvt Fields
+
+        private double _width;
+        private double _height;
+
+        #endregion
+
         #region Props
 
-        public double Width  { get; set; }
-        public double Height { get; set; }
+        public double Width  
+        { 
+            get
+            {
+                return _width;
+            }
+            set
+            {
+                _width = value;
+            }
+        }
+        public double Height 
+        { 
+            get
+            {
+                return _height;
+            }
+            set
+            {
+                _height = value;
+            }
+        }
 
         #endregion
 
@@ -19,8 +46,8 @@ namespace EnvelopeAnalysis
 
         public Envelope(double width, double height)
         {
-            Width = width;
-            Height = height;
+            _width = width;
+            _height = height;
         }
 
         #endregion
@@ -29,7 +56,7 @@ namespace EnvelopeAnalysis
 
         public bool DoesAbleToPutIn(Envelope envelopeToCompare)
         {
-            return (Width >= envelopeToCompare.Width) && (Height >= envelopeToCompare.Height);
+            return (_width >= envelopeToCompare.Width) && (_height >= envelopeToCompare.Height);
         }
 
         #endregion

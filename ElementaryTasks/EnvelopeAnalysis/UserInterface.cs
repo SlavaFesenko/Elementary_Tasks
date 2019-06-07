@@ -8,41 +8,32 @@ namespace EnvelopeAnalysis
 {
     public static class UserInterface
     {
-        #region Method
+        #region Methods
 
-        public static (double, double, double, double) Input()
-        {
-            string[] inputMessages = { "Input width of the first envelope:",
-                                       "Input height of the first envelope:",
-                                       "Input width of the second envelope:",
-                                       "Input height of the second envelope:"};
-            string successMessage = "All sides was validated!";
-            string errorMessage = "Side wasn't validated! Please, try again!";
+        public static double Input(string inputSideMessage)
+        {            
             bool isSuccess = false;
-            const int COUNT_OF_SIDES = 4;
-            double[] result = new double[COUNT_OF_SIDES];
+            double result = 0;
 
-            for (int i = 0; i < COUNT_OF_SIDES; i++)
+            do
             {
-                do
-                {
-                    Console.WriteLine(inputMessages[i]);
-                    isSuccess = double.TryParse(Console.ReadLine(), out result[i]);
-                    Validator.Validate(result[i]);
-                    if (!isSuccess)
-                        Console.WriteLine(errorMessage);
-                } while (!isSuccess);
-            }
-            Console.WriteLine(successMessage);
+                Console.WriteLine(inputSideMessage);
+                isSuccess = double.TryParse(Console.ReadLine(), out result) && Validator.Validate(result); 
 
-            return (result[0], result[1], result[2], result[3]);
+                if (!isSuccess)
+                    Console.WriteLine(Message.ERROR_MESSAGE);
+
+            } while (!isSuccess);
+
+            Console.WriteLine(Message.SUCCESS_MESSAGE);
+
+            return result;
         }
 
 
         public static void Display(string resultOfCompare)
         {
-            Console.WriteLine("Your result of compare:");
-            Console.WriteLine(resultOfCompare);
+            Console.WriteLine($"Your result of compare:\n{resultOfCompare}");
         }
 
         public static void ShowErrorMessage(Exception e)

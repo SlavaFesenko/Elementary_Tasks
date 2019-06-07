@@ -30,7 +30,7 @@ namespace Chess
                         return (rows, columns);
                     }
                     else
-                        throw new ArgumentException($"Rows({rows}) or Colomns({columns}) parametr out of range\n(Must be bigger than 0 and less than {MAX_VALUE})");
+                        throw new ArgumentException($"Rows({rows}) or Colomns({columns}) parametr out of range\n(Must be greater than 0 and less than {MAX_VALUE})");
                 }
                 else
                     throw new FormatException("Can't parse rows or colomns");

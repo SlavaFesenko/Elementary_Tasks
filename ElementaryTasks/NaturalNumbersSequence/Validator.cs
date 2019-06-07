@@ -22,7 +22,7 @@ namespace NaturalNumbersSequence
                     if (number > 0)
                         return number;
                     else
-                        throw new ArgumentException("Number must be bigger than 0!");
+                        throw new ArgumentException("Number must be greater than 0!");
                 }
                 else
                     throw new FormatException("Unsuccessful format!");

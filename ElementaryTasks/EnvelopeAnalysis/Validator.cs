@@ -10,10 +10,17 @@ namespace EnvelopeAnalysis
     {
         #region Method
 
-        public static void Validate(double side)
+        public static bool Validate(double side)
         {
-            if (side < 0)
-                Console.WriteLine("The side must be bigger than 0!");
+            if (side <= 0)
+            {
+                Console.WriteLine("The side must be greater than 0!");
+
+                return false;
+            }
+            else
+                return 
+                    true;
         }
 
         #endregion

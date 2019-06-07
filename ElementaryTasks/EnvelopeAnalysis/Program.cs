@@ -24,7 +24,10 @@ namespace EnvelopeAnalysis
             {
                 do
                 {
-                    (double firstWidth, double firstHeight, double secondWidth, double secondHeight) = UserInterface.Input();
+                    double firstWidth = UserInterface.Input("Input width of the first envelope:");
+                    double firstHeight = UserInterface.Input("Input height of the first envelope:");
+                    double secondWidth = UserInterface.Input("Input width of the second envelope:");
+                    double secondHeight = UserInterface.Input("Input height of the second envelope:");
                     Envelope firstEnvelope = new Envelope(firstWidth, firstHeight);
                     Envelope secondEnvelope = new Envelope(secondWidth, secondHeight);
 
@@ -53,8 +56,8 @@ namespace EnvelopeAnalysis
 
         public static string CompareEnvelops(Envelope firstEnvelope, Envelope secondEnvelope)
         {
-            bool doesFirstInSecond = firstEnvelope.DoesPutIn(secondEnvelope);
-            bool doesSecondInFirst = secondEnvelope.DoesPutIn(firstEnvelope);
+            bool doesFirstInSecond = firstEnvelope.DoesAbleToPutIn(secondEnvelope);
+            bool doesSecondInFirst = secondEnvelope.DoesAbleToPutIn(firstEnvelope);
             string result = string.Empty;
 
             if (doesFirstInSecond)

@@ -35,7 +35,7 @@ namespace TrianglesSort
                         throw new ArgumentException("Triangle couldn't be built!");
                 }
                 else
-                    throw new ArgumentException("Sides must be bigger than 0!");
+                    throw new ArgumentException("Sides must be greater than 0!");
             }
         }
 
