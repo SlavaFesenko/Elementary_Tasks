@@ -3,7 +3,7 @@ using NUnit.Framework;
 using Task8_FibonacciOrder;
 
 
-namespace TestForTasks
+namespace TestForTasks8
 {
     [TestFixture]
     class RangeClassTesting
@@ -43,7 +43,7 @@ namespace TestForTasks
             var result = _range.FindLowAndUpBorder(paramSmaller, paramBigger);
 
             //assert
-            Assert.AreEqual(forOut, result);
+            Assert.AreEqual(forOut, result,"GetSmallerParamWrong");
         }
 
         [TestCase]
@@ -58,7 +58,7 @@ namespace TestForTasks
             var result = _range.FindLowAndUpBorder(paramSmaller, paramBigger);
 
             //assert
-            Assert.AreEqual(forOut, result);
+            Assert.AreEqual(forOut, result,"GetSmallerParamWhenTheyEquals");
         }
 
     }

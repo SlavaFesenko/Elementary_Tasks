@@ -28,11 +28,12 @@ namespace Task8_FibonacciOrder
 
         public override (int, int) FindLowAndUpBorder(int border1, int border2)
         {
-            int _b1 = 0;
-            int _b2 = 0;
-            (_b1, _b2) = base.FindLowAndUpBorder(border1, border2);
+            //int _b1 = 0;
+            //int _b2 = 0;
+            //(_b1, _b2) = base.FindLowAndUpBorder(border1, border2);
 
-            return (GetLowerBorderWithConditionals(_b1), GetUpperBoarderConditionals(_b2));
+            return base.FindLowAndUpBorder(border1, border2);
+            //return (GetLowerBorderWithConditionals(_b1), GetUpperBoarderConditionals(_b2));
         }
 
         public override int GetLowerBorderWithConditionals(double lowerRange)

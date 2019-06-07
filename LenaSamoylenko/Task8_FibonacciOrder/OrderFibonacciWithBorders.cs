@@ -39,7 +39,10 @@ namespace Task8_FibonacciOrder
             using (_provider as IDisposable)
             {
                 List<int> collection = new List<int>();
-                _logger.LogDebug(String.Format("{0} was started", System.Reflection.MethodBase.GetCurrentMethod().Name));
+                if (_logger!=null)
+                {
+                    _logger.LogDebug(String.Format("{0} was started", System.Reflection.MethodBase.GetCurrentMethod().Name));
+                }
 
                 try
                 {

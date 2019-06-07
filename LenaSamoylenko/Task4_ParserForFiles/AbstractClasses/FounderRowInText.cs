@@ -52,15 +52,18 @@ namespace Task4_ParserForFiles
         public int CountOfThread { get => _countOfThread; protected set => _countOfThread = value; }
         public int RowSize { get => _rowSize; protected set => _rowSize = value; }
         public int TextSize { get => _textSize; protected set => _textSize = value; }
-        public string Text { get => _text; protected set => _text = value; }
+        public string Text { get => _text; set => _text = value; }
         internal List<int> ChangedParts { get => _changedParts; }
         internal Encoding CurrentEncoding { get => _currentEncoding; }
         #endregion
 
         #region Methods
-        public void GetText(string textPath)
+        public string GetText(string textPath)
         {
-            _logger.LogDebug(System.Reflection.MethodBase.GetCurrentMethod().Name);
+            if (_logger != null)
+                _logger.LogDebug(System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+            string result = null;
 
             bool isTextReadable = false;
             try
@@ -69,13 +72,15 @@ namespace Task4_ParserForFiles
                 if (isTextReadable == true)
                 {
                     TextSize = _text.Length;
-                    Text = _text;
+                    result = _text;
                 }
             }
             catch (Exception exception)
             {
                 _exeptions.GetException(exception);
             }
+
+            return result;
         }
 
         public virtual void NewFileWithNewRows(List<int> forChangeParts, string oldRow, string pathNewFile, string newRow)

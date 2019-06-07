@@ -4,7 +4,7 @@ using Task8_FibonacciOrder;
 using CommonThings.AbstractClasses;
 using System.Collections.Generic;
 
-namespace TestForTasks
+namespace TestForTasks8
 {
     [TestFixture]
     class OrderFibonacciWithBordersClassTesting
@@ -42,7 +42,7 @@ namespace TestForTasks
             //assert
             foreach (var number in result)
             {
-                Assert.AreEqual(number, _fibList[index]);
+                Assert.AreEqual(number, _fibList[index], "OrderIsWrong");
                 index++;
             }
         }

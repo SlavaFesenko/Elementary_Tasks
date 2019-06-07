@@ -29,4 +29,10 @@
     <ProjectReference Include="..\CommonThings\CommonThings.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Buduwee_kapitalizma.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -69,7 +69,7 @@ namespace Task8_FibonacciOrder
         public override string CalculateOK()
         {
             string _message = null;
-            
+
             try
             {
                 using (_provider as IDisposable)
@@ -77,7 +77,13 @@ namespace Task8_FibonacciOrder
                     _provider = CommonThings.Logger<Borders>.HelperForLogging();
 
                     _range = _provider.GetRequiredService<Borders>();//new Borders();
-                    (_range.LowerBorder, _range.UpperBorder) = _range.SetValue(_borders[0], _borders[1], _taskNumber);
+                    (int b1, int b2) = _range.SetValue(_borders[0], _borders[1], _taskNumber);
+
+                    _borders[0] = b1;
+                    _borders[1] = b2;
+
+                    _range.LowerBorder = _range.GetLowerBorderWithConditionals(b1);
+                    _range.UpperBorder = _range.GetUpperBoarderConditionals(b2);
                 }
 
                 using (_provider as IDisposable)

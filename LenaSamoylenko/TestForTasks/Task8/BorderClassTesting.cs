@@ -3,7 +3,7 @@ using NUnit.Framework;
 using Task8_FibonacciOrder;
 
 
-namespace TestForTasks
+namespace TestForTasks8
 {
     [TestFixture]
     class BorderClassTesting
@@ -35,7 +35,7 @@ namespace TestForTasks
             //assert
             for (int i = 0; i < _length; i++)
             {
-                Assert.AreEqual(_etalonResults[i], result[i]);
+                Assert.AreEqual(_etalonResults[i], result[i],"UpperBoarderWrongBigger");
             }
         }
 
@@ -58,7 +58,7 @@ namespace TestForTasks
             //assert
             for (int i = 0; i < _length; i++)
             {
-                Assert.AreEqual(_etalonResults[i], result[i]);
+                Assert.AreEqual(_etalonResults[i], result[i], "UpperBoarderWrongEquals");
             }
         }
 
@@ -81,7 +81,7 @@ namespace TestForTasks
             //assert
             for (int i = 0; i < _length; i++)
             {
-                Assert.AreEqual(_etalonResults[i], result[i]);
+                Assert.AreEqual(_etalonResults[i], result[i],"LowwerBoarderWrongSmaller");
             }
         }
 
@@ -104,7 +104,7 @@ namespace TestForTasks
             //assert
             for (int i = 0; i < _length; i++)
             {
-                Assert.AreEqual(_etalonResults[i], result[i]);
+                Assert.AreEqual(_etalonResults[i], result[i], "LowwerBoarderWrong1");
             }
         }
     }

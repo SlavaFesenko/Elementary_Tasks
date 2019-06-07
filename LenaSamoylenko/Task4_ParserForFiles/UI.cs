@@ -67,7 +67,7 @@ namespace Task4_ParserForFiles
                             _servicesProvider = Logger<CounterRowInText>.HelperForLogging();
 
                             _founder = _servicesProvider.GetRequiredService<CounterRowInText>();
-                            _founder.GetText(args[0]);
+                            _founder.Text=_founder.GetText(args[0]);
                             _isContinue = false;
                         }
                         else if (_lenght == (int)CountOfArgs.FourthTaskSecond)
@@ -77,7 +77,7 @@ namespace Task4_ParserForFiles
                             _servicesProvider = Logger<CnangerRowInText>.HelperForLogging();
 
                             _founder = _servicesProvider.GetRequiredService<CnangerRowInText>();
-                            _founder.GetText(args[0]);
+                            _founder.Text=_founder.GetText(args[0]);
                             _isContinue = false;
                         }
                     }

@@ -19,4 +19,16 @@
     <ProjectReference Include="..\Task8_FibonacciOrder\Task8_FibonacciOrder.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Books\Absoljutnoe_oruzhie_Ameriki.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Books\Aforizmy_i_mysli_ob_istorii.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Books\A_kak_luchshe_skazatb.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
