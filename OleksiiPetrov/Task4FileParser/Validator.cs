@@ -16,7 +16,8 @@ namespace Task4FileParser
                         return true;
 
                 default:
-                    throw new ArgumentException($"Count of input values = {args.Length}. Count values must be = 2 or 3.");
+                    throw new ArgumentException($"Count of input values = {args.Length}." +
+                        $" Count values must be = 2 or 3.");
             }
         }
 

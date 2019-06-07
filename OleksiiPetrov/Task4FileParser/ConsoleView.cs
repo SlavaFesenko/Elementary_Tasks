@@ -46,7 +46,8 @@ namespace Task4FileParser
 
             Console.WriteLine("Input in stages:");
             ShowSeparator();
-            Console.WriteLine("Press 1 to Find mode or press 2 to Replace modes. Escape(esc) to EXIT");
+            Console.WriteLine("Press 1 to Find mode or press 2 to Replace modes. " +
+                "Escape(esc) to EXIT");
             ConsoleKeyInfo key = Console.ReadKey();
 
             switch (key.Key)

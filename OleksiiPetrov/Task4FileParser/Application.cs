@@ -12,7 +12,7 @@ namespace Task4FileParser
         private string[] _args;
         private IView _view;
         private Parser _parser;
-        Logger logger = LogManager.GetCurrentClassLogger();
+        Logger _logger = LogManager.GetCurrentClassLogger();
 
         #endregion
 
@@ -33,12 +33,12 @@ namespace Task4FileParser
         #region Methods
         public virtual void Run()
         {
-            logger.Trace("Application start without arguments");
+            _logger.Trace("Application start without arguments");
             _view.ShowInstruction(ConfigurationManager.AppSettings["Instruction"]);
 
             if (ConfigurationManager.AppSettings["ReInputMode"].ToLower() == "true")
             {
-                logger.Trace("ReInput mode started");
+                _logger.Trace("ReInput mode started");
                 Run(_view.ReInput());
             }
         }
@@ -46,6 +46,11 @@ namespace Task4FileParser
         {
             _args = (string[])args.Clone();
 
+            _logger.Info($"Application run with arguments: ");
+            foreach (var item in _args)
+            {
+                _logger.Trace(item + " ");
+            }
             try
             {
                 if (Validator.IsValid(_args) && Validator.IsFileExists(_args))
@@ -55,12 +60,13 @@ namespace Task4FileParser
                     if (input.WorkMode == WorkMode.Find)
                     {
                         _parser = new Parser(input.Source);
-                        string result = $"File {input.Source}: Count entries \"{input.SearchingString}\"" +
-                            $" = {_parser.GetCountEntries(input.SearchingString)}";
+                        int count = _parser.GetCountEntries(input.SearchingString);
+
+                        string result = $"File {input.Source}: Count entries \"{input.SearchingString}\" = {count}";
 
                         _view.ShowResult(result);
-                        logger.Info($"Application run with valid arguments: {input.Source}, {input.SearchingString}");
-                        logger.Info($"Show result:\n {result}");
+                        _logger.Info($"Application run with valid arguments: {input.Source}, {input.SearchingString}");
+                        _logger.Info($"Show result:\n {result}");
 
                     }
 
@@ -69,38 +75,38 @@ namespace Task4FileParser
                         _parser = new Parser(input.Source);
                         _parser.ReplaceAll(input.SearchingString, input.ReplacementString);
 
-
                         string result = $"File {input.Source}: String \"{input.SearchingString}\" " +
                             $"have been replaced to \"{input.ReplacementString}\" ";
-                        _view.ShowResult(result);
 
-                        logger.Info($"Application run with valid arguments: {input.Source}," +
+                        _view.ShowResult(result);
+                        _logger.Info($"Application run with valid arguments: {input.Source}," +
                             $" {input.SearchingString}, {input.ReplacementString}");
-                        logger.Info($"Show result:\n {result}");
+                        _logger.Info($"Show result:\n {result}");
                     }
                 }
             }
             catch (ArgumentException ex)
             {
                 _view.ShowErrorMessage(ex.Message);
-                logger.Error(ex.Message);
+                _logger.Error(ex.Message);
                 Run();
 
             }
             catch (NullReferenceException ex)
             {
-                _view.ShowErrorMessage(ex.Message);
-                logger.Error(ex.Message);
+                _view.ShowErrorMessage("Attention" + ex.Message);
+                _logger.Error(ex.Message);
                 Run();
 
             }
             catch (Exception ex)
             {
-                _view.ShowErrorMessage(ex.Message);
-                logger.Error(ex.Message);
+                _view.ShowErrorMessage("Attention" + ex.Message);
+                _logger.Error(ex.Message);
                 Run();
             }
         }
+
         #endregion
     }
 }

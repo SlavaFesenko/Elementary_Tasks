@@ -13,7 +13,7 @@ namespace Task8FibonacciNumbers
 
         private string[] _args;
         private IView _view;
-        Logger logger = LogManager.GetCurrentClassLogger();
+        Logger _logger = LogManager.GetCurrentClassLogger();
 
         #endregion
 
@@ -34,12 +34,12 @@ namespace Task8FibonacciNumbers
 
         public virtual void Run()
         {
-            logger.Trace("Application start without arguments");
+            _logger.Trace("Application start without arguments");
             _view.ShowInstruction(ConfigurationManager.AppSettings["Instruction"]);
 
             if (ConfigurationManager.AppSettings["ReInputMode"].ToLower() == "true")
             {
-                logger.Trace("ReInput mode started");
+                _logger.Trace("ReInput mode started");
                 Run(_view.ReInput());
             }
         }
@@ -47,6 +47,11 @@ namespace Task8FibonacciNumbers
         {
             _args = (string[])args.Clone();
 
+            _logger.Info($"Application run with arguments: ");
+            foreach (var item in _args)
+            {
+                _logger.Trace(item + " ");
+            }
             try
             {
                 if (Validator.IsValid(args))
@@ -57,20 +62,21 @@ namespace Task8FibonacciNumbers
 
                     string result = sequence.GetStringSequence(sequenceCollection).ToString();
                     _view.ShowResult(result);
-                    logger.Info($"Application run and show result with valid arguments: {input.LeftNumber}, {input.RightNumber}");
-                    logger.Info($"Show result: {result}");
+                    _logger.Info($"Application run and show result with valid arguments: " +
+                        $"{input.LeftNumber}, {input.RightNumber}");
+                    _logger.Info($"Show result: {result}");
                 }
             }
             catch (ArgumentException ex)
             {
-                _view.ShowErrorMessage(ex.Message);
-                logger.Error(ex.Message);
+                _view.ShowErrorMessage("Attention" + ex.Message);
+                _logger.Error(ex.Message);
                 Run();
             }
             catch (Exception ex)
             {
-                _view.ShowErrorMessage(ex.Message);
-                logger.Error(ex.Message);
+                _view.ShowErrorMessage("Attention" + ex.Message);
+                _logger.Error(ex.Message);
                 Run();
             }
         }

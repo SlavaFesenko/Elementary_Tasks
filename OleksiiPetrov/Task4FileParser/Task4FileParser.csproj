@@ -62,6 +62,7 @@
     <Compile Include="WorkMode.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="textDigits.txt" />
     <None Include="App.config" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
