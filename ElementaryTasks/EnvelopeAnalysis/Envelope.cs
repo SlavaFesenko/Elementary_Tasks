@@ -27,7 +27,7 @@ namespace EnvelopeAnalysis
 
         #region Methods
 
-        public bool DoesPutIn(Envelope envelopeToCompare)
+        public bool DoesAbleToPutIn(Envelope envelopeToCompare)
         {
             return (Width >= envelopeToCompare.Width) && (Height >= envelopeToCompare.Height);
         }
