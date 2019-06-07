@@ -6,6 +6,11 @@ namespace ElementaryTask7
     {
         static Logger logger = LogManager.GetCurrentClassLogger();
 
+        /// <summary>
+        /// Сheck on the possibility of creating a sequence
+        /// </summary>
+        /// <param name="rightBorder">Number which the sequence seeks</param>
+        /// <returns>Success</returns>
         public static bool ValidSquare(int rightBorder)
         {
             bool result = false;
@@ -15,9 +20,7 @@ namespace ElementaryTask7
                 logger.Trace("Successful validate");
             }
             return result;
-        }
-
-        
+        } 
 
     }
 }

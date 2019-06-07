@@ -7,9 +7,12 @@ namespace ElementaryTask7
     class UIConsoleRun
     {
         private const int SQUARE = 1;    
+
         static Logger logger = LogManager.GetCurrentClassLogger();
 
-
+        /// <summary>
+        /// Method to run applications
+        /// </summary>
         public static void BuildUI(string[] args)
         {
             if (args.Length == SQUARE)
@@ -21,8 +24,10 @@ namespace ElementaryTask7
         }
 
         #region OtherMethods
-     
 
+        /// <summary>
+        /// Method for printing square
+        /// </summary>
         private static void Square(string[] args)
         {
             int border=0;

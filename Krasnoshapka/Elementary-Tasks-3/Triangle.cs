@@ -25,6 +25,14 @@ namespace ElementaryTasks3
             ThirdSide = thirdSide;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the Triangle.
+        /// </summary>
+        /// <param name="triangleName">Name of triangle</param>                 
+        /// <param name="firstSide">First side of triangle</param>                   
+        /// <param name="secondSide">Second side of triangle</param>                  
+        /// <param name="thirdSide">Third side of triangle</param>
+        /// <returns></returns>
         public static Triangle TriangleInitialize(string triangleName, float firstSide, float secondSide, float thirdSide)
         {
             if (FigureValidator.ValidSides(firstSide, secondSide, thirdSide))
@@ -35,11 +43,19 @@ namespace ElementaryTasks3
                 throw new ArgumentException("Incorrect parameters");
         }
 
+        /// <summary>
+        /// Perimeter Calculation
+        /// </summary>
+        /// <returns>Perimeter</returns>
         public float GetPerimeter()
         {
           return FirstSide + SecondSide + ThirdSide;
         }
 
+        /// <summary>
+        /// Area calculation
+        /// </summary>
+        /// <returns>Area</returns>
         public float GetSquare()
         {
             float HalfPerimeter = GetPerimeter() / 2;

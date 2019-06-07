@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ElementaryTasks3
 {
-   public class TrianglesCompare: IComparer<IFigureBehaviour>
+    /// <summary>
+    /// Method for comparing triangle
+    /// </summary>
+    public class TrianglesCompare: IComparer<IFigureBehaviour>
     {
         public int Compare(IFigureBehaviour x, IFigureBehaviour y)
         {

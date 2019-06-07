@@ -11,6 +11,9 @@ namespace ElementaryTasks3
         private const int COMMAND_LINE_ARGS = 0;
         private const int ARGS_FOR_TRIANGLE=4;
 
+        /// <summary>
+        /// Method to run applications
+        /// </summary>
         public static void BuildUI(string[] args)
         {
             if (args.Length == COMMAND_LINE_ARGS)
@@ -75,6 +78,9 @@ namespace ElementaryTasks3
 
         #region OtherMethods
 
+        /// <summary>
+        /// Method for parsing input
+        /// </summary>
         private static bool Parsing(string[] input, out string triangleName, out float firstTriangleSide, out float secondTriangleSide, out float thirdTriangleSide, bool success)
         {
             triangleName = input[0];
@@ -84,6 +90,9 @@ namespace ElementaryTasks3
             return success;
         }
 
+        /// <summary>
+        /// Method for printing triangle list.
+        /// </summary>
         private static void ShowList(List<Triangle> trianglesList)
         {
             Console.WriteLine("============= Triangles list: ===============");
@@ -98,7 +107,10 @@ namespace ElementaryTasks3
             Console.WriteLine("Arguments are set inside program, please don`t input any additional parameters!");
         }
 
-
+        /// <summary>
+        /// Checking for answer to continue execution of program or not
+        /// </summary>
+        /// <returns>Decision</returns>
         private static bool Repeat()
         {
         Console.WriteLine("To repeat type y/Y or yes/YES:");

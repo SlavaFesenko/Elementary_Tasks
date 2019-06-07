@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-   public abstract class Sequence
+    /// <summary>
+    /// Abstract class for common sequence
+    /// </summary>
+    public abstract class Sequence
     {
         public int LeftBorder { get; set; }
         public int RightBorder { get; set; }

@@ -11,7 +11,6 @@ namespace ElementaryTasks3
             try
             {
                 UIConsoleRun.BuildUI(args);
-                logger.Trace("Application completed well");
             }
             catch (ArgumentException ex)
             {
@@ -29,6 +28,7 @@ namespace ElementaryTasks3
                 logger.Error(ex.Message);
             }
 
+            logger.Trace("Application completed well");
         }
     }
 }

@@ -12,23 +12,24 @@ namespace ElementaryTask7
             try
             {             
                 UIConsoleRun.BuildUI(args);
-                logger.Trace("Application completed well");
             }
             catch (ArgumentException ex)
             {
                 Console.WriteLine(ex.Message);
-                logger.Error(ex.Message);
+                logger.Error(ex + ex.Message);
             }
             catch (FormatException ex)
             {
                 Console.WriteLine(ex.Message);
-                logger.Error(ex.Message);
+                logger.Error(ex + ex.Message);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex?.Message);
-                logger.Error(ex.Message);
+                logger.Error(ex + ex.Message);
             }
+
+            logger.Trace("Application completed well");
         }
     }
 }
